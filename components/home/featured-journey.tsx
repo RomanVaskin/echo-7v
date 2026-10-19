@@ -1,0 +1,62 @@
+import Image from 'next/image'
+import Link from 'next/link'
+import { ArrowUpRight } from 'lucide-react'
+import { featuredJourney as journey, statusLabel } from '@/lib/journeys'
+
+export function FeaturedJourney() {
+  const facts = [
+    { label: 'Duration', value: journey.nights ? `${journey.nights} nights` : null },
+    { label: 'Dates', value: journey.dates },
+    { label: 'Yacht', value: journey.vessel },
+    { label: 'From', value: journey.pricePerPerson },
+  ]
+
+  return (
+    <section aria-labelledby="featured-title" className="relative">
+      <div className="mx-auto max-w-7xl px-6 lg:px-10">
+        <div className="reveal grid overflow-hidden border border-border lg:grid-cols-[1.3fr_1fr]">
+          <div className="relative min-h-[420px] lg:min-h-[640px]">
+            <Image
+              src={journey.image || '/placeholder.svg'}
+              alt="Catamaran anchored in a turquoise Caribbean lagoon at golden hour"
+              fill
+              sizes="(min-width: 1024px) 60vw, 100vw"
+              className="object-cover"
+            />
+          </div>
+          <div className="flex flex-col justify-between gap-12 bg-card p-8 md:p-12">
+            <div className="flex flex-col gap-6">
+              <p className="eyebrow flex items-center gap-3">
+                <span className="size-1.5 rounded-full bg-primary" aria-hidden="true" />
+                Featured journey · {statusLabel[journey.status]}
+              </p>
+              <h2 id="featured-title" className="font-display text-6xl md:text-7xl">
+                {journey.destination}
+              </h2>
+              <p className="max-w-sm leading-relaxed text-muted-foreground">{journey.summary}</p>
+            </div>
+
+            <dl className="grid grid-cols-2 gap-px bg-border">
+              {facts.map((fact) => (
+                <div key={fact.label} className="flex flex-col gap-1 bg-card py-4 pr-4">
+                  <dt className="eyebrow">{fact.label}</dt>
+                  <dd className={fact.value ? 'font-display text-2xl' : 'text-sm tracking-[0.2em] text-muted-foreground'}>
+                    {fact.value ?? 'TBA'}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+
+            <Link
+              href={journey.href ?? '/#enquire'}
+              className="flex items-center justify-between bg-primary px-6 py-4 text-xs uppercase tracking-[0.22em] text-primary-foreground transition-opacity hover:opacity-90"
+            >
+              Explore Journey
+              <ArrowUpRight className="size-4" aria-hidden="true" />
+            </Link>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
