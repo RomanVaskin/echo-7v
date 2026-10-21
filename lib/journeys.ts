@@ -1,3 +1,6 @@
+import type { Dictionary } from '@/lib/dictionaries'
+import { localePath, type Locale } from '@/lib/i18n'
+
 export type AvailabilityStatus = 'enquiries-open' | 'limited' | 'coming-soon' | 'fully-booked'
 
 export type Region = 'Caribbean' | 'Mediterranean' | 'Indian Ocean'
@@ -5,14 +8,12 @@ export type Region = 'Caribbean' | 'Mediterranean' | 'Indian Ocean'
 /**
  * Only confirmed details are filled in. Leave a field as `null`
  * and the UI will render it as "TBA".
+ * Translatable text (destination, area, summary) lives in the dictionaries.
  */
-export type Journey = {
+type JourneyBase = {
   slug: string
-  destination: string
   region: Region
-  area: string
   image: string
-  summary: string
   nights: number | null
   dates: string | null
   vessel: string | null
@@ -24,22 +25,18 @@ export type Journey = {
   coordinates: [number, number]
 }
 
-export const statusLabel: Record<AvailabilityStatus, string> = {
-  'enquiries-open': 'Enquiries open',
-  limited: 'Limited availability',
-  'coming-soon': 'Coming soon',
-  'fully-booked': 'Fully booked',
+export type Journey = JourneyBase & {
+  destination: string
+  regionLabel: string
+  area: string
+  summary: string
 }
 
-export const journeys: Journey[] = [
+const journeysBase: JourneyBase[] = [
   {
     slug: 'caribbean',
-    destination: 'The Caribbean',
     region: 'Caribbean',
-    area: 'Island-hopping voyage',
     image: '/images/caribbean-hero.png',
-    summary:
-      'Nine nights between quiet anchorages, turquoise lagoons and palm-fringed islands — our signature journey.',
     nights: 9,
     dates: null,
     vessel: null,
@@ -52,11 +49,8 @@ export const journeys: Journey[] = [
   },
   {
     slug: 'cyclades',
-    destination: 'The Cyclades',
     region: 'Mediterranean',
-    area: 'Greece',
     image: '/images/mediterranean.png',
-    summary: 'Whitewashed villages, meltemi winds and long Aegean evenings.',
     nights: null,
     dates: null,
     vessel: null,
@@ -68,11 +62,8 @@ export const journeys: Journey[] = [
   },
   {
     slug: 'dalmatia',
-    destination: 'Dalmatian Coast',
     region: 'Mediterranean',
-    area: 'Croatia',
     image: '/images/adriatic.png',
-    summary: 'Pine-scented coves and stone harbour towns along the Adriatic.',
     nights: null,
     dates: null,
     vessel: null,
@@ -84,11 +75,8 @@ export const journeys: Journey[] = [
   },
   {
     slug: 'seychelles',
-    destination: 'Seychelles',
     region: 'Indian Ocean',
-    area: 'Inner Islands',
     image: '/images/indian-ocean.png',
-    summary: 'Granite boulders, white sand and the warm Indian Ocean.',
     nights: null,
     dates: null,
     vessel: null,
@@ -102,4 +90,17 @@ export const journeys: Journey[] = [
 
 export const regions: Region[] = ['Caribbean', 'Mediterranean', 'Indian Ocean']
 
-export const featuredJourney = journeys.find((j) => j.featured) ?? journeys[0]
+export const journeySlugs = journeysBase.map((j) => j.slug)
+
+export function getJourneys(locale: Locale, dict: Dictionary): Journey[] {
+  return journeysBase.map((journey) => ({
+    ...journey,
+    ...dict.journeys[journey.slug],
+    regionLabel: dict.regions[journey.region],
+    href: journey.href ? localePath(locale, journey.href) : null,
+  }))
+}
+
+export function getFeaturedJourney(journeys: Journey[]) {
+  return journeys.find((j) => j.featured) ?? journeys[0]
+}

@@ -6,6 +6,22 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  // English is served without a prefix: internally `/` and `/journeys/*` map to the `[lang]` segment as `en`.
+  async rewrites() {
+    return {
+      beforeFiles: [
+        { source: '/', destination: '/en' },
+        { source: '/journeys/:path*', destination: '/en/journeys/:path*' },
+      ],
+    }
+  },
+  // The prefixed English URLs are not public; keep a single canonical address per page.
+  async redirects() {
+    return [
+      { source: '/en', destination: '/', permanent: true },
+      { source: '/en/:path*', destination: '/:path*', permanent: true },
+    ]
+  },
   async headers() {
     return [
       {

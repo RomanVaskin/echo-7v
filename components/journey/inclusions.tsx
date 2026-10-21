@@ -1,4 +1,5 @@
 import { Check, Minus } from 'lucide-react'
+import type { Dictionary } from '@/lib/dictionaries'
 import { SectionHeading } from '@/components/site/section-heading'
 
 function List({ title, items, included }: { title: string; items: string[]; included: boolean }) {
@@ -21,19 +22,19 @@ function List({ title, items, included }: { title: string; items: string[]; incl
   )
 }
 
-export function Inclusions({ included, notIncluded }: { included: string[]; notIncluded: string[] }) {
+export function Inclusions({ dict }: { dict: Dictionary['caribbean']['inclusions'] }) {
   return (
     <section aria-labelledby="inclusions-title" className="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-36">
       <SectionHeading
         id="inclusions-title"
         index="05"
-        eyebrow="Inclusions"
-        title="What’s included"
-        description="Indicative list — final inclusions are confirmed with each departure."
+        eyebrow={dict.eyebrow}
+        title={dict.title}
+        description={dict.description}
       />
       <div className="mt-14 grid gap-12 md:grid-cols-2">
-        <List title="Included" items={included} included />
-        <List title="Not included" items={notIncluded} included={false} />
+        <List title={dict.includedTitle} items={dict.included} included />
+        <List title={dict.notIncludedTitle} items={dict.notIncluded} included={false} />
       </div>
     </section>
   )

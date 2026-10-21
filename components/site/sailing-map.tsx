@@ -20,6 +20,7 @@ type SailingMapProps = {
   showRoute?: boolean
   focusZoom?: number
   listTitle: string
+  exploreLabel: string
   className?: string
 }
 
@@ -40,7 +41,7 @@ function markerIcon(label: string, active: boolean) {
   })
 }
 
-export default function SailingMap({ points, showRoute, focusZoom = 11, listTitle, className }: SailingMapProps) {
+export default function SailingMap({ points, showRoute, focusZoom = 11, listTitle, exploreLabel, className }: SailingMapProps) {
   const [activeId, setActiveId] = useState<string | null>(null)
   const activePoint = points.find((p) => p.id === activeId)
   const bounds = useMemo(() => L.latLngBounds(points.map((p) => p.coordinates)), [points])
@@ -116,7 +117,7 @@ export default function SailingMap({ points, showRoute, focusZoom = 11, listTitl
                     href={point.href}
                     className="mx-6 mb-4 inline-block text-xs uppercase tracking-[0.22em] text-primary underline-offset-4 hover:underline"
                   >
-                    Explore Journey
+                    {exploreLabel}
                   </Link>
                 )}
               </li>

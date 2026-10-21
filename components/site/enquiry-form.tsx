@@ -3,7 +3,8 @@
 import { useActionState } from 'react'
 import { ArrowRight } from 'lucide-react'
 import { submitEnquiry, type EnquiryState } from '@/app/actions/enquiry'
-import { journeys } from '@/lib/journeys'
+import type { Dictionary } from '@/lib/dictionaries'
+import type { Locale } from '@/lib/i18n'
 import { cn } from '@/lib/utils'
 
 const initialState: EnquiryState = { status: 'idle' }
@@ -20,13 +21,20 @@ function FieldError({ id, message }: { id: string; message?: string }) {
   )
 }
 
-export function EnquiryForm({ defaultJourney = 'caribbean' }: { defaultJourney?: string }) {
+type EnquiryFormProps = {
+  defaultJourney?: string
+  locale: Locale
+  dict: Dictionary['form']
+  journeyOptions: { slug: string; label: string }[]
+}
+
+export function EnquiryForm({ defaultJourney = 'caribbean', locale, dict, journeyOptions }: EnquiryFormProps) {
   const [state, formAction, pending] = useActionState(submitEnquiry, initialState)
 
   if (state.status === 'success') {
     return (
       <div role="status" className="flex flex-col gap-4 border border-primary/40 p-10">
-        <p className="eyebrow text-primary">Enquiry received</p>
+        <p className="eyebrow text-primary">{dict.received}</p>
         <p className="font-display text-3xl text-balance">{state.message}</p>
       </div>
     )
@@ -34,9 +42,10 @@ export function EnquiryForm({ defaultJourney = 'caribbean' }: { defaultJourney?:
 
   return (
     <form action={formAction} noValidate className="grid gap-8 md:grid-cols-2">
+      <input type="hidden" name="locale" value={locale} />
       <div className="flex flex-col gap-1">
         <label htmlFor="name" className="eyebrow">
-          Full name
+          {dict.name}
         </label>
         <input
           id="name"
@@ -52,7 +61,7 @@ export function EnquiryForm({ defaultJourney = 'caribbean' }: { defaultJourney?:
 
       <div className="flex flex-col gap-1">
         <label htmlFor="email" className="eyebrow">
-          Email
+          {dict.email}
         </label>
         <input
           id="email"
@@ -69,7 +78,7 @@ export function EnquiryForm({ defaultJourney = 'caribbean' }: { defaultJourney?:
 
       <div className="flex flex-col gap-1">
         <label htmlFor="journey" className="eyebrow">
-          Journey
+          {dict.journey}
         </label>
         <select
           id="journey"
@@ -79,20 +88,19 @@ export function EnquiryForm({ defaultJourney = 'caribbean' }: { defaultJourney?:
           aria-invalid={Boolean(state.errors?.journey)}
           aria-describedby="journey-error"
         >
-          {journeys.map((j) => (
+          {journeyOptions.map((j) => (
             <option key={j.slug} value={j.slug}>
-              {j.destination}
-              {j.nights ? ` — ${j.nights} nights` : ''}
+              {j.label}
             </option>
           ))}
-          <option value="general">General enquiry</option>
+          <option value="general">{dict.general}</option>
         </select>
         <FieldError id="journey-error" message={state.errors?.journey} />
       </div>
 
       <div className="flex flex-col gap-1">
         <label htmlFor="guests" className="eyebrow">
-          Number of guests
+          {dict.guests}
         </label>
         <input
           id="guests"
@@ -111,20 +119,20 @@ export function EnquiryForm({ defaultJourney = 'caribbean' }: { defaultJourney?:
 
       <div className="flex flex-col gap-1 md:col-span-2">
         <label htmlFor="timing" className="eyebrow">
-          Preferred timing
+          {dict.timing}
         </label>
-        <input id="timing" name="timing" placeholder="e.g. Early spring, flexible" className={inputClass} />
+        <input id="timing" name="timing" placeholder={dict.timingPlaceholder} className={inputClass} />
       </div>
 
       <div className="flex flex-col gap-1 md:col-span-2">
         <label htmlFor="message" className="eyebrow">
-          Message
+          {dict.message}
         </label>
         <textarea
           id="message"
           name="message"
           rows={4}
-          placeholder="Tell us about your travel plans, cabin preferences or questions."
+          placeholder={dict.messagePlaceholder}
           className={cn(inputClass, 'resize-none')}
           aria-invalid={Boolean(state.errors?.message)}
           aria-describedby="message-error"
@@ -134,14 +142,14 @@ export function EnquiryForm({ defaultJourney = 'caribbean' }: { defaultJourney?:
 
       <div className="flex flex-col gap-4 md:col-span-2 md:flex-row md:items-center md:justify-between">
         <p className="text-sm text-muted-foreground" aria-live="polite">
-          {state.status === 'error' ? state.message : 'No commitment — we reply personally to every enquiry.'}
+          {state.status === 'error' ? state.message : dict.reassurance}
         </p>
         <button
           type="submit"
           disabled={pending}
           className="group flex items-center justify-center gap-3 bg-primary px-8 py-4 text-xs uppercase tracking-[0.22em] text-primary-foreground transition-opacity hover:opacity-90 disabled:opacity-60"
         >
-          {pending ? 'Sending…' : 'Send enquiry'}
+          {pending ? dict.sending : dict.send}
           <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
         </button>
       </div>
