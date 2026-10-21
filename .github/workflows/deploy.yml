@@ -1,0 +1,63 @@
+name: Deploy SeaSmates to Beget
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: seasmates-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Configure verified SSH connection
+        env:
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VPS_USER: ${{ secrets.VPS_USER }}
+          VPS_SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          test -n "$VPS_HOST" && test -n "$VPS_USER" && test -n "$VPS_SSH_KEY"
+          test "$VPS_HOST" = "31.207.74.26"
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          printf '%s\n' "$VPS_SSH_KEY" > ~/.ssh/seasmates_deploy
+          chmod 600 ~/.ssh/seasmates_deploy
+          printf '%s\n' '31.207.74.26 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMSts96kiUo+K7fCJlE9XXSR29D24ss7uOdD4UyG0dAp' > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+          printf 'Host seasmates-vps\n  HostName %s\n  User %s\n  Port 22\n  IdentityFile ~/.ssh/seasmates_deploy\n  IdentitiesOnly yes\n  StrictHostKeyChecking yes\n  UserKnownHostsFile ~/.ssh/known_hosts\n' "$VPS_HOST" "$VPS_USER" > ~/.ssh/config
+          chmod 600 ~/.ssh/config
+
+      - name: Deploy and check local application
+        run: |
+          ssh -o BatchMode=yes seasmates-vps 'bash -se' <<'REMOTE'
+          set -euo pipefail
+          cd /opt/seasmates
+          test -z "$(git status --porcelain --untracked-files=no)" || {
+            echo "Tracked files modified on server; refusing deployment"
+            exit 1
+          }
+          git fetch origin main
+          git checkout main
+          git merge --ff-only origin/main
+          pnpm install --frozen-lockfile
+          pnpm build
+          systemctl restart seasmates
+          for attempt in $(seq 1 20); do
+            if curl --fail --silent --show-error --output /dev/null http://127.0.0.1:3270/; then
+              echo "SeaSmates local health check passed"
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "SeaSmates health check failed" >&2
+          journalctl -u seasmates -n 30 --no-pager || true
+          exit 1
+          REMOTE
