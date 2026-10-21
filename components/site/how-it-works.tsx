@@ -1,35 +1,20 @@
+import type { Dictionary } from '@/lib/dictionaries'
 import { SectionHeading } from './section-heading'
 
-const steps = [
-  {
-    number: '01',
-    title: 'Explore Your Journey',
-    description: 'Discover our carefully curated sailing experiences.',
-  },
-  {
-    number: '02',
-    title: 'Plan Your Escape',
-    description: 'Connect with our team to discuss availability, accommodation and travel details.',
-  },
-  {
-    number: '03',
-    title: 'Set Sail',
-    description: 'Prepare for an unforgettable journey at sea.',
-  },
-]
+export function HowItWorks({ dict }: { dict: Dictionary['howItWorks'] }) {
+  const steps = dict.steps.map((step, i) => ({ ...step, number: String(i + 1).padStart(2, '0') }))
 
-export function HowItWorks() {
   return (
     <section id="how-it-works" aria-labelledby="how-it-works-title" className="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-36">
       <SectionHeading
         id="how-it-works-title"
-        eyebrow="How it works"
+        eyebrow={dict.eyebrow}
         title={
           <>
-            From first glance <em className="text-primary">to open water.</em>
+            {dict.titleLead} <em className="text-primary">{dict.titleAccent}</em>
           </>
         }
-        description="Every Seasemates journey is arranged personally. There is no checkout — only a conversation with our team."
+        description={dict.description}
       />
       <ol className="mt-16 flex flex-col">
         {steps.map((step) => (

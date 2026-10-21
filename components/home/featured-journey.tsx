@@ -1,14 +1,16 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowUpRight } from 'lucide-react'
-import { featuredJourney as journey, statusLabel } from '@/lib/journeys'
+import type { Dictionary } from '@/lib/dictionaries'
+import { formatNights, localePath, type Locale } from '@/lib/i18n'
+import type { Journey } from '@/lib/journeys'
 
-export function FeaturedJourney() {
+export function FeaturedJourney({ locale, dict, journey }: { locale: Locale; dict: Dictionary; journey: Journey }) {
   const facts = [
-    { label: 'Duration', value: journey.nights ? `${journey.nights} nights` : null },
-    { label: 'Dates', value: journey.dates },
-    { label: 'Yacht', value: journey.vessel },
-    { label: 'From', value: journey.pricePerPerson },
+    { label: dict.common.duration, value: journey.nights ? formatNights(locale, journey.nights) : null },
+    { label: dict.common.dates, value: journey.dates },
+    { label: dict.common.yacht, value: journey.vessel },
+    { label: dict.common.from, value: journey.pricePerPerson },
   ]
 
   return (
@@ -18,7 +20,7 @@ export function FeaturedJourney() {
           <div className="relative min-h-[420px] lg:min-h-[640px]">
             <Image
               src={journey.image || '/placeholder.svg'}
-              alt="Catamaran anchored in a turquoise Caribbean lagoon at golden hour"
+              alt={dict.featuredJourney.imageAlt}
               fill
               sizes="(min-width: 1024px) 60vw, 100vw"
               className="object-cover"
@@ -28,7 +30,7 @@ export function FeaturedJourney() {
             <div className="flex flex-col gap-6">
               <p className="eyebrow flex items-center gap-3">
                 <span className="size-1.5 rounded-full bg-primary" aria-hidden="true" />
-                Featured journey · {statusLabel[journey.status]}
+                {dict.featuredJourney.eyebrow} · {dict.status[journey.status]}
               </p>
               <h2 id="featured-title" className="font-display text-6xl md:text-7xl">
                 {journey.destination}
@@ -41,17 +43,17 @@ export function FeaturedJourney() {
                 <div key={fact.label} className="flex flex-col gap-1 bg-card py-4 pr-4">
                   <dt className="eyebrow">{fact.label}</dt>
                   <dd className={fact.value ? 'font-display text-2xl' : 'text-sm tracking-[0.2em] text-muted-foreground'}>
-                    {fact.value ?? 'TBA'}
+                    {fact.value ?? dict.common.tba}
                   </dd>
                 </div>
               ))}
             </dl>
 
             <Link
-              href={journey.href ?? '/#enquire'}
+              href={journey.href ?? localePath(locale, '/#enquire')}
               className="flex items-center justify-between bg-primary px-6 py-4 text-xs uppercase tracking-[0.22em] text-primary-foreground transition-opacity hover:opacity-90"
             >
-              Explore Journey
+              {dict.common.exploreJourney}
               <ArrowUpRight className="size-4" aria-hidden="true" />
             </Link>
           </div>

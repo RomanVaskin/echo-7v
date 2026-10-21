@@ -1,20 +1,22 @@
 'use client'
 
 import { useState } from 'react'
-import { journeys, regions, type Region } from '@/lib/journeys'
+import type { Dictionary } from '@/lib/dictionaries'
+import type { Locale } from '@/lib/i18n'
+import { regions, type Journey, type Region } from '@/lib/journeys'
 import { TravelCard } from '@/components/site/travel-card'
 import { cn } from '@/lib/utils'
 
 type Filter = 'All' | Region
 
-export function ScheduleGrid() {
+export function ScheduleGrid({ locale, dict, journeys }: { locale: Locale; dict: Dictionary; journeys: Journey[] }) {
   const [filter, setFilter] = useState<Filter>('All')
   const filters: Filter[] = ['All', ...regions]
   const visible = filter === 'All' ? journeys : journeys.filter((j) => j.region === filter)
 
   return (
     <div className="flex flex-col gap-10">
-      <div role="group" aria-label="Filter journeys by region" className="flex flex-wrap gap-2">
+      <div role="group" aria-label={dict.schedule.filterLabel} className="flex flex-wrap gap-2">
         {filters.map((f) => (
           <button
             key={f}
@@ -28,13 +30,13 @@ export function ScheduleGrid() {
                 : 'border-border text-foreground/70 hover:border-foreground/40 hover:text-foreground',
             )}
           >
-            {f}
+            {f === 'All' ? dict.schedule.all : dict.regions[f]}
           </button>
         ))}
       </div>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {visible.map((journey) => (
-          <TravelCard key={journey.slug} journey={journey} />
+          <TravelCard key={journey.slug} journey={journey} locale={locale} dict={dict} />
         ))}
       </div>
     </div>
