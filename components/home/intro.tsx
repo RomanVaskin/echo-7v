@@ -2,22 +2,21 @@ import type { Dictionary } from '@/lib/dictionaries'
 
 export function Intro({ dict }: { dict: Dictionary['intro'] }) {
   return (
-    <section aria-label={dict.aria} className="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-36">
-      <div className="reveal grid gap-12 lg:grid-cols-[1fr_2fr]">
-        <p className="eyebrow">{dict.eyebrow}</p>
-        <div className="flex flex-col gap-10">
-          <p className="font-display text-balance text-4xl leading-tight md:text-5xl lg:text-6xl">
-            {dict.lead}{' '}
-            <em className="text-muted-foreground">{dict.accent}</em>
+    <section aria-label={dict.aria} className="mx-auto max-w-7xl px-6 pb-12 pt-24 lg:px-10 lg:pb-16 lg:pt-36">
+      <div className="reveal flex flex-col gap-10">
+        <div className="flex max-w-2xl flex-col gap-8">
+          <p className="eyebrow">{dict.eyebrow}</p>
+          <p className="font-display text-pretty text-left text-[1.8rem] leading-tight md:text-[2.4rem] lg:text-5xl">
+            {dict.lead}
           </p>
-          <div className="grid gap-8 border-t border-border pt-8 sm:grid-cols-3">
-            {dict.items.map((item) => (
-              <div key={item.title} className="flex flex-col gap-2">
-                <h3 className="text-sm uppercase tracking-[0.18em] text-foreground">{item.title}</h3>
-                <p className="text-sm leading-relaxed text-muted-foreground">{item.text}</p>
-              </div>
-            ))}
-          </div>
+        </div>
+        <div className="grid gap-8 border-t border-border pt-8 sm:grid-cols-3">
+          {dict.items.map((item) => (
+            <div key={item.title} className="flex flex-col gap-2">
+              <h3 className="text-sm uppercase tracking-[0.18em] text-foreground">{item.title}</h3>
+              <p className="text-sm leading-relaxed text-muted-foreground">{item.text}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>

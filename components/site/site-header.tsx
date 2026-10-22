@@ -23,7 +23,6 @@ export function SiteHeader({
   const navItems = [
     { href: localePath(locale, '/journeys/caribbean'), label: dict.nav.caribbean },
     { href: localePath(locale, '/#schedule'), label: dict.nav.schedule },
-    { href: localePath(locale, '/#destinations'), label: dict.nav.destinations },
     { href: localePath(locale, '/#how-it-works'), label: dict.nav.howItWorks },
   ]
   const enquireHref = localePath(locale, '/#enquire')
@@ -32,7 +31,7 @@ export function SiteHeader({
     <header className="absolute inset-x-0 top-0 z-50">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-6 lg:px-10">
         <Link href={localePath(locale, '/')} className="font-display text-2xl tracking-wide text-foreground" aria-label={dict.homeLabel}>
-          Seasemates
+          seasmates
         </Link>
 
         <nav aria-label={dict.mainNav} className="hidden items-center gap-6 lg:flex xl:gap-10">

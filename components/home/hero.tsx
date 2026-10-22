@@ -1,38 +1,56 @@
-import Image from 'next/image'
+import { existsSync } from 'node:fs'
+import path from 'node:path'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import type { Dictionary } from '@/lib/dictionaries'
 import { formatNights, localePath, type Locale } from '@/lib/i18n'
 import type { Journey } from '@/lib/journeys'
+import { HeroScene, type HeroVideoSource } from './hero-scene'
+
+const HERO_POSTER = '/images/hero-sailing.png'
+
+/**
+ * Drop sea / yacht footage into `public/videos/` under these names and rebuild — no code change needed.
+ * Missing files are skipped, and with none present the hero shows the poster image only.
+ */
+const HERO_VIDEO_CANDIDATES: HeroVideoSource[] = [
+  { src: '/videos/hero.webm', type: 'video/webm' },
+  { src: '/videos/hero.mp4', type: 'video/mp4' },
+]
+
+const heroVideoSources = HERO_VIDEO_CANDIDATES.filter((source) =>
+  existsSync(path.join(process.cwd(), 'public', source.src)),
+)
 
 export function Hero({ locale, dict, featuredJourney }: { locale: Locale; dict: Dictionary['hero']; featuredJourney: Journey }) {
   return (
-    <section className="relative flex min-h-svh flex-col justify-end overflow-hidden">
-      <Image
-        src="/images/hero-sailing.png"
-        alt={dict.imageAlt}
-        fill
-        priority
-        sizes="100vw"
-        className="object-cover"
-      />
-      <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/20 to-background" />
-
-      <div className="relative mx-auto flex w-full max-w-7xl flex-col gap-16 px-6 pb-12 pt-40 lg:px-10 lg:pb-16">
-        <div className="hero-fade flex max-w-4xl flex-col gap-8">
-          <p className="eyebrow text-foreground/80">{dict.eyebrow}</p>
-          <h1 className="font-display text-balance text-6xl md:text-8xl lg:text-[8.5rem]">
-            {dict.titleLead} <em className="text-primary">{dict.titleAccent}</em>
-          </h1>
-          <p className="max-w-lg text-pretty text-lg leading-relaxed text-foreground/80">
-            {dict.lead}
-          </p>
+    <HeroScene sources={heroVideoSources} poster={HERO_POSTER} posterAlt={dict.imageAlt}>
+      <div className="relative flex flex-1 flex-col items-center justify-center px-6 pt-24 text-center">
+        <div className="hero-title flex flex-col items-center">
+          <div className="hero-fade flex flex-col items-center gap-1.5">
+            <p className="eyebrow text-foreground/80">{dict.motto}</p>
+            {dict.mottoTranslation && (
+              <p className="text-[0.6875rem] tracking-[0.18em] text-foreground/60">{dict.mottoTranslation}</p>
+            )}
+          </div>
+          <h1 className="hero-rise hero-wordmark mt-6 whitespace-nowrap font-display text-foreground md:mt-8">seasmates</h1>
         </div>
+        <p className="hero-subtitle mt-5 md:mt-7">
+          <span
+            className="hero-fade block font-display text-xl leading-snug text-foreground/90 md:text-3xl"
+            style={{ animationDelay: '0.35s' }}
+          >
+            {dict.titleLead}
+            <br className="md:hidden" /> <em className="text-primary">{dict.titleAccent}</em>
+          </span>
+        </p>
+      </div>
 
-        <div className="flex flex-col gap-6 border-t border-foreground/20 pt-6 md:flex-row md:items-end md:justify-between">
+      <div className="relative mx-auto w-full max-w-7xl px-6 pb-10 lg:px-10 lg:pb-14">
+        <div className="hero-fade flex flex-col gap-5 border-t border-foreground/20 pt-6 md:flex-row md:items-end md:justify-between">
           <Link href={featuredJourney.href ?? localePath(locale, '/#schedule')} className="group flex flex-col gap-2">
             <span className="eyebrow">{dict.featuredLabel}</span>
-            <span className="flex items-center gap-4 font-display text-3xl md:text-4xl">
+            <span className="flex items-center gap-4 font-display text-2xl md:text-4xl">
               {featuredJourney.destination} · {formatNights(locale, featuredJourney.nights ?? 0)}
               <ArrowRight
                 className="size-6 text-primary transition-transform group-hover:translate-x-2"
@@ -48,6 +66,6 @@ export function Hero({ locale, dict, featuredJourney }: { locale: Locale; dict: 
           </Link>
         </div>
       </div>
-    </section>
+    </HeroScene>
   )
 }

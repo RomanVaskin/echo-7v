@@ -34,10 +34,24 @@ export async function generateMetadata({ params }: LayoutProps<'/[lang]'>): Prom
     metadataBase: new URL(siteUrl),
     title: {
       default: dict.meta.siteTitle,
-      template: '%s — Seasemates',
+      template: '%s — seasmates',
     },
     description: dict.meta.siteDescription,
-    generator: 'v0.app',
+    applicationName: 'seasmates',
+    openGraph: {
+      type: 'website',
+      siteName: 'seasmates',
+      title: dict.meta.siteTitle,
+      description: dict.meta.siteDescription,
+      locale: lang === 'ru' ? 'ru_RU' : 'en_GB',
+      images: [{ url: '/images/hero-sailing.png', alt: dict.hero.imageAlt }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: dict.meta.siteTitle,
+      description: dict.meta.siteDescription,
+      images: ['/images/hero-sailing.png'],
+    },
     icons: {
       icon: [
         { url: '/favicon.ico', sizes: 'any' },
