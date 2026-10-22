@@ -1,8 +1,9 @@
 export const en = {
   meta: {
-    siteTitle: 'Seasemates — A Boutique International Sailing Club',
-    siteDescription:
-      'Carefully selected sailing journeys for small crews. Discover our featured 9-night Caribbean voyage and plan your escape at sea.',
+    siteTitle: 'seasmates — United by the Sea',
+    siteDescription: 'Seasmates — sea journeys, sailing yachts, new routes and people united by the sea.',
+    journeysTitle: 'All journeys',
+    journeysDescription: 'Every seasmates sailing journey in one place: the Caribbean voyage and the routes in preparation.',
     caribbeanTitle: 'The Caribbean — 9 Nights',
     caribbeanDescription:
       'Our signature 9-night Caribbean sailing journey: quiet anchorages, turquoise lagoons and island life with a small crew.',
@@ -57,7 +58,7 @@ export const en = {
     },
   } as Record<string, { destination: string; area: string; summary: string }>,
   header: {
-    homeLabel: 'Seasemates home',
+    homeLabel: 'seasmates home',
     languageLabel: 'Language',
     mainNav: 'Main',
     mobileNav: 'Mobile',
@@ -66,17 +67,15 @@ export const en = {
     nav: {
       caribbean: 'The Caribbean',
       schedule: 'Schedule',
-      destinations: 'Destinations',
       howItWorks: 'How it works',
     },
   },
   footer: {
     tagline:
-      'A boutique international sailing club. Carefully selected journeys for small crews who prefer to travel by sea.',
+      'An international sailing club. Carefully selected journeys for small crews who prefer to travel by sea.',
     journeys: 'Journeys',
     caribbeanLink: 'The Caribbean — 9 nights',
     schedule: 'Sailing schedule',
-    destinations: 'Destinations',
     club: 'Club',
     howItWorks: 'How it works',
     enquire: 'Enquire',
@@ -85,18 +84,18 @@ export const en = {
   },
   hero: {
     imageAlt: 'A sailing yacht crossing deep open ocean at dusk',
-    eyebrow: 'A boutique international sailing club',
+    motto: 'United by the Sea',
+    // Optional local translation of the motto, shown under it; empty in English.
+    mottoTranslation: '',
     titleLead: 'Travel by sea,',
     titleAccent: 'in good company.',
-    lead: 'Carefully selected journeys for small crews — quiet anchorages, long passages and the people you meet along the way.',
     featuredLabel: 'Featured journey',
     viewSchedule: 'View sailing schedule',
   },
   intro: {
-    aria: 'About Seasemates',
+    aria: 'About seasmates',
     eyebrow: 'The club',
-    lead: 'Not a charter marketplace. A small club of travellers who share a horizon —',
-    accent: 'and a handful of journeys chosen with care.',
+    lead: 'Carefully selected journeys for small crews — quiet anchorages, long passages and the people you meet along the way.',
     items: [
       { title: 'Small crews', text: 'Intimate groups, so every anchorage still feels like a discovery.' },
       { title: 'Curated routes', text: 'Each voyage is planned around calm water, light and local life.' },
@@ -110,7 +109,6 @@ export const en = {
   schedule: {
     eyebrow: 'Sailing schedule',
     title: 'Upcoming journeys',
-    description: 'A deliberately short list. Details are published as they are confirmed — anything not yet final is marked TBA.',
     filterLabel: 'Filter journeys by region',
     all: 'All',
     card: {
@@ -121,17 +119,16 @@ export const en = {
       price: 'Price per person',
     },
   },
-  destinations: {
-    eyebrow: 'Destinations',
-    title: 'Where we sail',
-    description: 'Select a destination to chart it. The Caribbean is our signature voyage; further waters are in preparation.',
-    listTitle: 'Destinations',
+  allJourneys: {
+    cta: 'All journeys',
+    eyebrow: 'Sailing schedule',
+    title: 'All journeys',
   },
   howItWorks: {
     eyebrow: 'How it works',
     titleLead: 'From first glance',
     titleAccent: 'to open water.',
-    description: 'Every Seasemates journey is arranged personally. There is no checkout — only a conversation with our team.',
+    description: 'Every seasmates journey is arranged personally. There is no checkout — only a conversation with our team.',
     steps: [
       { title: 'Explore Your Journey', description: 'Discover our carefully curated sailing experiences.' },
       { title: 'Plan Your Escape', description: 'Connect with our team to discuss availability, accommodation and travel details.' },
@@ -327,7 +324,7 @@ export const en = {
         {
           question: 'Can I join as a solo traveller?',
           answer:
-            'Yes. Seasemates is a club for like-minded travellers, and many guests join on their own. Cabin arrangements are discussed individually.',
+            'Yes. seasmates is a club for like-minded travellers, and many guests join on their own. Cabin arrangements are discussed individually.',
         },
         {
           question: 'How many guests will be on board?',

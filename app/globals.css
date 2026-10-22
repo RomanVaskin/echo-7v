@@ -29,6 +29,10 @@
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) * 1.4);
+  /* Light "sand" surfaces with deep-sea ink, used by the featured journey section */
+  --color-sand: #f8f7f2;
+  --color-sand-deep: #eae7de;
+  --color-ink: #092d38;
 }
 
 :root {
@@ -95,12 +99,57 @@
   .hero-fade {
     animation: hero-in 1.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
   }
+  .hero-rise {
+    animation: hero-rise 1.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+
+  /* Scroll-linked hero motion. `--hero-p` (0 → 1 while the hero scrolls out) is set by HeroScene. */
+  .hero-media {
+    transform: translate3d(0, calc(var(--hero-p, 0) * 30%), 0) scale(calc(1.04 + var(--hero-p, 0) * 0.04));
+    will-change: transform;
+  }
+  .hero-title {
+    transform: translate3d(0, calc(var(--hero-p, 0) * -16vh), 0) scale(calc(1 - var(--hero-p, 0) * 0.05));
+    opacity: calc(1 - var(--hero-p, 0) * 1.1);
+    will-change: transform, opacity;
+  }
+  .hero-subtitle {
+    transform: translate3d(0, calc(var(--hero-p, 0) * -7vh), 0);
+    opacity: calc(1 - var(--hero-p, 0) * 1.5);
+    will-change: transform, opacity;
+  }
+}
+
+.hero-video {
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+.hero-video[data-ready='true'] {
+  opacity: 1;
+}
+
+/* Brand wordmark on the hero: sized to the viewport, never wider than it */
+.hero-wordmark {
+  font-size: clamp(3.75rem, 21vw, 16rem);
+  line-height: 0.9;
+  letter-spacing: -0.02em;
 }
 
 @keyframes reveal-up {
   from {
     opacity: 0;
     transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
   }
   to {
     opacity: 1;
@@ -119,7 +168,7 @@
   }
 }
 
-/* Leaflet map styling tuned to the Seasemates palette */
+/* Leaflet map styling tuned to the seasmates palette */
 .leaflet-container {
   background: #08201f;
   font-family: var(--font-sans);

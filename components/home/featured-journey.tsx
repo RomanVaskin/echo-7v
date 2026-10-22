@@ -14,9 +14,9 @@ export function FeaturedJourney({ locale, dict, journey }: { locale: Locale; dic
   ]
 
   return (
-    <section aria-labelledby="featured-title" className="relative">
-      <div className="mx-auto max-w-7xl px-6 lg:px-10">
-        <div className="reveal grid overflow-hidden border border-border lg:grid-cols-[1.3fr_1fr]">
+    <section aria-labelledby="featured-title" className="relative bg-sand text-ink">
+      <div className="mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-24">
+        <div className="reveal grid overflow-hidden border border-ink/15 lg:grid-cols-[1.3fr_1fr]">
           <div className="relative min-h-[420px] lg:min-h-[640px]">
             <Image
               src={journey.image || '/placeholder.svg'}
@@ -26,23 +26,23 @@ export function FeaturedJourney({ locale, dict, journey }: { locale: Locale; dic
               className="object-cover"
             />
           </div>
-          <div className="flex flex-col justify-between gap-12 bg-card p-8 md:p-12">
+          <div className="flex flex-col justify-between gap-12 bg-sand-deep p-8 md:p-12">
             <div className="flex flex-col gap-6">
-              <p className="eyebrow flex items-center gap-3">
+              <p className="eyebrow flex items-center gap-3 text-ink/75">
                 <span className="size-1.5 rounded-full bg-primary" aria-hidden="true" />
                 {dict.featuredJourney.eyebrow} · {dict.status[journey.status]}
               </p>
               <h2 id="featured-title" className="font-display text-6xl md:text-7xl">
                 {journey.destination}
               </h2>
-              <p className="max-w-sm leading-relaxed text-muted-foreground">{journey.summary}</p>
+              <p className="max-w-sm leading-relaxed text-ink/80">{journey.summary}</p>
             </div>
 
-            <dl className="grid grid-cols-2 gap-px bg-border">
+            <dl className="grid grid-cols-2 gap-px bg-ink/15">
               {facts.map((fact) => (
-                <div key={fact.label} className="flex flex-col gap-1 bg-card py-4 pr-4">
-                  <dt className="eyebrow">{fact.label}</dt>
-                  <dd className={fact.value ? 'font-display text-2xl' : 'text-sm tracking-[0.2em] text-muted-foreground'}>
+                <div key={fact.label} className="flex flex-col gap-1 bg-sand-deep py-4 pr-4">
+                  <dt className="eyebrow text-ink/75">{fact.label}</dt>
+                  <dd className={fact.value ? 'font-display text-2xl' : 'text-sm tracking-[0.2em] text-ink/70'}>
                     {fact.value ?? dict.common.tba}
                   </dd>
                 </div>

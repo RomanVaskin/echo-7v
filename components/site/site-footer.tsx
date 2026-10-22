@@ -9,7 +9,7 @@ export function SiteFooter({ locale, dict }: { locale: Locale; dict: Dictionary[
     <footer className="border-t border-border">
       <div className="mx-auto grid max-w-7xl gap-12 px-6 py-16 md:grid-cols-[2fr_1fr_1fr] lg:px-10">
         <div className="flex flex-col gap-4">
-          <p className="font-display text-4xl">Seasemates</p>
+          <p className="font-display text-4xl">seasmates</p>
           <p className="max-w-sm text-sm leading-relaxed text-muted-foreground">{dict.tagline}</p>
         </div>
         <div className="flex flex-col gap-3">
@@ -19,9 +19,6 @@ export function SiteFooter({ locale, dict }: { locale: Locale; dict: Dictionary[
           </Link>
           <Link href={localePath(locale, '/#schedule')} className={linkClass}>
             {dict.schedule}
-          </Link>
-          <Link href={localePath(locale, '/#destinations')} className={linkClass}>
-            {dict.destinations}
           </Link>
         </div>
         <div className="flex flex-col gap-3">
@@ -35,7 +32,7 @@ export function SiteFooter({ locale, dict }: { locale: Locale; dict: Dictionary[
         </div>
       </div>
       <div className="mx-auto flex max-w-7xl flex-col justify-between gap-2 border-t border-border px-6 py-6 text-xs text-muted-foreground sm:flex-row lg:px-10">
-        <p>{`© ${new Date().getFullYear()} Seasemates. ${dict.rights}`}</p>
+        <p>{`© ${new Date().getFullYear()} seasmates. ${dict.rights}`}</p>
         <p>{dict.tbaNote}</p>
       </div>
     </footer>

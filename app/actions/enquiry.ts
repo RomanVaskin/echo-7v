@@ -37,7 +37,7 @@ export async function submitEnquiry(_prev: EnquiryState, formData: FormData): Pr
   }
 
   // Enquiries are validated here; connect a database or email provider to store and deliver them.
-  console.log('[seasemates] enquiry received', { journey, guests, timing, hasMessage: message.length > 0 })
+  console.log('[seasmates] enquiry received', { journey, guests, timing, hasMessage: message.length > 0 })
 
   return {
     status: 'success',
