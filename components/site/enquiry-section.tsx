@@ -11,7 +11,7 @@ type EnquirySectionProps = {
   eyebrow: string
   form: Dictionary['form']
   journeyOptions: { slug: string; label: string }[]
-  /** `light`: warm ivory section (home page); default is the dark card surface. */
+  /** `light`: warm light section (home page); default is the dark card surface. */
   tone?: 'dark' | 'light'
 }
 

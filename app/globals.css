@@ -33,6 +33,7 @@
   --color-ocean-card: var(--ocean-card);
   --color-ocean-text: var(--ocean-text);
   --color-ivory: var(--warm-ivory);
+  --color-surface-warm: var(--surface-warm);
   --color-sand-accent: var(--sand-accent);
 }
 
@@ -42,6 +43,8 @@
   --ocean-card: #153b40;
   --ocean-text: #28494d;
   --warm-ivory: #f5f3ee;
+  /* PANTONE 482 C: the light section background on the home page */
+  --surface-warm: #dbc8b6;
   --sand-accent: #d7bb8e;
   --text-light: #f5f3ee;
   --radius: 0.25rem;
@@ -71,27 +74,34 @@
   --ring: var(--sand-accent);
 }
 
-/* Warm ivory sections with deep-sea text */
+/* Warm light sections (PANTONE 482 C) with deep-sea text */
 .theme-light {
   color-scheme: light;
-  --background: var(--warm-ivory);
+  --background: var(--surface-warm);
   --foreground: var(--ocean-deep);
-  --card: var(--warm-ivory);
+  --card: var(--surface-warm);
   --card-foreground: var(--ocean-deep);
-  --popover: var(--warm-ivory);
+  --popover: var(--surface-warm);
   --popover-foreground: var(--ocean-deep);
   --muted-foreground: var(--ocean-text);
-  /* darker than the dark-theme value so form errors stay readable on ivory */
+  /* darker than the dark-theme value so form errors stay readable on the light surface */
   --destructive: #a5432f;
-  --border: rgb(6 43 48 / 0.16);
-  --input: rgb(6 43 48 / 0.3);
+  --border: rgb(6 43 48 / 0.2);
+  --input: rgb(6 43 48 / 0.35);
 }
 .theme-light,
 .theme-dark {
   background-color: var(--background);
   color: var(--foreground);
 }
-/* Sand text is too faint on ivory: accents and section numbers use the sea tones there */
+/* Sand fills blend into the warm surface: active filters and the send button get a deep-sea edge */
+.theme-light button[aria-pressed='true'] {
+  border-color: var(--ocean-deep);
+}
+.theme-light button[type='submit'] {
+  box-shadow: inset 0 0 0 1px var(--ocean-deep);
+}
+/* Sand text is too faint on the light surface: accents and section numbers use the sea tones there */
 .theme-light :is(h1, h2, h3) em.text-primary {
   color: var(--ocean-text);
 }
