@@ -169,7 +169,7 @@
     animation: hero-in 1.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
   }
   .hero-letter > span {
-    animation: hero-letter-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation: hero-letter-in 1.25s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
 
   .hero-media {
@@ -259,13 +259,21 @@
   }
 }
 
-/* Each wordmark letter rises out of its own mask; clip-path (not overflow) keeps the text baseline */
+/* Each wordmark letter turns up around its own horizontal axis; the perspective scales with the font size */
+.hero-letters {
+  perspective: 4em;
+  -webkit-perspective: 4em;
+}
 .hero-letter {
   display: inline-block;
-  clip-path: inset(-0.3em -0.1em -0.12em -0.1em);
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
 }
 .hero-letter > span {
   display: inline-block;
+  transform-origin: center center;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 /* Brand wordmark on the hero (keeps its serif): sized to the viewport, never wider than it */
@@ -291,13 +299,11 @@
 @keyframes hero-letter-in {
   from {
     opacity: 0;
-    transform: translateY(35px);
-    filter: blur(6px);
+    transform: translateY(22px) rotateX(-85deg);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
-    filter: blur(0);
+    transform: translateY(0) rotateX(0deg);
   }
 }
 
