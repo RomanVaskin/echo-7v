@@ -90,7 +90,7 @@ export const ru: Dictionary = {
     mottoTranslation: 'Объединённые морем',
     titleLead: 'В путь по морю,',
     titleAccent: 'в хорошей компании.',
-    featuredLabel: 'Главный маршрут',
+    exploreJourneys: 'Выбрать путешествие',
     viewSchedule: 'Смотреть расписание рейсов',
   },
   intro: {
