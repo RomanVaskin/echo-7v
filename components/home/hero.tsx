@@ -8,9 +8,9 @@ import { HeroScene, type HeroVideoSource } from './hero-scene'
 const HERO_POSTER = '/images/hero-sailing.png'
 
 const WORDMARK = 'seasmates'
-// Letter-by-letter reveal: starts after the background fades in, one letter every 80ms.
+// Letter-by-letter 3D reveal: starts after the background fades in, one letter every 90ms.
 const LETTERS_START_S = 0.3
-const LETTER_STAGGER_S = 0.08
+const LETTER_STAGGER_S = 0.09
 
 /**
  * Drop sea / yacht footage into `public/videos/` under these names and rebuild — no code change needed.
@@ -29,7 +29,7 @@ export function Hero({ locale, dict }: { locale: Locale; dict: Dictionary['hero'
   return (
     <HeroScene sources={heroVideoSources} poster={HERO_POSTER} posterAlt={dict.imageAlt}>
       <div className="relative mx-auto w-full max-w-7xl px-6 pt-24 lg:px-10 lg:pt-28">
-        <div className="hero-fade flex flex-col gap-1.5" style={{ animationDelay: '1.45s' }}>
+        <div className="hero-fade flex flex-col gap-1.5" style={{ animationDelay: '1.7s' }}>
           <p className="eyebrow text-foreground/80">{dict.motto}</p>
           {dict.mottoTranslation && (
             <p className="text-[0.6875rem] tracking-[0.14em] text-foreground/60">{dict.mottoTranslation}</p>
@@ -41,7 +41,7 @@ export function Hero({ locale, dict }: { locale: Locale; dict: Dictionary['hero'
         <div className="hero-title origin-left">
           <h1 className="hero-wordmark -ml-[0.04em] whitespace-nowrap text-foreground">
             <span className="sr-only">{WORDMARK}</span>
-            <span aria-hidden="true">
+            <span aria-hidden="true" className="hero-letters">
               {[...WORDMARK].map((letter, i) => (
                 <span key={i} className="hero-letter">
                   <span style={{ animationDelay: `${LETTERS_START_S + i * LETTER_STAGGER_S}s` }}>{letter}</span>
@@ -53,7 +53,7 @@ export function Hero({ locale, dict }: { locale: Locale; dict: Dictionary['hero'
         <p className="hero-subtitle mt-5 md:mt-7">
           <span
             className="hero-fade block font-display text-xl leading-snug text-foreground/90 md:text-3xl"
-            style={{ animationDelay: '1.75s' }}
+            style={{ animationDelay: '2s' }}
           >
             {dict.titleLead}
             <br className="md:hidden" /> <em className="text-primary">{dict.titleAccent}</em>
