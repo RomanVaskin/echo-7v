@@ -129,6 +129,11 @@
   body {
     @apply bg-background text-foreground font-sans;
   }
+  /* No italics anywhere: emphasised words keep their accent colour in upright type */
+  em,
+  i {
+    font-style: normal;
+  }
   ::selection {
     background: var(--primary);
     color: var(--primary-foreground);

@@ -17,7 +17,6 @@ const cormorant = Cormorant_Garamond({
 // Inter with the optical-size axis: large sizes render with the Display cut.
 const inter = Inter({
   subsets: ['latin', 'cyrillic'],
-  style: ['normal', 'italic'],
   axes: ['opsz'],
   variable: '--font-inter',
 })
