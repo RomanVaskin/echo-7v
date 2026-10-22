@@ -29,84 +29,74 @@
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) * 1.4);
-  --color-ocean-deep: var(--ocean-deep);
-  --color-ocean-card: var(--ocean-card);
-  --color-ocean-text: var(--ocean-text);
-  --color-ivory: var(--warm-ivory);
-  --color-surface-warm: var(--surface-warm);
-  --color-sand-accent: var(--sand-accent);
+  --color-brand-light: var(--brand-light);
+  --color-brand-dark: var(--brand-dark);
+  --color-brand-text-dark: var(--brand-text-dark);
+  --color-brand-text-light: var(--brand-text-light);
 }
 
-/* seasmates palette */
+/* seasmates palette: PANTONE 4087 C (light sections) and PANTONE 4131 C (dark sections) */
 :root {
-  --ocean-deep: #062b30;
-  --ocean-card: #153b40;
-  --ocean-text: #28494d;
-  --warm-ivory: #f5f3ee;
-  /* PANTONE 482 C: the light section background on the home page */
-  --surface-warm: #dbc8b6;
-  --sand-accent: #d7bb8e;
-  --text-light: #f5f3ee;
+  --brand-light: #b79f97;
+  --brand-dark: #484b5d;
+  --brand-text-dark: #252733;
+  --brand-text-light: #f8f6f3;
   --radius: 0.25rem;
 }
 
-/* Dark sea surfaces (default). `.theme-dark` restores them inside a light section, e.g. on travel cards. */
+/* Dark surfaces (default). `.theme-dark` restores them inside a light section, e.g. on travel cards. */
 :root,
 .theme-dark {
   color-scheme: dark;
-  --background: var(--ocean-deep);
-  --foreground: var(--text-light);
-  --card: var(--ocean-card);
-  --card-foreground: var(--text-light);
-  --popover: var(--ocean-card);
-  --popover-foreground: var(--text-light);
-  --primary: var(--sand-accent);
-  --primary-foreground: var(--ocean-deep);
-  --secondary: var(--ocean-card);
-  --secondary-foreground: var(--text-light);
-  --muted: var(--ocean-card);
-  --muted-foreground: #9db3ae;
-  --accent: var(--ocean-card);
-  --accent-foreground: var(--text-light);
-  --destructive: #e08a76;
-  --border: rgb(245 243 238 / 0.14);
-  --input: rgb(245 243 238 / 0.22);
-  --ring: var(--sand-accent);
+  --background: var(--brand-dark);
+  --foreground: var(--brand-text-light);
+  --card: var(--brand-dark);
+  --card-foreground: var(--brand-text-light);
+  --popover: var(--brand-dark);
+  --popover-foreground: var(--brand-text-light);
+  --primary: var(--brand-light);
+  --primary-foreground: var(--brand-text-dark);
+  --secondary: var(--brand-dark);
+  --secondary-foreground: var(--brand-text-light);
+  --muted: var(--brand-dark);
+  /* light text toned towards the surface: 5.3:1 on #484B5D */
+  --muted-foreground: color-mix(in srgb, var(--brand-text-light) 75%, var(--brand-dark));
+  --accent: var(--brand-dark);
+  --accent-foreground: var(--brand-text-light);
+  --destructive: #f2b2a4;
+  --border: rgb(248 246 243 / 0.24);
+  --input: rgb(248 246 243 / 0.32);
+  --ring: var(--brand-light);
 }
 
-/* Warm light sections (PANTONE 482 C) with deep-sea text */
+/* Light sections with dark text */
 .theme-light {
   color-scheme: light;
-  --background: var(--surface-warm);
-  --foreground: var(--ocean-deep);
-  --card: var(--surface-warm);
-  --card-foreground: var(--ocean-deep);
-  --popover: var(--surface-warm);
-  --popover-foreground: var(--ocean-deep);
-  --muted-foreground: var(--ocean-text);
-  /* darker than the dark-theme value so form errors stay readable on the light surface */
-  --destructive: #a5432f;
-  --border: rgb(6 43 48 / 0.2);
-  --input: rgb(6 43 48 / 0.35);
+  --background: var(--brand-light);
+  --foreground: var(--brand-text-dark);
+  --card: var(--brand-light);
+  --card-foreground: var(--brand-text-dark);
+  --popover: var(--brand-light);
+  --popover-foreground: var(--brand-text-dark);
+  /* the active filter and the send button: dark fill with light text */
+  --primary: var(--brand-dark);
+  --primary-foreground: var(--brand-text-light);
+  /* only the full text colour reaches 4.5:1 on #B79F97, so secondary text uses it too */
+  --muted-foreground: var(--brand-text-dark);
+  --destructive: #5c1d13;
+  --border: rgb(37 39 51 / 0.3);
+  --input: rgb(37 39 51 / 0.45);
+  --ring: var(--brand-dark);
 }
 .theme-light,
 .theme-dark {
   background-color: var(--background);
   color: var(--foreground);
 }
-/* Sand fills blend into the warm surface: active filters and the send button get a deep-sea edge */
-.theme-light button[aria-pressed='true'] {
-  border-color: var(--ocean-deep);
-}
-.theme-light button[type='submit'] {
-  box-shadow: inset 0 0 0 1px var(--ocean-deep);
-}
-/* Sand text is too faint on the light surface: accents and section numbers use the sea tones there */
-.theme-light :is(h1, h2, h3) em.text-primary {
-  color: var(--ocean-text);
-}
+/* Small text on the light surface needs the full text colour (inactive filters, section numbers) */
+.theme-light button[aria-pressed='false'],
 .theme-light .eyebrow .text-primary {
-  color: var(--ocean-deep);
+  color: var(--foreground);
 }
 
 @layer base {
@@ -249,22 +239,22 @@
   filter: sepia(0.25) hue-rotate(130deg) saturate(0.9) brightness(0.95);
 }
 .leaflet-control-attribution {
-  background: rgb(6 43 48 / 0.8) !important;
-  color: #9db3ae !important;
+  background: rgb(72 75 93 / 0.85) !important;
+  color: var(--brand-text-light) !important;
   font-size: 10px;
 }
 .leaflet-control-attribution a {
-  color: #d7bb8e !important;
+  color: var(--brand-light) !important;
 }
 .leaflet-bar a {
-  background: #153b40 !important;
-  color: #f5f3ee !important;
-  border-color: rgb(245 243 238 / 0.14) !important;
+  background: var(--brand-dark) !important;
+  color: var(--brand-text-light) !important;
+  border-color: rgb(248 246 243 / 0.24) !important;
 }
 .leaflet-tooltip.sea-tooltip {
-  background: #062b30;
-  color: #f5f3ee;
-  border: 1px solid rgb(245 243 238 / 0.2);
+  background: var(--brand-dark);
+  color: var(--brand-text-light);
+  border: 1px solid rgb(248 246 243 / 0.24);
   border-radius: 2px;
   box-shadow: none;
   font-size: 12px;
@@ -281,15 +271,15 @@
   width: 28px;
   height: 28px;
   border-radius: 9999px;
-  border: 1px solid #d7bb8e;
-  background: #062b30;
-  color: #d7bb8e;
+  border: 1px solid var(--brand-light);
+  background: var(--brand-dark);
+  color: var(--brand-light);
   font-size: 11px;
   font-weight: 600;
   transition: all 0.3s ease;
 }
 .sea-marker[data-active='true'] {
-  background: #d7bb8e;
-  color: #062b30;
+  background: var(--brand-light);
+  color: var(--brand-text-dark);
   transform: scale(1.2);
 }

@@ -186,7 +186,7 @@ export function JourneyCarousel({
   }
 
   const arrowClass =
-    'flex size-10 items-center justify-center rounded-full border border-foreground/30 text-foreground transition-colors hover:border-foreground disabled:pointer-events-none disabled:opacity-30'
+    'flex size-10 items-center justify-center rounded-full border border-foreground/60 text-foreground transition-colors hover:border-foreground disabled:pointer-events-none disabled:opacity-30'
 
   return (
     <div className="flex flex-col gap-8">
@@ -220,10 +220,10 @@ export function JourneyCarousel({
       </ul>
 
       <div
-        className={cn('relative mx-auto h-0.5 w-40 overflow-hidden bg-ocean-deep/15 md:w-56', !nav.overflow && 'hidden')}
+        className={cn('relative mx-auto h-0.5 w-40 overflow-hidden bg-foreground/20 md:w-56', !nav.overflow && 'hidden')}
         aria-hidden="true"
       >
-        <div ref={thumbRef} className="absolute inset-y-0 left-0 bg-ocean-deep" />
+        <div ref={thumbRef} className="absolute inset-y-0 left-0 bg-foreground" />
       </div>
     </div>
   )

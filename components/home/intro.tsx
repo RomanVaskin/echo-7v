@@ -11,7 +11,7 @@ export function Intro({ dict, index }: { dict: Dictionary['intro']; index?: stri
             {index && <span className="text-foreground">{index} / </span>}
             {dict.eyebrow}
           </p>
-          <p className="font-display text-pretty text-[2rem] leading-[1.08] text-ocean-text md:text-[2.5rem] xl:text-5xl">
+          <p className="font-display text-pretty text-[2rem] leading-[1.08] text-foreground md:text-[2.5rem] xl:text-5xl">
             {dict.lead}
           </p>
         </div>
