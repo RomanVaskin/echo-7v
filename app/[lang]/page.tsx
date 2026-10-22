@@ -8,7 +8,6 @@ import { EnquirySection } from '@/components/site/enquiry-section'
 import { AllJourneysLink } from '@/components/site/all-journeys-link'
 import { Hero } from '@/components/home/hero'
 import { Intro } from '@/components/home/intro'
-import { FeaturedJourney } from '@/components/home/featured-journey'
 import { ScheduleGrid } from '@/components/home/schedule'
 import { getDictionary } from '@/lib/dictionaries'
 import { alternates, formatNights, isLocale, localePath } from '@/lib/i18n'
@@ -45,7 +44,6 @@ export default async function HomePage({ params }: PageProps<'/[lang]'>) {
       <main>
         <Hero locale={locale} dict={dict.hero} featuredJourney={featured} />
         <Intro dict={dict.intro} />
-        <FeaturedJourney locale={locale} dict={dict} journey={featured} />
 
         <section id="schedule" aria-labelledby="schedule-title" className="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-36">
           <SectionHeading
@@ -59,7 +57,7 @@ export default async function HomePage({ params }: PageProps<'/[lang]'>) {
           </div>
         </section>
 
-        <HowItWorks dict={dict.howItWorks} />
+        <HowItWorks dict={dict.howItWorks} showSteps={false} />
         <AllJourneysLink href={localePath(locale, '/journeys')} label={dict.allJourneys.cta} />
 
         <EnquirySection

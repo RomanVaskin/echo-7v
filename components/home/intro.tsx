@@ -2,7 +2,7 @@ import type { Dictionary } from '@/lib/dictionaries'
 
 export function Intro({ dict }: { dict: Dictionary['intro'] }) {
   return (
-    <section aria-label={dict.aria} className="mx-auto max-w-7xl px-6 pb-12 pt-24 lg:px-10 lg:pb-16 lg:pt-36">
+    <section aria-label={dict.aria} className="mx-auto max-w-7xl px-6 pb-12 pt-12 lg:px-10 lg:pb-16 lg:pt-16">
       <div className="reveal flex flex-col gap-10">
         <div className="flex max-w-2xl flex-col gap-8">
           <p className="eyebrow">{dict.eyebrow}</p>
