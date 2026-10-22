@@ -147,7 +147,7 @@ export function EnquiryForm({ defaultJourney = 'caribbean', locale, dict, journe
         <button
           type="submit"
           disabled={pending}
-          className="group flex items-center justify-center gap-3 bg-primary px-8 py-4 text-xs uppercase tracking-[0.22em] text-primary-foreground transition-opacity hover:opacity-90 disabled:opacity-60"
+          className="group flex shrink-0 items-center whitespace-nowrap justify-center gap-3 bg-primary px-8 py-4 text-xs uppercase tracking-[0.14em] text-primary-foreground transition-opacity hover:opacity-90 disabled:opacity-60"
         >
           {pending ? dict.sending : dict.send}
           <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />

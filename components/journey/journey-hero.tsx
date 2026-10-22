@@ -44,7 +44,7 @@ export function JourneyHero({ journey, locale, dict }: { journey: Journey; local
           ].map((item) => (
             <div key={item.label} className="flex flex-col gap-1">
               <span className="eyebrow">{item.label}</span>
-              <span className={item.value ? 'text-foreground' : 'text-sm tracking-[0.2em] text-muted-foreground'}>
+              <span className={item.value ? 'text-foreground' : 'text-sm tracking-[0.14em] text-muted-foreground'}>
                 {item.value ?? dict.common.tba}
               </span>
             </div>

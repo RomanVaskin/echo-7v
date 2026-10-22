@@ -39,7 +39,7 @@ export function SiteHeader({
             <Link
               key={item.href}
               href={item.href}
-              className="text-xs uppercase tracking-[0.22em] text-foreground/80 transition-colors hover:text-foreground"
+              className="text-xs uppercase tracking-[0.14em] text-foreground/80 transition-colors hover:text-foreground"
             >
               {item.label}
             </Link>
@@ -47,7 +47,7 @@ export function SiteHeader({
           <LanguageSwitcher locale={locale} path={path} label={dict.languageLabel} />
           <Link
             href={enquireHref}
-            className="border border-foreground/40 px-5 py-2.5 text-xs uppercase tracking-[0.22em] text-foreground transition-colors hover:border-primary hover:text-primary"
+            className="border border-foreground/40 px-5 py-2.5 text-xs uppercase tracking-[0.14em] text-foreground transition-colors hover:border-primary hover:text-primary"
           >
             {enquireLabel}
           </Link>
@@ -79,7 +79,7 @@ export function SiteHeader({
               key={item.href}
               href={item.href}
               onClick={() => setOpen(false)}
-              className="border-b border-border py-3 text-sm uppercase tracking-[0.2em] text-foreground/90 last:border-none"
+              className="border-b border-border py-3 text-sm uppercase tracking-[0.14em] text-foreground/90 last:border-none"
             >
               {item.label}
             </Link>

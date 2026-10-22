@@ -39,7 +39,7 @@ export function YachtDetails({ dict, tba }: { dict: Dictionary['caribbean']['yac
             {specs.map((spec) => (
               <div key={spec.label} className="flex items-baseline justify-between border-b border-border py-4">
                 <dt className="text-sm text-muted-foreground">{spec.label}</dt>
-                <dd className={spec.value ? 'text-foreground' : 'text-xs tracking-[0.2em] text-muted-foreground/80'}>
+                <dd className={spec.value ? 'text-foreground' : 'text-xs tracking-[0.14em] text-muted-foreground/80'}>
                   {spec.value ?? tba}
                 </dd>
               </div>

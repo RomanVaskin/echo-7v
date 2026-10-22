@@ -42,7 +42,7 @@ export function FeaturedJourney({ locale, dict, journey }: { locale: Locale; dic
               {facts.map((fact) => (
                 <div key={fact.label} className="flex flex-col gap-1 bg-sand-deep py-4 pr-4">
                   <dt className="eyebrow text-ink/75">{fact.label}</dt>
-                  <dd className={fact.value ? 'font-display text-2xl' : 'text-sm tracking-[0.2em] text-ink/70'}>
+                  <dd className={fact.value ? 'font-display text-2xl' : 'text-sm tracking-[0.14em] text-ink/70'}>
                     {fact.value ?? dict.common.tba}
                   </dd>
                 </div>
@@ -51,7 +51,7 @@ export function FeaturedJourney({ locale, dict, journey }: { locale: Locale; dic
 
             <Link
               href={journey.href ?? localePath(locale, '/#enquire')}
-              className="flex items-center justify-between bg-primary px-6 py-4 text-xs uppercase tracking-[0.22em] text-primary-foreground transition-opacity hover:opacity-90"
+              className="flex items-center justify-between bg-primary px-6 py-4 text-xs uppercase tracking-[0.14em] text-primary-foreground transition-opacity hover:opacity-90"
             >
               {dict.common.exploreJourney}
               <ArrowUpRight className="size-4" aria-hidden="true" />

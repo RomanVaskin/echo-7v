@@ -5,7 +5,7 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-serif: var(--font-cormorant), ui-serif, Georgia, serif;
   --color-ring: var(--ring);
   --color-input: var(--input);
@@ -29,33 +29,74 @@
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) * 1.4);
-  /* Light "sand" surfaces with deep-sea ink, used by the featured journey section */
-  --color-sand: #f8f7f2;
-  --color-sand-deep: #eae7de;
-  --color-ink: #092d38;
+  --color-ocean-deep: var(--ocean-deep);
+  --color-ocean-card: var(--ocean-card);
+  --color-ocean-text: var(--ocean-text);
+  --color-ivory: var(--warm-ivory);
+  --color-sand-accent: var(--sand-accent);
 }
 
+/* seasmates palette */
 :root {
-  color-scheme: dark;
-  --background: #0a2326;
-  --foreground: #ece6da;
-  --card: #0e2c30;
-  --card-foreground: #ece6da;
-  --popover: #0e2c30;
-  --popover-foreground: #ece6da;
-  --primary: #d4b98c;
-  --primary-foreground: #0a2326;
-  --secondary: #123a3e;
-  --secondary-foreground: #ece6da;
-  --muted: #123a3e;
-  --muted-foreground: #9db3ae;
-  --accent: #123a3e;
-  --accent-foreground: #ece6da;
-  --destructive: #e08a76;
-  --border: rgb(236 230 218 / 0.14);
-  --input: rgb(236 230 218 / 0.22);
-  --ring: #d4b98c;
+  --ocean-deep: #062b30;
+  --ocean-card: #153b40;
+  --ocean-text: #28494d;
+  --warm-ivory: #f5f3ee;
+  --sand-accent: #d7bb8e;
+  --text-light: #f5f3ee;
   --radius: 0.25rem;
+}
+
+/* Dark sea surfaces (default). `.theme-dark` restores them inside a light section, e.g. on travel cards. */
+:root,
+.theme-dark {
+  color-scheme: dark;
+  --background: var(--ocean-deep);
+  --foreground: var(--text-light);
+  --card: var(--ocean-card);
+  --card-foreground: var(--text-light);
+  --popover: var(--ocean-card);
+  --popover-foreground: var(--text-light);
+  --primary: var(--sand-accent);
+  --primary-foreground: var(--ocean-deep);
+  --secondary: var(--ocean-card);
+  --secondary-foreground: var(--text-light);
+  --muted: var(--ocean-card);
+  --muted-foreground: #9db3ae;
+  --accent: var(--ocean-card);
+  --accent-foreground: var(--text-light);
+  --destructive: #e08a76;
+  --border: rgb(245 243 238 / 0.14);
+  --input: rgb(245 243 238 / 0.22);
+  --ring: var(--sand-accent);
+}
+
+/* Warm ivory sections with deep-sea text */
+.theme-light {
+  color-scheme: light;
+  --background: var(--warm-ivory);
+  --foreground: var(--ocean-deep);
+  --card: var(--warm-ivory);
+  --card-foreground: var(--ocean-deep);
+  --popover: var(--warm-ivory);
+  --popover-foreground: var(--ocean-deep);
+  --muted-foreground: var(--ocean-text);
+  /* darker than the dark-theme value so form errors stay readable on ivory */
+  --destructive: #a5432f;
+  --border: rgb(6 43 48 / 0.16);
+  --input: rgb(6 43 48 / 0.3);
+}
+.theme-light,
+.theme-dark {
+  background-color: var(--background);
+  color: var(--foreground);
+}
+/* Sand text is too faint on ivory: accents and section numbers use the sea tones there */
+.theme-light :is(h1, h2, h3) em.text-primary {
+  color: var(--ocean-text);
+}
+.theme-light .eyebrow .text-primary {
+  color: var(--ocean-deep);
 }
 
 @layer base {
@@ -76,16 +117,19 @@
 
 @utility eyebrow {
   font-size: 0.6875rem;
-  letter-spacing: 0.32em;
+  font-weight: 400;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--muted-foreground);
 }
 
+/* Inter Display Light for headings and the logo */
 @utility font-display {
-  font-family: var(--font-serif);
-  font-weight: 400;
-  letter-spacing: -0.01em;
-  line-height: 1.02;
+  font-family: var(--font-sans);
+  font-weight: 300;
+  font-optical-sizing: auto;
+  letter-spacing: -0.045em;
+  line-height: 1.05;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -144,8 +188,10 @@
   user-select: none;
 }
 
-/* Brand wordmark on the hero: sized to the viewport, never wider than it */
+/* Brand wordmark on the hero (keeps its serif): sized to the viewport, never wider than it */
 .hero-wordmark {
+  font-family: var(--font-serif);
+  font-weight: 400;
   font-size: clamp(3.75rem, 21vw, 16rem);
   line-height: 0.9;
   letter-spacing: -0.02em;
@@ -193,22 +239,22 @@
   filter: sepia(0.25) hue-rotate(130deg) saturate(0.9) brightness(0.95);
 }
 .leaflet-control-attribution {
-  background: rgb(10 35 38 / 0.8) !important;
+  background: rgb(6 43 48 / 0.8) !important;
   color: #9db3ae !important;
   font-size: 10px;
 }
 .leaflet-control-attribution a {
-  color: #d4b98c !important;
+  color: #d7bb8e !important;
 }
 .leaflet-bar a {
-  background: #0e2c30 !important;
-  color: #ece6da !important;
-  border-color: rgb(236 230 218 / 0.14) !important;
+  background: #153b40 !important;
+  color: #f5f3ee !important;
+  border-color: rgb(245 243 238 / 0.14) !important;
 }
 .leaflet-tooltip.sea-tooltip {
-  background: #0a2326;
-  color: #ece6da;
-  border: 1px solid rgb(236 230 218 / 0.2);
+  background: #062b30;
+  color: #f5f3ee;
+  border: 1px solid rgb(245 243 238 / 0.2);
   border-radius: 2px;
   box-shadow: none;
   font-size: 12px;
@@ -225,15 +271,15 @@
   width: 28px;
   height: 28px;
   border-radius: 9999px;
-  border: 1px solid #d4b98c;
-  background: #0a2326;
-  color: #d4b98c;
+  border: 1px solid #d7bb8e;
+  background: #062b30;
+  color: #d7bb8e;
   font-size: 11px;
   font-weight: 600;
   transition: all 0.3s ease;
 }
 .sea-marker[data-active='true'] {
-  background: #d4b98c;
-  color: #0a2326;
+  background: #d7bb8e;
+  color: #062b30;
   transform: scale(1.2);
 }

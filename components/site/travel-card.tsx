@@ -10,7 +10,7 @@ function Detail({ label, value, tba }: { label: string; value: string | null; tb
   return (
     <div className="flex items-baseline justify-between gap-4 border-b border-border py-2.5 text-sm">
       <dt className="text-muted-foreground">{label}</dt>
-      <dd className={cn('text-right', value ? 'text-foreground' : 'text-muted-foreground/70 tracking-[0.2em] text-xs')}>
+      <dd className={cn('text-right', value ? 'text-foreground' : 'text-muted-foreground/70 tracking-[0.14em] text-xs')}>
         {value ?? tba}
       </dd>
     </div>
@@ -33,7 +33,7 @@ export function TravelCard({
   const href = journey.href ?? localePath(locale, '/#enquire')
 
   return (
-    <article className={cn('group flex flex-col bg-card', reveal && 'reveal')}>
+    <article className={cn('theme-dark group flex flex-col bg-card', reveal && 'reveal')}>
       <div className="relative aspect-[4/3] overflow-hidden">
         <Image
           src={journey.image || '/placeholder.svg'}
@@ -46,7 +46,7 @@ export function TravelCard({
         <div className="absolute inset-x-4 top-4 flex flex-wrap items-start justify-between gap-2">
           <span
             className={cn(
-              'flex items-center gap-2 bg-background/80 px-3 py-1.5 text-[10px] uppercase tracking-[0.22em] backdrop-blur',
+              'flex items-center gap-2 bg-background/80 px-3 py-1.5 text-[10px] uppercase tracking-[0.14em] backdrop-blur',
               isAvailable ? 'text-primary' : 'text-foreground/70',
             )}
           >
@@ -57,7 +57,7 @@ export function TravelCard({
             {dict.status[journey.status]}
           </span>
           {journey.featured && (
-            <span className="bg-primary px-3 py-1.5 text-[10px] uppercase tracking-[0.22em] text-primary-foreground">
+            <span className="bg-primary px-3 py-1.5 text-[10px] uppercase tracking-[0.14em] text-primary-foreground">
               {dict.common.featured}
             </span>
           )}
@@ -87,7 +87,7 @@ export function TravelCard({
         <Link
           href={href}
           className={cn(
-            'mt-auto flex items-center justify-between border px-5 py-3.5 text-xs uppercase tracking-[0.22em] transition-colors',
+            'mt-auto flex items-center justify-between border px-5 py-3.5 text-xs uppercase tracking-[0.14em] transition-colors',
             journey.href
               ? 'border-primary text-primary hover:bg-primary hover:text-primary-foreground'
               : 'border-border text-foreground/80 hover:border-foreground/50 hover:text-foreground',

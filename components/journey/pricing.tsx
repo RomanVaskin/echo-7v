@@ -28,7 +28,7 @@ export function Pricing({ journey, locale, dict, common, status }: { journey: Jo
           </p>
           <Link
             href="#enquire"
-            className="group mt-2 flex w-fit items-center gap-3 bg-primary px-8 py-4 text-xs uppercase tracking-[0.22em] text-primary-foreground transition-opacity hover:opacity-90"
+            className="group mt-2 flex w-fit items-center gap-3 bg-primary px-8 py-4 text-xs uppercase tracking-[0.14em] text-primary-foreground transition-opacity hover:opacity-90"
           >
             {common.registerInterest}
             <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
@@ -38,7 +38,7 @@ export function Pricing({ journey, locale, dict, common, status }: { journey: Jo
           {rows.map((row) => (
             <div key={row.label} className="flex items-baseline justify-between gap-6 border-b border-border py-5">
               <dt className="text-sm text-muted-foreground">{row.label}</dt>
-              <dd className={row.value ? 'font-display text-2xl md:text-3xl' : 'text-sm tracking-[0.2em] text-muted-foreground'}>
+              <dd className={row.value ? 'font-display text-2xl md:text-3xl' : 'text-sm tracking-[0.14em] text-muted-foreground'}>
                 {row.value ?? common.tba}
               </dd>
             </div>
