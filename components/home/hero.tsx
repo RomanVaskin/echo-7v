@@ -8,7 +8,7 @@ import { HeroScene, type HeroVideoSource } from './hero-scene'
 const HERO_POSTER = '/images/hero-sailing.png'
 
 const WORDMARK = 'seasmates'
-// Letter-by-letter 3D roll: starts after the background fades in, one letter every 70ms.
+// Letter-by-letter 3D flip, right to left: starts after the background fades in, one letter every 70ms.
 const LETTERS_START_S = 0.3
 const LETTER_STAGGER_S = 0.07
 
@@ -44,7 +44,9 @@ export function Hero({ locale, dict }: { locale: Locale; dict: Dictionary['hero'
             <span aria-hidden="true" className="hero-letters">
               {[...WORDMARK].map((letter, i) => (
                 <span key={i} className="hero-letter">
-                  <span style={{ animationDelay: `${LETTERS_START_S + i * LETTER_STAGGER_S}s` }}>{letter}</span>
+                  <span style={{ animationDelay: `${LETTERS_START_S + (WORDMARK.length - 1 - i) * LETTER_STAGGER_S}s` }}>
+                    {letter}
+                  </span>
                 </span>
               ))}
             </span>
