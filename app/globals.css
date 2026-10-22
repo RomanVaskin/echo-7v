@@ -169,7 +169,7 @@
     animation: hero-in 1.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
   }
   .hero-letter > span {
-    animation: hero-letter-in 1.25s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation: hero-letter-in 0.9s cubic-bezier(0.33, 1, 0.68, 1) both;
   }
 
   .hero-media {
@@ -251,10 +251,11 @@
   }
 }
 
-/* Each wordmark letter turns up around its own horizontal axis; the perspective scales with the font size */
+/* Each wordmark letter flips open around its own vertical axis, from edge-on to flat (as on octobergroup.ru).
+   The perspective is in em, so the effect scales with the wordmark. */
 .hero-letters {
-  perspective: 4em;
-  -webkit-perspective: 4em;
+  perspective: 6em;
+  -webkit-perspective: 6em;
 }
 .hero-letter {
   display: inline-block;
@@ -289,13 +290,17 @@
 }
 
 @keyframes hero-letter-in {
+  /* hidden until its turn, then edge-on (a thin vertical line) opening to full width; no fade */
   from {
     opacity: 0;
-    transform: translateY(22px) rotateX(-85deg);
+    transform: rotateY(88deg);
+  }
+  1% {
+    opacity: 1;
   }
   to {
     opacity: 1;
-    transform: translateY(0) rotateX(0deg);
+    transform: rotateY(0deg);
   }
 }
 
