@@ -95,6 +95,8 @@ export function JourneyCarousel({ journeys, locale, dict }: { journeys: Journey[
 
     const onDown = (event: PointerEvent) => {
       if (event.pointerType !== 'mouse' || event.button !== 0) return
+      // Presses on the card's links and buttons stay plain clicks.
+      if ((event.target as Element).closest('a, button')) return
       pointerId = event.pointerId
       startX = lastX = event.clientX
       startLeft = scroller.scrollLeft
@@ -160,6 +162,18 @@ export function JourneyCarousel({ journeys, locale, dict }: { journeys: Journey[
     }
   }, [])
 
+  // Left/Right/Home/End on the focused strip move card by card.
+  const onKeyDown = (event: React.KeyboardEvent<HTMLUListElement>) => {
+    if (event.target !== event.currentTarget) return
+    const scroller = event.currentTarget
+    if (event.key === 'ArrowRight') step(1)
+    else if (event.key === 'ArrowLeft') step(-1)
+    else if (event.key === 'Home') goTo(0)
+    else if (event.key === 'End') goTo(scroller.scrollWidth)
+    else return
+    event.preventDefault()
+  }
+
   const arrowClass =
     'flex size-11 items-center justify-center border border-border text-foreground/80 transition-colors hover:border-primary hover:text-primary disabled:pointer-events-none disabled:opacity-30'
 
@@ -168,7 +182,9 @@ export function JourneyCarousel({ journeys, locale, dict }: { journeys: Journey[
       <ul
         ref={scrollerRef}
         aria-label={dict.schedule.carouselLabel}
-        className="journey-scroller no-scrollbar relative -mx-6 flex snap-x snap-mandatory gap-6 overflow-x-auto overscroll-x-contain scroll-px-6 px-6 lg:-mx-10 lg:scroll-px-10 lg:px-10"
+        tabIndex={nav.overflow ? 0 : -1}
+        onKeyDown={onKeyDown}
+        className="journey-scroller no-scrollbar relative -mx-6 flex snap-x snap-mandatory gap-6 overflow-x-auto overscroll-x-contain scroll-px-6 px-6 lg:-mx-10 lg:scroll-px-10 lg:px-10 focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-primary"
       >
         {journeys.map((journey) => (
           <li
