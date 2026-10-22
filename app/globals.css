@@ -163,12 +163,12 @@
   .hero-fade {
     animation: hero-in 1.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
   }
-  .hero-rise {
-    animation: hero-rise 1.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  .hero-letter > span {
+    animation: hero-letter-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
 
-  /* Scroll-linked hero motion. `--hero-p` (0 → 1 while the hero scrolls out) is set by HeroScene. */
   .hero-media {
+    animation: hero-media-in 1.2s ease-out both;
     transform: translate3d(0, calc(var(--hero-p, 0) * 30%), 0) scale(calc(1.04 + var(--hero-p, 0) * 0.04));
     will-change: transform;
   }
@@ -208,6 +208,15 @@
   user-select: none;
 }
 
+/* Each wordmark letter rises out of its own mask; clip-path (not overflow) keeps the text baseline */
+.hero-letter {
+  display: inline-block;
+  clip-path: inset(-0.3em -0.1em -0.12em -0.1em);
+}
+.hero-letter > span {
+  display: inline-block;
+}
+
 /* Brand wordmark on the hero (keeps its serif): sized to the viewport, never wider than it */
 .hero-wordmark {
   font-family: var(--font-serif);
@@ -228,14 +237,25 @@
   }
 }
 
-@keyframes hero-rise {
+@keyframes hero-letter-in {
   from {
     opacity: 0;
-    transform: translateY(40px);
+    transform: translateY(35px);
+    filter: blur(6px);
   }
   to {
     opacity: 1;
     transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes hero-media-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 
