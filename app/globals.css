@@ -128,6 +128,22 @@
   opacity: 1;
 }
 
+/* Horizontal journey carousel */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.journey-scroller {
+  cursor: grab;
+}
+.journey-scroller[data-dragging='true'] {
+  cursor: grabbing;
+  scroll-snap-type: none;
+  user-select: none;
+}
+
 /* Brand wordmark on the hero: sized to the viewport, never wider than it */
 .hero-wordmark {
   font-size: clamp(3.75rem, 21vw, 16rem);

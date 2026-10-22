@@ -111,6 +111,9 @@ export const en = {
     title: 'Upcoming journeys',
     filterLabel: 'Filter journeys by region',
     all: 'All',
+    carouselLabel: 'Upcoming journeys',
+    previous: 'Previous journeys',
+    next: 'Next journeys',
     card: {
       dates: 'Dates',
       duration: 'Duration',

@@ -112,6 +112,9 @@ export const ru: Dictionary = {
     title: 'Ближайшие путешествия',
     filterLabel: 'Фильтр путешествий по региону',
     all: 'Все',
+    carouselLabel: 'Ближайшие путешествия',
+    previous: 'Предыдущие путешествия',
+    next: 'Следующие путешествия',
     card: {
       dates: 'Даты',
       duration: 'Длительность',
