@@ -41,6 +41,9 @@
   --brand-dark: #051c2c;
   --brand-text-dark: #252733;
   --brand-text-light: #f8f6f3;
+  /* PANTONE 437 C: filled buttons on the home page's light sections */
+  --button-primary: #8e777f;
+  --button-primary-hover: #78636b;
   --radius: 0.25rem;
 }
 
@@ -97,6 +100,23 @@
 .theme-light button[aria-pressed='false'],
 .theme-light .eyebrow .text-primary {
   color: var(--foreground);
+}
+/* Filled buttons on light sections (active filter, send enquiry): PANTONE 437 C with white text */
+.theme-light button[aria-pressed='true'],
+.theme-light button[type='submit'] {
+  border-color: var(--button-primary);
+  background-color: var(--button-primary);
+  color: #fff;
+  transition-property: background-color, border-color, opacity;
+}
+.theme-light button[type='submit']:hover:not(:disabled) {
+  border-color: var(--button-primary-hover);
+  background-color: var(--button-primary-hover);
+  opacity: 1;
+}
+.theme-light button:is([aria-pressed], [type='submit']):focus-visible {
+  outline: 2px solid var(--brand-text-dark);
+  outline-offset: 3px;
 }
 
 @layer base {
