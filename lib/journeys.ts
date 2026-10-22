@@ -30,6 +30,8 @@ export type Journey = JourneyBase & {
   regionLabel: string
   area: string
   summary: string
+  /** Short line shown on the journey card; only set for journeys with a confirmed programme. */
+  tagline?: string
 }
 
 const journeysBase: JourneyBase[] = [
@@ -38,10 +40,10 @@ const journeysBase: JourneyBase[] = [
     region: 'Caribbean',
     image: '/images/caribbean-hero.png',
     nights: 9,
-    dates: null,
+    dates: '29.12 – 06.01',
     vessel: null,
     guests: null,
-    pricePerPerson: null,
+    pricePerPerson: '$4,200',
     status: 'enquiries-open',
     href: '/journeys/caribbean',
     featured: true,

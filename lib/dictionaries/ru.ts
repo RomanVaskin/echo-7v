@@ -24,6 +24,8 @@ export const ru: Dictionary = {
     enquire: 'Оставить заявку',
     loadingChart: 'Загрузка карты…',
     sailingYachtIn: 'Парусная яхта —',
+    perPerson: '/ чел.',
+    more: 'Подробнее',
   },
   status: {
     'enquiries-open': 'Приём заявок открыт',
@@ -42,6 +44,7 @@ export const ru: Dictionary = {
       area: 'Путешествие по островам',
       summary:
         'Девять ночей среди тихих якорных стоянок, бирюзовых лагун и островов с пальмовыми пляжами — наш главный маршрут.',
+      tagline: 'Новогодние приключения под парусом',
     },
     cyclades: {
       destination: 'Киклады',
