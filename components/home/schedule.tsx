@@ -48,20 +48,9 @@ export function ScheduleGrid({
     </div>
   )
 
+  // The home carousel shows every journey, without region filters.
   if (layout === 'carousel') {
-    return (
-      <JourneyCarousel
-        journeys={visible}
-        locale={locale}
-        dict={dict}
-        toolbar={
-          <>
-            {heading}
-            {filterButtons}
-          </>
-        }
-      />
-    )
+    return <JourneyCarousel journeys={journeys} locale={locale} dict={dict} toolbar={heading} />
   }
 
   return (
