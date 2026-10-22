@@ -16,7 +16,18 @@ const MOMENTUM_MS = 180
  * momentum glide on desktop, arrows and a progress line. Scroll state is written straight to the
  * DOM; React state only changes when the arrows' availability does.
  */
-export function JourneyCarousel({ journeys, locale, dict }: { journeys: Journey[]; locale: Locale; dict: Dictionary }) {
+export function JourneyCarousel({
+  journeys,
+  locale,
+  dict,
+  toolbar,
+}: {
+  journeys: Journey[]
+  locale: Locale
+  dict: Dictionary
+  /** Rendered in one row with the arrows, above the strip (heading and filters). */
+  toolbar?: React.ReactNode
+}) {
   const scrollerRef = useRef<HTMLUListElement>(null)
   const thumbRef = useRef<HTMLDivElement>(null)
   const [nav, setNav] = useState({ prev: false, next: false, overflow: false })
@@ -175,10 +186,22 @@ export function JourneyCarousel({ journeys, locale, dict }: { journeys: Journey[
   }
 
   const arrowClass =
-    'flex size-11 items-center justify-center border border-border text-foreground/80 transition-colors hover:border-primary hover:text-primary disabled:pointer-events-none disabled:opacity-30'
+    'flex size-10 items-center justify-center rounded-full border border-foreground/30 text-foreground transition-colors hover:border-foreground disabled:pointer-events-none disabled:opacity-30'
 
   return (
     <div className="flex flex-col gap-8">
+      <div className="flex flex-wrap items-center gap-x-10 gap-y-6">
+        {toolbar}
+        <div className={cn('ml-auto hidden gap-3 md:flex', !nav.overflow && 'md:hidden')}>
+          <button type="button" className={arrowClass} onClick={() => step(-1)} disabled={!nav.prev} aria-label={dict.schedule.previous}>
+            <ArrowLeft className="size-4" aria-hidden="true" />
+          </button>
+          <button type="button" className={arrowClass} onClick={() => step(1)} disabled={!nav.next} aria-label={dict.schedule.next}>
+            <ArrowRight className="size-4" aria-hidden="true" />
+          </button>
+        </div>
+      </div>
+
       <ul
         ref={scrollerRef}
         aria-label={dict.schedule.carouselLabel}
@@ -196,18 +219,11 @@ export function JourneyCarousel({ journeys, locale, dict }: { journeys: Journey[
         ))}
       </ul>
 
-      <div className={cn('flex items-center gap-8', !nav.overflow && 'hidden')}>
-        <div className="relative h-px flex-1 overflow-hidden bg-[#9db3ae]/25" aria-hidden="true">
-          <div ref={thumbRef} className="absolute inset-y-0 left-0 bg-[#d5be95]" />
-        </div>
-        <div className="hidden gap-2 md:flex">
-          <button type="button" className={arrowClass} onClick={() => step(-1)} disabled={!nav.prev} aria-label={dict.schedule.previous}>
-            <ArrowLeft className="size-4" aria-hidden="true" />
-          </button>
-          <button type="button" className={arrowClass} onClick={() => step(1)} disabled={!nav.next} aria-label={dict.schedule.next}>
-            <ArrowRight className="size-4" aria-hidden="true" />
-          </button>
-        </div>
+      <div
+        className={cn('relative mx-auto h-0.5 w-40 overflow-hidden bg-ocean-deep/15 md:w-56', !nav.overflow && 'hidden')}
+        aria-hidden="true"
+      >
+        <div ref={thumbRef} className="absolute inset-y-0 left-0 bg-ocean-deep" />
       </div>
     </div>
   )

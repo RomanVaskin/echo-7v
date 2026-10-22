@@ -14,7 +14,7 @@ export function LanguageSwitcher({
   className?: string
 }) {
   return (
-    <nav aria-label={label} className={cn('flex items-center gap-2 text-xs uppercase tracking-[0.22em]', className)}>
+    <nav aria-label={label} className={cn('flex items-center gap-2 text-xs uppercase tracking-[0.14em]', className)}>
       {locales.map((code, index) => (
         <span key={code} className="flex items-center gap-2">
           {index > 0 && (

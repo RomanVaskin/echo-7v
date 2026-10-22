@@ -29,14 +29,14 @@ export function Hero({ locale, dict, featuredJourney }: { locale: Locale; dict: 
         <div className="hero-fade flex flex-col gap-1.5">
           <p className="eyebrow text-foreground/80">{dict.motto}</p>
           {dict.mottoTranslation && (
-            <p className="text-[0.6875rem] tracking-[0.18em] text-foreground/60">{dict.mottoTranslation}</p>
+            <p className="text-[0.6875rem] tracking-[0.14em] text-foreground/60">{dict.mottoTranslation}</p>
           )}
         </div>
       </div>
 
       <div className="relative mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center px-6 lg:px-10">
         <div className="hero-title origin-left">
-          <h1 className="hero-rise hero-wordmark -ml-[0.04em] whitespace-nowrap font-display text-foreground">seasmates</h1>
+          <h1 className="hero-rise hero-wordmark -ml-[0.04em] whitespace-nowrap text-foreground">seasmates</h1>
         </div>
         <p className="hero-subtitle mt-5 md:mt-7">
           <span
@@ -63,7 +63,7 @@ export function Hero({ locale, dict, featuredJourney }: { locale: Locale; dict: 
           </Link>
           <Link
             href={localePath(locale, '/#schedule')}
-            className="text-xs uppercase tracking-[0.22em] text-foreground/70 underline-offset-8 hover:text-foreground hover:underline"
+            className="text-xs uppercase tracking-[0.14em] text-foreground/70 underline-offset-8 hover:text-foreground hover:underline"
           >
             {dict.viewSchedule}
           </Link>

@@ -21,7 +21,7 @@ export function Itinerary({ days, dict }: { days: ItineraryDay[]; dict: Dictiona
             <span className="eyebrow pt-2 text-primary">{`${dict.day} ${String(day.day).padStart(2, '0')}`}</span>
             <div className="flex flex-col gap-1">
               <h3 className="font-display text-3xl md:text-4xl">{day.place}</h3>
-              <p className="text-sm uppercase tracking-[0.18em] text-muted-foreground">{day.title}</p>
+              <p className="text-sm uppercase tracking-[0.14em] text-muted-foreground">{day.title}</p>
             </div>
             <p className="max-w-lg leading-relaxed text-foreground/80 md:pt-2">{day.description}</p>
           </li>

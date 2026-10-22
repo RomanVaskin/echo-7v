@@ -11,6 +11,8 @@ type EnquirySectionProps = {
   eyebrow: string
   form: Dictionary['form']
   journeyOptions: { slug: string; label: string }[]
+  /** `light`: warm ivory section (home page); default is the dark card surface. */
+  tone?: 'dark' | 'light'
 }
 
 export function EnquirySection({
@@ -22,9 +24,10 @@ export function EnquirySection({
   eyebrow,
   form,
   journeyOptions,
+  tone = 'dark',
 }: EnquirySectionProps) {
   return (
-    <section id="enquire" aria-labelledby="enquire-title" className="bg-card">
+    <section id="enquire" aria-labelledby="enquire-title" className={tone === 'light' ? 'theme-light' : 'bg-card'}>
       <div className="mx-auto grid max-w-7xl gap-16 px-6 py-24 lg:grid-cols-[1fr_1.4fr] lg:px-10 lg:py-32">
         <div className="reveal flex flex-col gap-6">
           <p className="eyebrow flex items-center gap-4">

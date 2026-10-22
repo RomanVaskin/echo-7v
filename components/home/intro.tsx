@@ -1,23 +1,31 @@
+import Image from 'next/image'
 import type { Dictionary } from '@/lib/dictionaries'
 
-export function Intro({ dict }: { dict: Dictionary['intro'] }) {
+export function Intro({ dict, index }: { dict: Dictionary['intro']; index?: string }) {
   return (
-    <section aria-label={dict.aria} className="mx-auto max-w-7xl px-6 pb-12 pt-12 lg:px-10 lg:pb-16 lg:pt-16">
-      <div className="reveal flex flex-col gap-10">
-        <div className="flex max-w-2xl flex-col gap-8">
-          <p className="eyebrow">{dict.eyebrow}</p>
-          <p className="font-display text-pretty text-left text-[1.8rem] leading-tight md:text-[2.4rem] lg:text-5xl">
+    <section aria-label={dict.aria} className="theme-light grid border-t border-border lg:grid-cols-2">
+      {/* Left padding lines the text up with the max-w-7xl container used by other sections */}
+      <div className="reveal flex flex-col justify-center gap-10 px-6 py-16 md:py-20 lg:py-24 lg:pl-[max(2.5rem,calc((100vw-80rem)/2+2.5rem))] lg:pr-16">
+        <div className="flex max-w-xl flex-col gap-7">
+          <p className="eyebrow">
+            {index && <span className="text-foreground">{index} / </span>}
+            {dict.eyebrow}
+          </p>
+          <p className="font-display text-pretty text-[2rem] leading-[1.08] text-ocean-text md:text-[2.5rem] xl:text-5xl">
             {dict.lead}
           </p>
         </div>
-        <div className="grid gap-8 border-t border-border pt-8 sm:grid-cols-3">
+        <div className="grid max-w-xl gap-6 border-t border-border pt-8 sm:grid-cols-3">
           {dict.items.map((item) => (
             <div key={item.title} className="flex flex-col gap-2">
-              <h3 className="text-sm uppercase tracking-[0.18em] text-foreground">{item.title}</h3>
+              <h3 className="text-xs uppercase tracking-[0.14em] text-foreground">{item.title}</h3>
               <p className="text-sm leading-relaxed text-muted-foreground">{item.text}</p>
             </div>
           ))}
         </div>
+      </div>
+      <div className="relative min-h-[360px] md:min-h-[480px] lg:min-h-[600px]">
+        <Image src="/images/gallery-deck.png" alt={dict.imageAlt} fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
       </div>
     </section>
   )

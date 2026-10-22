@@ -95,7 +95,8 @@ export const en = {
   intro: {
     aria: 'About seasmates',
     eyebrow: 'The club',
-    lead: 'Carefully selected journeys for small crews — quiet anchorages, long passages and the people you meet along the way.',
+    lead: 'Thoughtfully curated journeys for small crews. Quiet anchorages, long passages, and the people you meet along the way.',
+    imageAlt: 'Friends relaxing on the bow of a yacht at sunset',
     items: [
       { title: 'Small crews', text: 'Intimate groups, so every anchorage still feels like a discovery.' },
       { title: 'Curated routes', text: 'Each voyage is planned around calm water, light and local life.' },

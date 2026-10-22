@@ -6,8 +6,8 @@ export default function manifest(): MetadataRoute.Manifest {
     short_name: 'seasmates',
     start_url: '/',
     display: 'standalone',
-    background_color: '#0a2326',
-    theme_color: '#0a2326',
+    background_color: '#062b30',
+    theme_color: '#062b30',
     icons: [
       { src: '/icon.svg', type: 'image/svg+xml', sizes: 'any' },
       { src: '/apple-icon.png', type: 'image/png', sizes: '180x180' },

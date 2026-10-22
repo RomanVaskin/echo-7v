@@ -115,7 +115,7 @@ export default function SailingMap({ points, showRoute, focusZoom = 11, listTitl
                 {active && point.href && (
                   <Link
                     href={point.href}
-                    className="mx-6 mb-4 inline-block text-xs uppercase tracking-[0.22em] text-primary underline-offset-4 hover:underline"
+                    className="mx-6 mb-4 inline-block text-xs uppercase tracking-[0.14em] text-primary underline-offset-4 hover:underline"
                   >
                     {exploreLabel}
                   </Link>

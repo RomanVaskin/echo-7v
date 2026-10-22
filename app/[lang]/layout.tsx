@@ -1,22 +1,25 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
-import { Cormorant_Garamond, Manrope } from 'next/font/google'
+import { Cormorant_Garamond, Inter } from 'next/font/google'
 import { notFound } from 'next/navigation'
 import 'leaflet/dist/leaflet.css'
 import '../globals.css'
 import { getDictionary } from '@/lib/dictionaries'
 import { isLocale, locales, siteUrl } from '@/lib/i18n'
 
+// Serif is kept only for the hero "seasmates" wordmark.
 const cormorant = Cormorant_Garamond({
-  subsets: ['latin', 'cyrillic'],
-  weight: ['300', '400', '500'],
-  style: ['normal', 'italic'],
+  subsets: ['latin'],
+  weight: ['400'],
   variable: '--font-cormorant',
 })
 
-const manrope = Manrope({
+// Inter with the optical-size axis: large sizes render with the Display cut.
+const inter = Inter({
   subsets: ['latin', 'cyrillic'],
-  variable: '--font-manrope',
+  style: ['normal', 'italic'],
+  axes: ['opsz'],
+  variable: '--font-inter',
 })
 
 export const dynamicParams = false
@@ -65,7 +68,7 @@ export async function generateMetadata({ params }: LayoutProps<'/[lang]'>): Prom
 
 export const viewport: Viewport = {
   colorScheme: 'dark',
-  themeColor: '#0a2326',
+  themeColor: '#062b30',
 }
 
 export default async function RootLayout({ children, params }: LayoutProps<'/[lang]'>) {
@@ -73,7 +76,7 @@ export default async function RootLayout({ children, params }: LayoutProps<'/[la
   if (!isLocale(lang)) notFound()
 
   return (
-    <html lang={lang} className={`${cormorant.variable} ${manrope.variable} bg-background`}>
+    <html lang={lang} className={`${cormorant.variable} ${inter.variable} bg-background`}>
       <body className="antialiased">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
