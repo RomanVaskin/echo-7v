@@ -8,9 +8,9 @@ import { HeroScene, type HeroVideoSource } from './hero-scene'
 const HERO_POSTER = '/images/hero-sailing.png'
 
 const WORDMARK = 'seasmates'
-// Letter-by-letter 3D reveal: starts after the background fades in, one letter every 90ms.
+// Letter-by-letter 3D roll: starts after the background fades in, one letter every 70ms.
 const LETTERS_START_S = 0.3
-const LETTER_STAGGER_S = 0.09
+const LETTER_STAGGER_S = 0.07
 
 /**
  * Drop sea / yacht footage into `public/videos/` under these names and rebuild — no code change needed.

@@ -169,7 +169,7 @@
     animation: hero-in 1.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
   }
   .hero-letter > span {
-    animation: hero-letter-in 1.25s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation: hero-letter-in 1.4s cubic-bezier(0.16, 1, 0.3, 1) both;
   }
 
   .hero-media {
@@ -251,7 +251,8 @@
   }
 }
 
-/* Each wordmark letter turns up around its own horizontal axis; the perspective scales with the font size */
+/* Each wordmark letter rolls up as if printed on a drum: it turns around a horizontal axis set behind it.
+   The perspective and the drum radius are in em, so the effect scales with the wordmark. */
 .hero-letters {
   perspective: 4em;
   -webkit-perspective: 4em;
@@ -263,7 +264,7 @@
 }
 .hero-letter > span {
   display: inline-block;
-  transform-origin: center center;
+  transform-origin: 50% 50% -0.45em;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 }
@@ -291,11 +292,14 @@
 @keyframes hero-letter-in {
   from {
     opacity: 0;
-    transform: translateY(22px) rotateX(-85deg);
+    transform: rotateX(-100deg);
+  }
+  35% {
+    opacity: 1;
   }
   to {
     opacity: 1;
-    transform: translateY(0) rotateX(0deg);
+    transform: rotateX(0deg);
   }
 }
 
