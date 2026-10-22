@@ -47,7 +47,7 @@ export function TravelCard({
           <span
             className={cn(
               'flex items-center gap-2 bg-background/80 px-3 py-1.5 text-[10px] uppercase tracking-[0.14em] backdrop-blur',
-              isAvailable ? 'text-primary' : 'text-foreground/70',
+              isAvailable ? 'text-foreground' : 'text-foreground/70',
             )}
           >
             <span
@@ -89,8 +89,8 @@ export function TravelCard({
           className={cn(
             'mt-auto flex items-center justify-between border px-5 py-3.5 text-xs uppercase tracking-[0.14em] transition-colors',
             journey.href
-              ? 'border-primary text-primary hover:bg-primary hover:text-primary-foreground'
-              : 'border-border text-foreground/80 hover:border-foreground/50 hover:text-foreground',
+              ? 'border-foreground/70 text-foreground hover:bg-foreground hover:text-background'
+              : 'border-foreground/40 text-foreground/90 hover:border-foreground hover:text-foreground',
           )}
         >
           {journey.href ? dict.common.exploreJourney : dict.common.registerInterest}
