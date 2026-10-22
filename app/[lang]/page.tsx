@@ -53,7 +53,7 @@ export default async function HomePage({ params }: PageProps<'/[lang]'>) {
             title={dict.schedule.title}
           />
           <div className="mt-12">
-            <ScheduleGrid locale={locale} dict={dict} journeys={journeys} />
+            <ScheduleGrid locale={locale} dict={dict} journeys={journeys} layout="carousel" />
           </div>
         </section>
 

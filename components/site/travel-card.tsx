@@ -17,12 +17,23 @@ function Detail({ label, value, tba }: { label: string; value: string | null; tb
   )
 }
 
-export function TravelCard({ journey, locale, dict }: { journey: Journey; locale: Locale; dict: Dictionary }) {
+export function TravelCard({
+  journey,
+  locale,
+  dict,
+  reveal = true,
+}: {
+  journey: Journey
+  locale: Locale
+  dict: Dictionary
+  /** Scroll-in animation; off inside the carousel, where it would track the horizontal scroller. */
+  reveal?: boolean
+}) {
   const isAvailable = journey.status === 'enquiries-open' || journey.status === 'limited'
   const href = journey.href ?? localePath(locale, '/#enquire')
 
   return (
-    <article className="reveal group flex flex-col bg-card">
+    <article className={cn('group flex flex-col bg-card', reveal && 'reveal')}>
       <div className="relative aspect-[4/3] overflow-hidden">
         <Image
           src={journey.image || '/placeholder.svg'}
@@ -32,23 +43,25 @@ export function TravelCard({ journey, locale, dict }: { journey: Journey; locale
           className="object-cover transition-transform duration-[1.6s] ease-out group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent" />
-        <span
-          className={cn(
-            'absolute left-4 top-4 flex items-center gap-2 bg-background/80 px-3 py-1.5 text-[10px] uppercase tracking-[0.22em] backdrop-blur',
-            isAvailable ? 'text-primary' : 'text-foreground/70',
-          )}
-        >
+        <div className="absolute inset-x-4 top-4 flex flex-wrap items-start justify-between gap-2">
           <span
-            aria-hidden="true"
-            className={cn('size-1.5 rounded-full', isAvailable ? 'bg-primary' : 'bg-foreground/40')}
-          />
-          {dict.status[journey.status]}
-        </span>
-        {journey.featured && (
-          <span className="absolute right-4 top-4 bg-primary px-3 py-1.5 text-[10px] uppercase tracking-[0.22em] text-primary-foreground">
-            {dict.common.featured}
+            className={cn(
+              'flex items-center gap-2 bg-background/80 px-3 py-1.5 text-[10px] uppercase tracking-[0.22em] backdrop-blur',
+              isAvailable ? 'text-primary' : 'text-foreground/70',
+            )}
+          >
+            <span
+              aria-hidden="true"
+              className={cn('size-1.5 rounded-full', isAvailable ? 'bg-primary' : 'bg-foreground/40')}
+            />
+            {dict.status[journey.status]}
           </span>
-        )}
+          {journey.featured && (
+            <span className="bg-primary px-3 py-1.5 text-[10px] uppercase tracking-[0.22em] text-primary-foreground">
+              {dict.common.featured}
+            </span>
+          )}
+        </div>
       </div>
 
       <div className="flex flex-1 flex-col gap-5 p-6">

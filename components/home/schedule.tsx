@@ -5,11 +5,22 @@ import type { Dictionary } from '@/lib/dictionaries'
 import type { Locale } from '@/lib/i18n'
 import { regions, type Journey, type Region } from '@/lib/journeys'
 import { TravelCard } from '@/components/site/travel-card'
+import { JourneyCarousel } from './journey-carousel'
 import { cn } from '@/lib/utils'
 
 type Filter = 'All' | Region
 
-export function ScheduleGrid({ locale, dict, journeys }: { locale: Locale; dict: Dictionary; journeys: Journey[] }) {
+export function ScheduleGrid({
+  locale,
+  dict,
+  journeys,
+  layout = 'grid',
+}: {
+  locale: Locale
+  dict: Dictionary
+  journeys: Journey[]
+  layout?: 'grid' | 'carousel'
+}) {
   const [filter, setFilter] = useState<Filter>('All')
   const filters: Filter[] = ['All', ...regions]
   const visible = filter === 'All' ? journeys : journeys.filter((j) => j.region === filter)
@@ -34,11 +45,15 @@ export function ScheduleGrid({ locale, dict, journeys }: { locale: Locale; dict:
           </button>
         ))}
       </div>
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {visible.map((journey) => (
-          <TravelCard key={journey.slug} journey={journey} locale={locale} dict={dict} />
-        ))}
-      </div>
+      {layout === 'carousel' ? (
+        <JourneyCarousel journeys={visible} locale={locale} dict={dict} />
+      ) : (
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {visible.map((journey) => (
+            <TravelCard key={journey.slug} journey={journey} locale={locale} dict={dict} />
+          ))}
+        </div>
+      )}
     </div>
   )
 }
