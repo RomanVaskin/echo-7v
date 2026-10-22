@@ -89,7 +89,7 @@ export const en = {
     mottoTranslation: '',
     titleLead: 'Travel by sea,',
     titleAccent: 'in good company.',
-    featuredLabel: 'Featured journey',
+    exploreJourneys: 'Explore Journeys',
     viewSchedule: 'View sailing schedule',
   },
   intro: {

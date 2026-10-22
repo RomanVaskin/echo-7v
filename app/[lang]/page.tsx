@@ -10,7 +10,7 @@ import { Intro } from '@/components/home/intro'
 import { ScheduleGrid } from '@/components/home/schedule'
 import { getDictionary } from '@/lib/dictionaries'
 import { alternates, formatNights, isLocale, localePath } from '@/lib/i18n'
-import { getFeaturedJourney, getJourneys } from '@/lib/journeys'
+import { getJourneys } from '@/lib/journeys'
 
 export async function generateMetadata({ params }: PageProps<'/[lang]'>): Promise<Metadata> {
   const { lang } = await params
@@ -30,7 +30,6 @@ export default async function HomePage({ params }: PageProps<'/[lang]'>) {
 
   const dict = getDictionary(locale)
   const journeys = getJourneys(locale, dict)
-  const featured = getFeaturedJourney(journeys)
 
   const journeyOptions = journeys.map((j) => ({
     slug: j.slug,
@@ -41,7 +40,7 @@ export default async function HomePage({ params }: PageProps<'/[lang]'>) {
     <>
       <SiteHeader locale={locale} path="/" dict={dict.header} enquireLabel={dict.common.enquire} />
       <main>
-        <Hero locale={locale} dict={dict.hero} featuredJourney={featured} />
+        <Hero locale={locale} dict={dict.hero} />
         <section id="schedule" aria-labelledby="schedule-title" className="theme-light">
           <div className="mx-auto max-w-7xl px-6 pb-14 pt-16 lg:px-10 lg:pb-20 lg:pt-20">
             <ScheduleGrid
