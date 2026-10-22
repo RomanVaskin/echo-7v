@@ -90,7 +90,6 @@ export const en = {
     titleLead: 'Travel by sea,',
     titleAccent: 'in good company.',
     exploreJourneys: 'Explore Journeys',
-    viewSchedule: 'View sailing schedule',
   },
   intro: {
     aria: 'About seasmates',

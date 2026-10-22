@@ -91,7 +91,6 @@ export const ru: Dictionary = {
     titleLead: 'В путь по морю,',
     titleAccent: 'в хорошей компании.',
     exploreJourneys: 'Выбрать путешествие',
-    viewSchedule: 'Смотреть расписание рейсов',
   },
   intro: {
     aria: 'О seasmates',
