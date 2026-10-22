@@ -33,7 +33,7 @@ export function TravelCard({
   const href = journey.href ?? localePath(locale, '/#enquire')
 
   return (
-    <article className={cn('theme-dark group flex flex-col bg-card', reveal && 'reveal')}>
+    <article className={cn('theme-dark group flex flex-col overflow-hidden rounded-[28px] bg-card', reveal && 'reveal')}>
       <div className="relative aspect-[4/3] overflow-hidden">
         <Image
           src={journey.image || '/placeholder.svg'}
@@ -87,7 +87,7 @@ export function TravelCard({
         <Link
           href={href}
           className={cn(
-            'mt-auto flex items-center justify-between border px-5 py-3.5 text-xs uppercase tracking-[0.14em] transition-colors',
+            'mt-auto flex items-center justify-between rounded-[18px] border px-5 py-3.5 text-xs uppercase tracking-[0.14em] transition-colors',
             journey.href
               ? 'border-foreground/70 text-foreground hover:bg-foreground hover:text-background'
               : 'border-foreground/40 text-foreground/90 hover:border-foreground hover:text-foreground',
