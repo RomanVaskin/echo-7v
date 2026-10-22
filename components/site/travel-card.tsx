@@ -6,17 +6,6 @@ import { type Journey } from '@/lib/journeys'
 import { formatNights, localePath, type Locale } from '@/lib/i18n'
 import { cn } from '@/lib/utils'
 
-function Detail({ label, value, tba }: { label: string; value: string | null; tba: string }) {
-  return (
-    <div className="flex items-baseline justify-between gap-4 border-b border-border py-2.5 text-sm">
-      <dt className="text-muted-foreground">{label}</dt>
-      <dd className={cn('text-right', value ? 'text-foreground' : 'text-muted-foreground/70 tracking-[0.14em] text-xs')}>
-        {value ?? tba}
-      </dd>
-    </div>
-  )
-}
-
 export function TravelCard({
   journey,
   locale,
@@ -64,39 +53,34 @@ export function TravelCard({
         </div>
       </div>
 
-      <div className="flex flex-1 flex-col gap-5 p-6">
-        <div className="flex flex-col gap-2">
-          <p className="eyebrow">
-            {journey.regionLabel} · {journey.area}
+      <div className="flex flex-1 flex-col p-6 md:p-7">
+        <h3 className="font-display text-4xl">{journey.destination}</h3>
+        {/* Only confirmed details; the status badge on the photo covers journeys still in preparation */}
+        {(journey.dates || journey.nights) && (
+          <div className="mt-3 flex flex-col gap-1 text-sm text-muted-foreground">
+            {journey.dates && <p>{journey.dates}</p>}
+            {journey.nights && <p>{formatNights(locale, journey.nights)}</p>}
+          </div>
+        )}
+        {journey.tagline && <p className="mt-8 font-display text-xl leading-snug">{journey.tagline}</p>}
+
+        <div className="mt-auto flex flex-wrap items-end justify-between gap-3 pt-10">
+          <p className="whitespace-nowrap font-display text-xl lg:text-2xl">
+            {journey.pricePerPerson && (
+              <>
+                {journey.pricePerPerson} <span className="text-sm text-muted-foreground lg:text-base">{dict.common.perPerson}</span>
+              </>
+            )}
           </p>
-          <h3 className="font-display text-3xl">{journey.destination}</h3>
+          <Link
+            href={href}
+            className="flex shrink-0 items-center gap-2 border border-foreground/60 px-3 py-2.5 lg:px-4 text-[11px] uppercase tracking-[0.14em] text-foreground transition-colors hover:bg-foreground hover:text-background"
+          >
+            {journey.href ? dict.common.more : dict.common.registerInterest}
+            <ArrowUpRight className="size-3.5" aria-hidden="true" />
+            <span className="sr-only">{` — ${journey.destination}`}</span>
+          </Link>
         </div>
-
-        <dl className="flex flex-col">
-          <Detail label={dict.schedule.card.dates} value={journey.dates} tba={dict.common.tba} />
-          <Detail
-            label={dict.schedule.card.duration}
-            value={journey.nights ? formatNights(locale, journey.nights) : null}
-            tba={dict.common.tba}
-          />
-          <Detail label={dict.schedule.card.yacht} value={journey.vessel} tba={dict.common.tba} />
-          <Detail label={dict.schedule.card.guests} value={journey.guests} tba={dict.common.tba} />
-          <Detail label={dict.schedule.card.price} value={journey.pricePerPerson} tba={dict.common.tba} />
-        </dl>
-
-        <Link
-          href={href}
-          className={cn(
-            'mt-auto flex items-center justify-between rounded-[10px] border px-5 py-3.5 text-xs uppercase tracking-[0.14em] transition-colors',
-            journey.href
-              ? 'border-foreground/70 text-foreground hover:bg-foreground hover:text-background'
-              : 'border-foreground/40 text-foreground/90 hover:border-foreground hover:text-foreground',
-          )}
-        >
-          {journey.href ? dict.common.exploreJourney : dict.common.registerInterest}
-          <ArrowUpRight className="size-4" aria-hidden="true" />
-          <span className="sr-only">{` — ${journey.destination}`}</span>
-        </Link>
       </div>
     </article>
   )

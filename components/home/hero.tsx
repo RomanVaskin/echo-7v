@@ -62,7 +62,7 @@ export function Hero({ locale, dict }: { locale: Locale; dict: Dictionary['hero'
       </div>
 
       <div className="relative mx-auto w-full max-w-7xl px-6 pb-10 lg:px-10 lg:pb-14">
-        <div className="hero-fade flex items-end border-t border-foreground/20 pt-6">
+        <div className="hero-fade flex items-end">
           {/* Scrolls to "01 / Upcoming journeys" on the home page */}
           <Link href={localePath(locale, '/#schedule')} className="hero-cta">
             {dict.exploreJourneys}

@@ -22,6 +22,8 @@ export const en = {
     enquire: 'Enquire',
     loadingChart: 'Loading chart…',
     sailingYachtIn: 'Sailing yacht in',
+    perPerson: '/ person',
+    more: 'Explore',
   },
   status: {
     'enquiries-open': 'Enquiries open',
@@ -40,6 +42,7 @@ export const en = {
       area: 'Island-hopping voyage',
       summary:
         'Nine nights between quiet anchorages, turquoise lagoons and palm-fringed islands — our signature journey.',
+      tagline: 'New Year’s adventures under sail',
     },
     cyclades: {
       destination: 'The Cyclades',
@@ -56,7 +59,7 @@ export const en = {
       area: 'Inner Islands',
       summary: 'Granite boulders, white sand and the warm Indian Ocean.',
     },
-  } as Record<string, { destination: string; area: string; summary: string }>,
+  } as Record<string, { destination: string; area: string; summary: string; tagline?: string }>,
   header: {
     homeLabel: 'seasmates home',
     languageLabel: 'Language',
