@@ -213,15 +213,15 @@
   user-select: none;
 }
 
-/* Round "explore journeys" button on the hero: PANTONE 437 C */
+/* Oval "explore journeys" button on the hero: PANTONE 437 C, a 2:1 ellipse */
 .hero-cta {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  aspect-ratio: 1 / 1;
-  width: 7.5rem;
+  aspect-ratio: 2 / 1;
+  width: 13rem;
+  padding-inline: 1.5rem;
   border-radius: 50%;
   background-color: var(--button-primary);
   color: #fff;
@@ -230,6 +230,7 @@
   line-height: 1.25;
   letter-spacing: -0.01em;
   text-align: center;
+  white-space: nowrap;
   transition:
     transform 400ms cubic-bezier(0.22, 1, 0.36, 1),
     background-color 400ms cubic-bezier(0.22, 1, 0.36, 1);
@@ -243,13 +244,13 @@
 }
 @media (min-width: 768px) {
   .hero-cta {
-    width: 9rem;
+    width: 15rem;
     font-size: 1.0625rem;
   }
 }
 @media (min-width: 1024px) {
   .hero-cta {
-    width: 10rem;
+    width: 16.5rem;
     font-size: 1.125rem;
   }
 }
