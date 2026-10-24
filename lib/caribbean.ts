@@ -1,5 +1,5 @@
 /**
- * Editable placeholder content for the Caribbean 9-night journey.
+ * Editable placeholder content for the Caribbean 10-night journey.
  * The route below is indicative and should be replaced once confirmed.
  * Day text (place, title, description), inclusions and FAQs live in the dictionaries.
  */
