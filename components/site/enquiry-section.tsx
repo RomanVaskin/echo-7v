@@ -1,7 +1,6 @@
 import type { Dictionary } from '@/lib/dictionaries'
 import type { Locale } from '@/lib/i18n'
 import { EnquiryForm } from './enquiry-form'
-import { SocialLinks } from './social-links'
 
 type EnquirySectionProps = {
   index?: string
@@ -12,7 +11,6 @@ type EnquirySectionProps = {
   locale: Locale
   eyebrow: string
   form: Dictionary['form']
-  social: Dictionary['social']
   /** `light`: warm light section (home page); default is the dark card surface. */
   tone?: 'dark' | 'light'
 }
@@ -25,7 +23,6 @@ export function EnquirySection({
   locale,
   eyebrow,
   form,
-  social,
   tone = 'dark',
 }: EnquirySectionProps) {
   return (
@@ -41,9 +38,8 @@ export function EnquirySection({
           </h2>
           <p className="max-w-sm leading-relaxed text-muted-foreground">{description}</p>
         </div>
-        <div className="flex w-full max-w-md flex-col gap-10 lg:justify-self-end">
+        <div className="w-full max-w-md lg:justify-self-end">
           <EnquiryForm journey={journey} locale={locale} dict={form} />
-          <SocialLinks dict={social} />
         </div>
       </div>
     </section>

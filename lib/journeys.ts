@@ -30,7 +30,9 @@ export type Journey = JourneyBase & {
   regionLabel: string
   area: string
   summary: string
-  /** Short line shown on the journey card; only set for journeys with a confirmed programme. */
+  /** Card title when it differs from the destination name. */
+  cardTitle?: string
+  /** Short description shown on the journey card; only set for journeys with a confirmed programme. */
   tagline?: string
 }
 

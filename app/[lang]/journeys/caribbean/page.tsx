@@ -101,7 +101,6 @@ export default async function CaribbeanJourneyPage({ params }: PageProps<'/[lang
           locale={locale}
           eyebrow={dict.enquirySection.eyebrow}
           form={dict.form}
-          social={dict.social}
           journey="caribbean"
           title={
             <>

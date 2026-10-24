@@ -92,7 +92,6 @@ export default async function ContactsPage({ params }: PageProps<'/[lang]/contac
           locale={locale}
           eyebrow={t.formEyebrow}
           form={dict.form}
-          social={dict.social}
           title={t.formTitle}
           description={t.formDescription}
         />

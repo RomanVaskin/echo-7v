@@ -5,6 +5,7 @@ import { SiteFooter } from '@/components/site/site-footer'
 import { HowItWorks } from '@/components/site/how-it-works'
 import { EnquirySection } from '@/components/site/enquiry-section'
 import { AllJourneysLink } from '@/components/site/all-journeys-link'
+import { SocialLinks } from '@/components/site/social-links'
 import { Hero } from '@/components/home/hero'
 import { Intro } from '@/components/home/intro'
 import { Reviews } from '@/components/home/reviews'
@@ -58,6 +59,8 @@ export default async function HomePage({ params }: PageProps<'/[lang]'>) {
 
         <HowItWorks dict={dict.howItWorks} variant="split" index="03" />
         <AllJourneysLink href={localePath(locale, '/journeys')} label={dict.allJourneys.cta} />
+        {/* Between 03 and 04; hidden until real account URLs are set in lib/social.ts */}
+        <SocialLinks dict={dict.social} />
 
         <Reviews locale={locale} dict={dict.reviews} />
 
@@ -67,7 +70,6 @@ export default async function HomePage({ params }: PageProps<'/[lang]'>) {
           locale={locale}
           eyebrow={dict.enquirySection.eyebrow}
           form={dict.form}
-          social={dict.social}
           title={dict.enquirySection.home.title}
           description={dict.enquirySection.home.description}
         />
