@@ -15,7 +15,7 @@ import { Gallery } from '@/components/journey/gallery'
 import { Pricing } from '@/components/journey/pricing'
 import { Faq } from '@/components/journey/faq'
 import { getDictionary } from '@/lib/dictionaries'
-import { alternates, formatNights, isLocale } from '@/lib/i18n'
+import { alternates, isLocale } from '@/lib/i18n'
 import { getJourneys } from '@/lib/journeys'
 import { caribbeanCoordinates, type ItineraryDay } from '@/lib/caribbean'
 
@@ -55,11 +55,6 @@ export default async function CaribbeanJourneyPage({ params }: PageProps<'/[lang
     sublabel: `${caribbean.route.day} ${day.day} · ${day.title}`,
     marker: String(day.day),
     coordinates: day.coordinates,
-  }))
-
-  const journeyOptions = journeys.map((j) => ({
-    slug: j.slug,
-    label: `${j.destination}${j.nights ? ` — ${formatNights(locale, j.nights)}` : ''}`,
   }))
 
   return (
@@ -106,8 +101,8 @@ export default async function CaribbeanJourneyPage({ params }: PageProps<'/[lang
           locale={locale}
           eyebrow={dict.enquirySection.eyebrow}
           form={dict.form}
-          journeyOptions={journeyOptions}
-          defaultJourney="caribbean"
+          social={dict.social}
+          journey="caribbean"
           title={
             <>
               {dict.enquirySection.caribbean.titleLead}{' '}

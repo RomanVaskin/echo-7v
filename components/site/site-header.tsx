@@ -30,7 +30,7 @@ export function SiteHeader({
   return (
     <header className="absolute inset-x-0 top-0 z-50">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-6 lg:px-10">
-        <Link href={localePath(locale, '/')} className="font-display text-2xl tracking-wide text-foreground" aria-label={dict.homeLabel}>
+        <Link href={localePath(locale, '/')} className="font-display text-[1.3125rem] tracking-wide text-foreground" aria-label={dict.homeLabel}>
           seasmates
         </Link>
 

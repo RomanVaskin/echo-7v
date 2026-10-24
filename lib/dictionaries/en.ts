@@ -18,7 +18,7 @@ export const en = {
     from: 'From',
     exploreJourney: 'Explore Journey',
     registerInterest: 'Register interest',
-    featured: 'Featured',
+    featured: 'Upcoming journey',
     enquire: 'Enquire',
     loadingChart: 'Loading chart…',
     sailingYachtIn: 'Sailing yacht in',
@@ -43,6 +43,7 @@ export const en = {
       summary:
         'Nine nights between quiet anchorages, turquoise lagoons and palm-fringed islands — our signature journey.',
       tagline: 'New Year’s adventures under sail',
+      dates: 'Dec 28, 2026 – Jan 7, 2027',
     },
     cyclades: {
       destination: 'The Cyclades',
@@ -59,7 +60,7 @@ export const en = {
       area: 'Inner Islands',
       summary: 'Granite boulders, white sand and the warm Indian Ocean.',
     },
-  } as Record<string, { destination: string; area: string; summary: string; tagline?: string }>,
+  } as Record<string, { destination: string; area: string; summary: string; tagline?: string; dates?: string }>,
   header: {
     homeLabel: 'seasmates home',
     languageLabel: 'Language',
@@ -144,10 +145,8 @@ export const en = {
   enquirySection: {
     eyebrow: 'Enquire',
     home: {
-      titleLead: 'Plan your',
-      titleAccent: 'escape.',
-      description:
-        'Tell us a little about yourself and the journey that calls to you. We reply personally to discuss availability and details.',
+      title: 'Have questions?',
+      description: 'Leave your details, and we’ll help you find the right sailing experience.',
     },
     caribbean: {
       titleLead: 'Begin your',
@@ -157,29 +156,30 @@ export const en = {
     },
   },
   form: {
-    name: 'Full name',
-    email: 'Email',
-    journey: 'Journey',
-    general: 'General enquiry',
-    guests: 'Number of guests',
-    timing: 'Preferred timing',
-    timingPlaceholder: 'e.g. Early spring, flexible',
-    message: 'Message',
-    messagePlaceholder: 'Tell us about your travel plans, cabin preferences or questions.',
-    reassurance: 'No commitment — we reply personally to every enquiry.',
-    send: 'Send enquiry',
+    name: 'Name',
+    contact: 'WhatsApp / Telegram',
+    send: 'Send',
     sending: 'Sending…',
     received: 'Enquiry received',
-    success: 'Thank you, {name}. A member of our team will be in touch personally.',
+    success: 'Thank you, {name}. We will be in touch shortly.',
     errors: {
-      name: 'Please enter your full name.',
-      email: 'Please enter a valid email address.',
-      journey: 'Please choose a journey.',
-      guests: 'Please enter between 1 and 12 guests.',
-      message: 'Please keep your message under 2000 characters.',
+      name: 'Please enter your name.',
+      contact: 'Please enter a phone number for WhatsApp or a Telegram username.',
       review: 'Please review the highlighted fields.',
+      delivery: 'We couldn’t send your enquiry right now. Please try again a little later.',
     },
   },
+  reviews: {
+    eyebrow: 'Reviews',
+    title: 'Reviews',
+  },
+  social: {
+    label: 'seasmates on social media',
+    whatsapp: 'seasmates on WhatsApp',
+    telegram: 'seasmates on Telegram',
+    instagram: 'seasmates on Instagram',
+  },
+
   caribbean: {
     breadcrumb: 'Journeys',
     breadcrumbLabel: 'Breadcrumb',
