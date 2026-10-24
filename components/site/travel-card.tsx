@@ -61,7 +61,16 @@ export function TravelCard({
         {/* Only confirmed details; the status badge on the photo covers journeys still in preparation */}
         {(journey.dates || journey.nights) && (
           <div className="mt-3 flex flex-col gap-1 text-sm text-muted-foreground">
-            {journey.dates && <p>{journey.dates}</p>}
+            {/* The long English range ends on its own line ("Dec 28, 2026 –" / "Jan 7, 2027"); the short Russian one fits on one */}
+            {journey.dates && (
+              <p>
+                {journey.dates.split(' – ').map((part, i, parts) => (
+                  <span key={part} className={locale === 'en' ? 'block' : undefined}>
+                    {i < parts.length - 1 ? `${part} – ` : part}
+                  </span>
+                ))}
+              </p>
+            )}
             {journey.nights && <p>{formatNights(locale, journey.nights)}</p>}
           </div>
         )}
