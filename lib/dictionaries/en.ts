@@ -254,140 +254,78 @@ export const en = {
   caribbean: {
     breadcrumb: 'Journeys',
     breadcrumbLabel: 'Breadcrumb',
-    heroStatus: 'Status',
     overview: {
       eyebrow: 'Journey overview',
       titleLead: 'Ten nights,',
       titleAccent: 'one unhurried horizon.',
       primary:
         'Our signature voyage moves slowly through the islands — a short sail each day, long swims, sheltered anchorages at dusk. It is designed for travellers who want the sea itself to be the destination.',
-      secondary:
-        'Days are loosely shaped by wind and light. Snorkel reefs, step ashore in small harbour towns or simply stay on deck with a book. Your professional crew handles the sailing; you are welcome to take the helm whenever you like.',
     },
-    route: {
-      eyebrow: 'Sailing route',
-      title: 'Chart the voyage',
-      description: 'Select a stop to follow the route. Indicative route, subject to confirmation.',
-      listTitle: 'Route stops',
-      day: 'Day',
-    },
-    itinerary: {
-      eyebrow: 'Day by day',
-      title: 'Itinerary',
-      description: 'Indicative itinerary. The exact route adapts to weather and sea conditions, as all good sailing does.',
-      day: 'Day',
-      days: [
-        {
-          place: 'St. Vincent',
-          title: 'Embarkation',
-          description:
-            'Meet your crew, settle into your cabin and enjoy a welcome sundowner on deck before a quiet first night at anchor.',
-        },
-        {
-          place: 'Bequia',
-          title: 'Admiralty Bay',
-          description:
-            'A gentle first sail south. Afternoon ashore among boatbuilders, beach bars and the island’s unhurried rhythm.',
-        },
-        {
-          place: 'Mustique',
-          title: 'Britannia Bay',
-          description: 'Calm turquoise water, snorkelling from the boat and an evening ashore.',
-        },
-        {
-          place: 'Canouan',
-          title: 'Open-water passage',
-          description: 'A longer sail with time at the helm for those who wish, arriving at a sheltered bay.',
-        },
-        {
-          place: 'Tobago Cays',
-          title: 'Marine park',
-          description: 'Anchor behind Horseshoe Reef. Swim with turtles and explore uninhabited cays by tender.',
-        },
-        {
-          place: 'Mayreau',
-          title: 'Salt Whistle Bay',
-          description: 'A crescent of white sand and a slow day — paddleboards, hammocks and a beach dinner.',
-        },
-        {
-          place: 'Union Island',
-          title: 'Clifton Harbour',
-          description: 'Kite-surfers, a lively market and a sunset view over the Grenadines.',
-        },
-        {
-          place: 'Carriacou',
-          title: 'Sandy Island',
-          description: 'Cross into Grenadian waters. Snorkel the reef around a tiny sand spit and dine on board.',
-        },
-        {
-          place: 'Petit St. Vincent',
-          title: 'Final anchorage',
-          description: 'A last full day at sea, followed by a farewell dinner under the stars.',
-        },
-        {
-          place: 'Union Island',
-          title: 'Disembarkation',
-          description: 'Breakfast on deck before saying goodbye to the crew and continuing your travels.',
-        },
+    highlights: {
+      eyebrow: 'On this journey',
+      title: 'Moments of the voyage',
+      carouselLabel: 'Journey highlights',
+      previous: 'Previous',
+      next: 'Next',
+      // Temporary themed cards; their photos are set in lib/caribbean.ts
+      items: [
+        { title: 'Life on board', text: 'A story about how a day on the yacht unfolds will appear here.' },
+        { title: 'Islands', text: 'A story about the islands and anchorages of the route will appear here.' },
+        { title: 'The sea', text: 'A story about time in and by the water will appear here.' },
+        { title: 'At the helm', text: 'A story about sailing and how guests take part in the passages will appear here.' },
+        { title: 'New Year at sea', text: 'A story about welcoming the New Year at sea will appear here.' },
       ],
     },
-    yacht: {
-      eyebrow: 'Yacht & accommodation',
-      titleLead: 'A quiet home',
-      titleAccent: 'on the water.',
-      description:
-        'Guests stay in private cabins with fresh linen and natural light, with generous deck space for sunbathing, dining and watching the islands drift by. Yacht specifications will be published once confirmed.',
-      imageAlt: 'Teak-lined yacht cabin with linen bedding and soft daylight',
-      specs: {
-        vesselType: 'Vessel type',
-        model: 'Model',
-        cabins: 'Cabins',
-        guests: 'Guests',
-        crew: 'Crew',
-        crewValue: 'Professional skipper',
-      },
+    map: {
+      eyebrow: 'Route',
+      label: 'Route map',
+      placeholder: 'Route map',
+    },
+    days: {
+      eyebrow: 'Day by day',
+      title: 'The route, day by day',
+      carouselLabel: 'Route by day',
+      day: 'Day',
+      previous: 'Previous',
+      next: 'Next',
+      // Placeholders until the confirmed route and programme arrive
+      items: [
+        { place: 'Day 1 location', text: 'The programme for this day will be published later.', activity: 'Activity to be announced' },
+        { place: 'Day 2 location', text: 'The programme for this day will be published later.', activity: 'Activity to be announced' },
+        { place: 'Day 3 location', text: 'The programme for this day will be published later.', activity: 'Activity to be announced' },
+        { place: 'Day 4 location', text: 'The programme for this day will be published later.', activity: 'Activity to be announced' },
+        { place: 'Day 5 location', text: 'The programme for this day will be published later.', activity: 'Activity to be announced' },
+        { place: 'Day 6 location', text: 'The programme for this day will be published later.', activity: 'Activity to be announced' },
+        { place: 'Day 7 location', text: 'The programme for this day will be published later.', activity: 'Activity to be announced' },
+        { place: 'Day 8 location', text: 'The programme for this day will be published later.', activity: 'Activity to be announced' },
+        { place: 'Day 9 location', text: 'The programme for this day will be published later.', activity: 'Activity to be announced' },
+      ],
     },
     inclusions: {
-      eyebrow: 'Inclusions',
-      title: 'What’s included',
-      description: 'Indicative list — final inclusions are confirmed with each departure.',
-      includedTitle: 'Included',
-      notIncludedTitle: 'Not included',
-      included: [
-        'Ten nights of cabin accommodation on board',
-        'Professional skipper and crew',
-        'Bed linen and towels',
-        'Snorkelling equipment and paddleboards',
-        'Welcome drinks and farewell dinner',
-        'Pre-departure planning with our team',
-      ],
-      notIncluded: [
-        'International and domestic flights',
-        'Travel and medical insurance',
-        'Marina, mooring and marine-park fees',
-        'Meals and drinks ashore',
-        'Crew gratuities',
-        'Personal expenses',
-      ],
+      eyebrow: 'Terms',
+      title: 'What the journey includes',
+      note: 'A preliminary list for illustration only — the final terms will be confirmed separately.',
+      includedTitle: 'What’s included',
+      notIncludedTitle: 'Paid separately',
+      included: ['Accommodation on the yacht', 'Route planning', 'Journey hosting', 'Shared programme activities'],
+      notIncluded: ['Flights', 'Transfers', 'Personal expenses', 'Additional activities'],
     },
-    gallery: {
-      eyebrow: 'Gallery',
-      images: [
-        'Friends relaxing on the bow of a yacht at sunset',
-        'A dinghy floating over a turquoise coral reef',
-        'Hands on a yacht wheel with the ocean horizon beyond',
-      ],
+    yacht: {
+      eyebrow: 'The yacht',
+      description: 'The catamaran for this journey. A full description and photos will be added later.',
+      exteriorTitle: 'The catamaran',
+      cabinsTitle: 'Cabins',
+      photoPlaceholder: 'Photo coming soon',
+      carouselLabel: 'Yacht photos',
+      previous: 'Previous',
+      next: 'Next',
     },
-    pricing: {
-      eyebrow: 'Price & availability',
-      titleLead: 'Reserve your',
-      titleAccent: 'place on board.',
-      description:
-        'Pricing and departure dates will be announced shortly. Register your interest now to be among the first to hear.',
-      price: 'Price per person',
-      departures: 'Departure dates',
-      duration: 'Duration',
-      availability: 'Availability',
+    actions: {
+      join: 'Join!',
+      ask: 'Ask a question',
+    },
+    contact: {
+      eyebrow: 'Contact us',
     },
     faq: {
       eyebrow: 'Questions',

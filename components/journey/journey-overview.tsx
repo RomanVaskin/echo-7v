@@ -3,7 +3,7 @@ import { SectionHeading } from '@/components/site/section-heading'
 
 export function JourneyOverview({ dict }: { dict: Dictionary['caribbean']['overview'] }) {
   return (
-    <section aria-labelledby="overview-title" className="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-36">
+    <section aria-labelledby="overview-title" className="mx-auto max-w-7xl px-6 pb-16 pt-24 lg:px-10 lg:pb-20 lg:pt-36">
       <SectionHeading
         id="overview-title"
         index="01"
@@ -14,14 +14,7 @@ export function JourneyOverview({ dict }: { dict: Dictionary['caribbean']['overv
           </>
         }
       />
-      <div className="reveal mt-14 grid gap-10 md:grid-cols-2 lg:pl-[33%]">
-        <p className="text-lg leading-relaxed text-foreground/85">
-          {dict.primary}
-        </p>
-        <p className="leading-relaxed text-muted-foreground">
-          {dict.secondary}
-        </p>
-      </div>
+      <p className="reveal mt-8 max-w-2xl text-lg leading-relaxed text-foreground/85 lg:ml-[33%]">{dict.primary}</p>
     </section>
   )
 }

@@ -1,26 +1,25 @@
 /**
- * Editable placeholder content for the Caribbean 10-night journey.
- * The route below is indicative and should be replaced once confirmed.
- * Day text (place, title, description), inclusions and FAQs live in the dictionaries.
+ * Editable media and data for the Caribbean New Year journey page. Texts live in the dictionaries
+ * (`caribbean.*`); this file holds what is the same in both languages.
  */
 
-export type ItineraryDay = {
-  day: number
-  place: string
-  title: string
-  description: string
-  coordinates: [number, number]
+/** Photos of the five highlight cards, in the order of `caribbean.highlights.items`. Temporary themed shots. */
+export const highlightImages = [
+  '/images/gallery-deck.png',
+  '/images/caribbean-hero.png',
+  '/images/gallery-reef.png',
+  '/images/gallery-helm.png',
+  '/images/hero-sailing.png',
+]
+
+/**
+ * The yacht, as named by the client. Photo slots stay empty (neutral placeholders) until confirmed
+ * photos of this very yacht are added: put a `/images/...` path in place of `null`.
+ */
+export const caribbeanYacht = {
+  name: 'Lagoon 450 SporTop Toja',
+  year: '2018',
+  exteriorPhotos: [null, null, null, null] as (string | null)[],
+  cabinPhotos: [null, null, null] as (string | null)[],
 }
 
-export const caribbeanCoordinates: [number, number][] = [
-  [13.128, -61.196],
-  [13.006, -61.243],
-  [12.877, -61.188],
-  [12.711, -61.33],
-  [12.633, -61.355],
-  [12.647, -61.389],
-  [12.598, -61.414],
-  [12.481, -61.476],
-  [12.54, -61.384],
-  [12.596, -61.42],
-]
