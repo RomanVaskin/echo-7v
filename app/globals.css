@@ -35,10 +35,10 @@
   --color-brand-text-light: var(--brand-text-light);
 }
 
-/* seasmates palette: PANTONE 4087 C (light sections) and PANTONE 296 C (dark sections) */
+/* seasmates palette: PANTONE 4087 C (light sections) and PANTONE 4131 C (dark sections) */
 :root {
   --brand-light: #b79f97;
-  --brand-dark: #051c2c;
+  --brand-dark: #484b5d;
   --brand-text-dark: #252733;
   --brand-text-light: #f8f6f3;
   /* PANTONE 437 C: filled buttons on the home page's light sections */
@@ -62,7 +62,7 @@
   --secondary: var(--brand-dark);
   --secondary-foreground: var(--brand-text-light);
   --muted: var(--brand-dark);
-  /* light text toned towards the surface: 9.4:1 on #051C2C */
+  /* light text toned towards the surface: 5.3:1 on #484B5D */
   --muted-foreground: color-mix(in srgb, var(--brand-text-light) 75%, var(--brand-dark));
   --accent: var(--brand-dark);
   --accent-foreground: var(--brand-text-light);
@@ -256,6 +256,29 @@
   }
 }
 
+/* Filled call-to-action link on the inner pages (Our Team): PANTONE 437 C, small radius */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1rem 2.25rem;
+  border-radius: var(--radius);
+  background-color: var(--button-primary);
+  color: #fff;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition: background-color 300ms ease;
+}
+.btn-primary:hover {
+  background-color: var(--button-primary-hover);
+}
+.btn-primary:focus-visible {
+  outline: 2px solid var(--foreground);
+  outline-offset: 3px;
+}
+
 /* Enquiry send button: PANTONE 437 C on every page */
 .enquiry-submit {
   background-color: var(--button-primary);
@@ -358,7 +381,7 @@
   filter: sepia(0.25) hue-rotate(130deg) saturate(0.9) brightness(0.95);
 }
 .leaflet-control-attribution {
-  background: rgb(5 28 44 / 0.85) !important;
+  background: rgb(72 75 93 / 0.85) !important;
   color: var(--brand-text-light) !important;
   font-size: 10px;
 }
