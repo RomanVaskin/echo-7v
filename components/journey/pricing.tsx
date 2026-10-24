@@ -20,7 +20,7 @@ export function Pricing({ journey, locale, dict, common, status }: { journey: Jo
             <span className="text-primary">07</span>
             <span>{dict.eyebrow}</span>
           </p>
-          <h2 id="pricing-title" className="font-display text-balance text-5xl md:text-6xl">
+          <h2 id="pricing-title" className="font-display text-balance text-5xl max-[359px]:text-[2.125rem] md:text-6xl">
             {dict.titleLead} <em className="text-primary">{dict.titleAccent}</em>
           </h2>
           <p className="max-w-sm leading-relaxed text-muted-foreground">
@@ -28,7 +28,8 @@ export function Pricing({ journey, locale, dict, common, status }: { journey: Jo
           </p>
           <Link
             href="#enquire"
-            className="group mt-2 flex w-fit items-center gap-3 bg-primary px-8 py-4 text-xs uppercase tracking-[0.14em] text-primary-foreground transition-opacity hover:opacity-90"
+            /* Oval, in the PANTONE 437 C used by the filled buttons on the other pages */
+            className="enquiry-submit group mt-2 flex w-fit items-center gap-3 whitespace-nowrap rounded-full px-8 py-4 text-xs uppercase tracking-[0.14em] max-[359px]:gap-2 max-[359px]:px-5 max-[359px]:tracking-[0.08em]"
           >
             {common.registerInterest}
             <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
