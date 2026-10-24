@@ -20,10 +20,12 @@ export function SiteHeader({
 }) {
   const [open, setOpen] = useState(false)
 
+  // The Caribbean journey, schedule and how-it-works stay reachable from the catalogue and the footer.
   const navItems = [
-    { href: localePath(locale, '/journeys/caribbean'), label: dict.nav.caribbean },
-    { href: localePath(locale, '/#schedule'), label: dict.nav.schedule },
-    { href: localePath(locale, '/#how-it-works'), label: dict.nav.howItWorks },
+    { href: localePath(locale, '/journeys'), label: dict.nav.journeys },
+    { href: localePath(locale, '/team'), label: dict.nav.team },
+    { href: localePath(locale, '/blog'), label: dict.nav.blog },
+    { href: localePath(locale, '/contacts'), label: dict.nav.contacts },
   ]
   const enquireHref = localePath(locale, '/#enquire')
 

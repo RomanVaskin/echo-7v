@@ -14,6 +14,9 @@ export function SiteFooter({ locale, dict }: { locale: Locale; dict: Dictionary[
         </div>
         <div className="flex flex-col gap-3">
           <p className="eyebrow">{dict.journeys}</p>
+          <Link href={localePath(locale, '/journeys')} className={linkClass}>
+            {dict.allJourneys}
+          </Link>
           <Link href={localePath(locale, '/journeys/caribbean')} className={linkClass}>
             {dict.caribbeanLink}
           </Link>
@@ -23,8 +26,17 @@ export function SiteFooter({ locale, dict }: { locale: Locale; dict: Dictionary[
         </div>
         <div className="flex flex-col gap-3">
           <p className="eyebrow">{dict.club}</p>
+          <Link href={localePath(locale, '/team')} className={linkClass}>
+            {dict.team}
+          </Link>
+          <Link href={localePath(locale, '/blog')} className={linkClass}>
+            {dict.blog}
+          </Link>
           <Link href={localePath(locale, '/#how-it-works')} className={linkClass}>
             {dict.howItWorks}
+          </Link>
+          <Link href={localePath(locale, '/contacts')} className={linkClass}>
+            {dict.contacts}
           </Link>
           <Link href={localePath(locale, '/#enquire')} className={linkClass}>
             {dict.enquire}

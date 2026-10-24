@@ -1,10 +1,10 @@
 import type { Dictionary } from '@/lib/dictionaries'
 import { socialLinks } from '@/lib/social'
 
-type Network = keyof typeof socialLinks
+export type Network = keyof typeof socialLinks
 
 /* Monochrome outline icons drawn in currentColor, 24px grid */
-const icons: Record<Network, React.ReactNode> = {
+export const socialIcons: Record<Network, React.ReactNode> = {
   whatsapp: (
     <>
       <path d="M3.5 20.5 4.8 16A8.5 8.5 0 1 1 8 19.2Z" />
@@ -52,7 +52,7 @@ export function SocialLinks({ dict }: { dict: Dictionary['social'] }) {
                 strokeLinejoin="round"
                 aria-hidden="true"
               >
-                {icons[network]}
+                {socialIcons[network]}
               </svg>
             </a>
           </li>
