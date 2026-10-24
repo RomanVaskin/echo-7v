@@ -26,13 +26,17 @@ export const socialIcons: Record<Network, React.ReactNode> = {
   ),
 }
 
+/**
+ * Round PANTONE 437 C buttons with light icons, centred. Shows only networks with a real URL in
+ * lib/social.ts and renders nothing while none is set.
+ */
 export function SocialLinks({ dict }: { dict: Dictionary['social'] }) {
   const networks = (Object.keys(socialLinks) as Network[]).filter((network) => socialLinks[network])
   if (networks.length === 0) return null
 
   return (
-    <nav aria-label={dict.label}>
-      <ul className="flex items-center gap-6">
+    <nav aria-label={dict.label} className="mx-auto flex max-w-7xl justify-center px-6 pb-16 lg:px-10 lg:pb-20">
+      <ul className="flex items-center gap-5">
         {networks.map((network) => (
           <li key={network}>
             <a
@@ -40,7 +44,7 @@ export function SocialLinks({ dict }: { dict: Dictionary['social'] }) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={dict[network]}
-              className="block text-foreground/80 transition-opacity duration-300 hover:text-foreground hover:opacity-70"
+              className="social-button"
             >
               <svg
                 viewBox="0 0 24 24"

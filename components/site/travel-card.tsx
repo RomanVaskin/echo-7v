@@ -57,7 +57,7 @@ export function TravelCard({
       </div>
 
       <div className="flex flex-1 flex-col p-6 md:p-7">
-        <h3 className="font-display text-4xl">{journey.destination}</h3>
+        <h3 className="font-display text-4xl tracking-[-0.03em]">{journey.cardTitle ?? journey.destination}</h3>
         {/* Only confirmed details; the status badge on the photo covers journeys still in preparation */}
         {(journey.dates || journey.nights) && (
           <div className="mt-3 flex flex-col gap-1 text-sm text-muted-foreground">
@@ -65,10 +65,10 @@ export function TravelCard({
             {journey.nights && <p>{formatNights(locale, journey.nights)}</p>}
           </div>
         )}
-        {journey.tagline && <p className="mt-8 font-display text-xl leading-snug">{journey.tagline}</p>}
+        {journey.tagline && <p className="mt-6 text-[0.9375rem] leading-relaxed text-foreground/85">{journey.tagline}</p>}
 
         <div className="mt-auto flex flex-wrap items-end justify-between gap-3 pt-10">
-          <p className="whitespace-nowrap font-display text-xl lg:text-2xl">
+          <p className="shrink-0 whitespace-nowrap font-display text-xl lg:text-2xl">
             {journey.pricePerPerson && (
               <>
                 {journey.pricePerPerson} <span className="text-sm text-muted-foreground lg:text-base">{dict.common.perPerson}</span>
@@ -77,7 +77,8 @@ export function TravelCard({
           </p>
           <Link
             href={href}
-            className="flex shrink-0 items-center gap-2 rounded-[8px] border border-foreground/60 px-3 py-2.5 lg:px-4 text-[11px] uppercase tracking-[0.14em] text-foreground transition-colors hover:bg-foreground hover:text-background"
+            /* Same width on every card: grows into the free space up to 13.5rem, never below the label */
+            className="ml-auto flex min-w-[8rem] max-w-[13.5rem] flex-1 items-center justify-between gap-2 whitespace-nowrap rounded-[8px] border border-foreground/60 px-4 py-2.5 text-[11px] uppercase tracking-[0.14em] text-foreground transition-colors hover:bg-foreground hover:text-background"
           >
             {journey.href ? dict.common.more : dict.common.registerInterest}
             <ArrowUpRight className="size-3.5" aria-hidden="true" />

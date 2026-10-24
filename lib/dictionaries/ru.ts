@@ -51,7 +51,10 @@ export const ru: Dictionary = {
       area: 'Путешествие по островам',
       summary:
         'Девять ночей среди тихих якорных стоянок, бирюзовых лагун и островов с пальмовыми пляжами — наш главный маршрут.',
-      tagline: 'Новогодние приключения под парусом',
+      // Journey card copy: kept in English on purpose
+      cardTitle: 'Caribbean New Year Escape',
+      tagline:
+        'Sail into the New Year aboard a private yacht in the Caribbean, exploring tropical islands and turquoise waters. Enjoy an intimate escape for eight guests, with a private skipper and chef, and celebrate New Year’s Eve with a festive dinner under the stars.',
       dates: '28.12.26 – 07.01.27',
     },
     cyclades: {
@@ -105,7 +108,8 @@ export const ru: Dictionary = {
   },
   hero: {
     imageAlt: 'Парусная яхта пересекает открытый океан на закате',
-    motto: 'United by the Sea',
+    // Not shown on the Russian hero; only the translation line below is.
+    motto: '',
     mottoTranslation: 'Объединённые морем',
     titleLead: 'В путь по морю,',
     titleAccent: 'в хорошей компании.',

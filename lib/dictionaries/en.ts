@@ -50,7 +50,10 @@ export const en = {
       area: 'Island-hopping voyage',
       summary:
         'Nine nights between quiet anchorages, turquoise lagoons and palm-fringed islands — our signature journey.',
-      tagline: 'New Year’s adventures under sail',
+      // Journey card copy (English in both locales)
+      cardTitle: 'Caribbean New Year Escape',
+      tagline:
+        'Sail into the New Year aboard a private yacht in the Caribbean, exploring tropical islands and turquoise waters. Enjoy an intimate escape for eight guests, with a private skipper and chef, and celebrate New Year’s Eve with a festive dinner under the stars.',
       dates: 'Dec 28, 2026 – Jan 7, 2027',
     },
     cyclades: {
@@ -68,7 +71,10 @@ export const en = {
       area: 'Inner Islands',
       summary: 'Granite boulders, white sand and the warm Indian Ocean.',
     },
-  } as Record<string, { destination: string; area: string; summary: string; tagline?: string; dates?: string }>,
+  } as Record<
+    string,
+    { destination: string; area: string; summary: string; cardTitle?: string; tagline?: string; dates?: string }
+  >,
   header: {
     homeLabel: 'seasmates home',
     languageLabel: 'Language',
