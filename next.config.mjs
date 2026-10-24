@@ -6,12 +6,15 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  // English is served without a prefix: internally `/` and `/journeys/*` map to the `[lang]` segment as `en`.
+  // English is served without a prefix: internally `/`, `/journeys/*`, `/team`, `/blog/*` and `/contacts` map to the `[lang]` segment as `en`.
   async rewrites() {
     return {
       beforeFiles: [
         { source: '/', destination: '/en' },
         { source: '/journeys/:path*', destination: '/en/journeys/:path*' },
+        { source: '/team', destination: '/en/team' },
+        { source: '/blog/:path*', destination: '/en/blog/:path*' },
+        { source: '/contacts', destination: '/en/contacts' },
       ],
     }
   },
