@@ -4,9 +4,9 @@ export const en = {
     siteDescription: 'Seasmates — sea journeys, sailing yachts, new routes and people united by the sea.',
     journeysTitle: 'All journeys',
     journeysDescription: 'Every seasmates sailing journey in one place: the Caribbean voyage and the routes in preparation.',
-    caribbeanTitle: 'The Caribbean — 9 Nights',
+    caribbeanTitle: 'The Caribbean — 10 Nights',
     caribbeanDescription:
-      'Our signature 9-night Caribbean sailing journey: quiet anchorages, turquoise lagoons and island life with a small crew.',
+      'Our signature 10-night Caribbean sailing journey: quiet anchorages, turquoise lagoons and island life with a small crew.',
     teamTitle: 'Our Team',
     teamDescription:
       'The people behind every seasmates journey — sailors for whom the sea is more than a route.',
@@ -49,7 +49,7 @@ export const en = {
       destination: 'The Caribbean',
       area: 'Island-hopping voyage',
       summary:
-        'Nine nights between quiet anchorages, turquoise lagoons and palm-fringed islands — our signature journey.',
+        'Ten nights between quiet anchorages, turquoise lagoons and palm-fringed islands — our signature journey.',
       // Journey card copy (English in both locales)
       cardTitle: 'Caribbean New Year Escape',
       tagline:
@@ -96,7 +96,7 @@ export const en = {
     tagline:
       'An international sailing club. Carefully selected journeys for small crews who prefer to travel by sea.',
     journeys: 'Journeys',
-    caribbeanLink: 'The Caribbean — 9 nights',
+    caribbeanLink: 'The Caribbean — 10 nights',
     schedule: 'Sailing schedule',
     club: 'Club',
     howItWorks: 'How it works',
@@ -257,7 +257,7 @@ export const en = {
     heroStatus: 'Status',
     overview: {
       eyebrow: 'Journey overview',
-      titleLead: 'Nine nights,',
+      titleLead: 'Ten nights,',
       titleAccent: 'one unhurried horizon.',
       primary:
         'Our signature voyage moves slowly through the islands — a short sail each day, long swims, sheltered anchorages at dusk. It is designed for travellers who want the sea itself to be the destination.',
@@ -354,7 +354,7 @@ export const en = {
       includedTitle: 'Included',
       notIncludedTitle: 'Not included',
       included: [
-        'Nine nights of cabin accommodation on board',
+        'Ten nights of cabin accommodation on board',
         'Professional skipper and crew',
         'Bed linen and towels',
         'Snorkelling equipment and paddleboards',
