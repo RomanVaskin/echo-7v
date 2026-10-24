@@ -28,11 +28,12 @@ const heroVideoSources = HERO_VIDEO_CANDIDATES.filter((source) =>
 export function Hero({ locale, dict }: { locale: Locale; dict: Dictionary['hero'] }) {
   return (
     <HeroScene sources={heroVideoSources} poster={HERO_POSTER} posterAlt={dict.imageAlt}>
-      <div className="relative mx-auto w-full max-w-7xl px-6 pt-24 lg:px-10 lg:pt-28">
-        <div className="hero-fade flex flex-col gap-1.5" style={{ animationDelay: '1.7s' }}>
-          <p className="eyebrow text-foreground/80">{dict.motto}</p>
+      {/* Sits right under the header logo, left-aligned with it */}
+      <div className="hero-motto relative mx-auto w-full max-w-7xl px-6 lg:px-10">
+        <div className="hero-fade flex flex-col gap-1" style={{ animationDelay: '1.7s' }}>
+          <p className="text-[0.625rem] uppercase tracking-[0.3em] text-foreground/80">{dict.motto}</p>
           {dict.mottoTranslation && (
-            <p className="text-[0.6875rem] tracking-[0.14em] text-foreground/60">{dict.mottoTranslation}</p>
+            <p className="text-[0.625rem] tracking-[0.16em] text-foreground/60">{dict.mottoTranslation}</p>
           )}
         </div>
       </div>

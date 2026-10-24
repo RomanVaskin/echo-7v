@@ -1,43 +1,54 @@
 'use server'
 
 import { getDictionary } from '@/lib/dictionaries'
+import { deliverEnquiry } from '@/lib/enquiry-delivery'
 import { defaultLocale, isLocale } from '@/lib/i18n'
 import { journeySlugs } from '@/lib/journeys'
 
-type Field = 'name' | 'email' | 'journey' | 'guests' | 'message'
+type Field = 'name' | 'contact'
 
 export type EnquiryState = {
   status: 'idle' | 'success' | 'error'
   message?: string
   errors?: Partial<Record<Field, string>>
+  /** Echoed back on error so the visitor does not have to retype. */
+  values?: Partial<Record<Field, string>>
 }
 
-const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+/** A phone number for WhatsApp: 7–15 digits, optional +, spaces, dashes and brackets. */
+function isPhone(value: string) {
+  const digits = value.replace(/\D/g, '')
+  return /^\+?[\d\s()-]+$/.test(value) && digits.length >= 7 && digits.length <= 15
+}
+
+/** A Telegram username (@name, name or t.me/name): 5–32 letters, digits or underscores. */
+function isTelegram(value: string) {
+  return /^(?:@|(?:https?:\/\/)?t\.me\/)?[A-Za-z][A-Za-z0-9_]{4,31}$/.test(value)
+}
 
 export async function submitEnquiry(_prev: EnquiryState, formData: FormData): Promise<EnquiryState> {
   const localeRaw = String(formData.get('locale') ?? '')
-  const form = getDictionary(isLocale(localeRaw) ? localeRaw : defaultLocale).form
+  const locale = isLocale(localeRaw) ? localeRaw : defaultLocale
+  const form = getDictionary(locale).form
   const name = String(formData.get('name') ?? '').trim()
-  const email = String(formData.get('email') ?? '').trim()
-  const journey = String(formData.get('journey') ?? '').trim()
-  const guestsRaw = String(formData.get('guests') ?? '').trim()
-  const timing = String(formData.get('timing') ?? '').trim().slice(0, 120)
-  const message = String(formData.get('message') ?? '').trim()
+  const contact = String(formData.get('contact') ?? '').trim()
+  const journeyRaw = String(formData.get('journey') ?? '').trim()
+  const journey = journeySlugs.includes(journeyRaw) ? journeyRaw : 'general'
 
+  const values = { name, contact }
   const errors: EnquiryState['errors'] = {}
   if (name.length < 2 || name.length > 100) errors.name = form.errors.name
-  if (!EMAIL_PATTERN.test(email) || email.length > 200) errors.email = form.errors.email
-  if (!journeySlugs.includes(journey) && journey !== 'general') errors.journey = form.errors.journey
-  const guests = Number(guestsRaw)
-  if (!Number.isInteger(guests) || guests < 1 || guests > 12) errors.guests = form.errors.guests
-  if (message.length > 2000) errors.message = form.errors.message
+  if (contact.length > 100 || !(isPhone(contact) || isTelegram(contact))) errors.contact = form.errors.contact
 
   if (Object.keys(errors).length > 0) {
-    return { status: 'error', message: form.errors.review, errors }
+    return { status: 'error', message: form.errors.review, errors, values }
   }
 
-  // Enquiries are validated here; connect a database or email provider to store and deliver them.
-  console.log('[seasmates] enquiry received', { journey, guests, timing, hasMessage: message.length > 0 })
+  // Only report success once the enquiry has actually reached the team.
+  const delivered = await deliverEnquiry({ name, contact, journey, locale })
+  if (!delivered) {
+    return { status: 'error', message: form.errors.delivery, values }
+  }
 
   return {
     status: 'success',

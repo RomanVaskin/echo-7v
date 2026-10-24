@@ -20,7 +20,7 @@ export const ru: Dictionary = {
     from: 'Цена от',
     exploreJourney: 'Подробнее о маршруте',
     registerInterest: 'Оставить заявку',
-    featured: 'Главный маршрут',
+    featured: 'Ближайшее путешествие',
     enquire: 'Оставить заявку',
     loadingChart: 'Загрузка карты…',
     sailingYachtIn: 'Парусная яхта —',
@@ -45,6 +45,7 @@ export const ru: Dictionary = {
       summary:
         'Девять ночей среди тихих якорных стоянок, бирюзовых лагун и островов с пальмовыми пляжами — наш главный маршрут.',
       tagline: 'Новогодние приключения под парусом',
+      dates: '28.12.26 – 07.01.27',
     },
     cyclades: {
       destination: 'Киклады',
@@ -146,10 +147,8 @@ export const ru: Dictionary = {
   enquirySection: {
     eyebrow: 'Заявка',
     home: {
-      titleLead: 'Спланируйте свой',
-      titleAccent: 'побег.',
-      description:
-        'Расскажите немного о себе и о маршруте, который вас зовёт. Мы лично ответим, чтобы обсудить наличие мест и детали.',
+      title: 'Остались вопросы?',
+      description: 'Оставьте заявку, и мы поможем подобрать формат путешествия',
     },
     caribbean: {
       titleLead: 'Начните своё',
@@ -159,29 +158,30 @@ export const ru: Dictionary = {
     },
   },
   form: {
-    name: 'Имя и фамилия',
-    email: 'Электронная почта',
-    journey: 'Маршрут',
-    general: 'Общий вопрос',
-    guests: 'Количество гостей',
-    timing: 'Желаемые сроки',
-    timingPlaceholder: 'например, начало весны, гибко',
-    message: 'Сообщение',
-    messagePlaceholder: 'Расскажите о ваших планах, пожеланиях по каюте или задайте вопросы.',
-    reassurance: 'Без обязательств — мы лично отвечаем на каждую заявку.',
-    send: 'Отправить заявку',
+    name: 'Имя',
+    contact: 'WhatsApp / Telegram',
+    send: 'Отправить',
     sending: 'Отправляем…',
     received: 'Заявка получена',
-    success: 'Спасибо, {name}. Мы лично свяжемся с вами в ближайшее время.',
+    success: 'Спасибо, {name}. Мы скоро с вами свяжемся.',
     errors: {
-      name: 'Пожалуйста, укажите имя и фамилию.',
-      email: 'Пожалуйста, введите корректный адрес электронной почты.',
-      journey: 'Пожалуйста, выберите маршрут.',
-      guests: 'Укажите от 1 до 12 гостей.',
-      message: 'Пожалуйста, сократите сообщение до 2000 символов.',
+      name: 'Пожалуйста, укажите имя.',
+      contact: 'Укажите номер телефона для WhatsApp или имя пользователя в Telegram.',
       review: 'Пожалуйста, проверьте выделенные поля.',
+      delivery: 'Не удалось отправить заявку. Пожалуйста, попробуйте ещё раз чуть позже.',
     },
   },
+  reviews: {
+    eyebrow: 'Отзывы',
+    title: 'Отзывы',
+  },
+  social: {
+    label: 'seasmates в социальных сетях',
+    whatsapp: 'seasmates в WhatsApp',
+    telegram: 'seasmates в Telegram',
+    instagram: 'seasmates в Instagram',
+  },
+
   caribbean: {
     breadcrumb: 'Путешествия',
     breadcrumbLabel: 'Навигационная цепочка',

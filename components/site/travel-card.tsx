@@ -33,20 +33,23 @@ export function TravelCard({
         />
         <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent" />
         <div className="absolute inset-x-4 top-4 flex flex-wrap items-start justify-between gap-2">
-          <span
-            className={cn(
-              'flex items-center gap-2 bg-background/80 px-3 py-1.5 text-[10px] uppercase tracking-[0.14em] backdrop-blur',
-              isAvailable ? 'text-foreground' : 'text-foreground/70',
-            )}
-          >
+          {/* Open journeys need no status badge; the others show theirs ("Coming soon"…) */}
+          {journey.status !== 'enquiries-open' && (
             <span
-              aria-hidden="true"
-              className={cn('size-1.5 rounded-full', isAvailable ? 'bg-primary' : 'bg-foreground/40')}
-            />
-            {dict.status[journey.status]}
-          </span>
+              className={cn(
+                'flex items-center gap-2 bg-background/80 px-3 py-1.5 text-[10px] uppercase tracking-[0.14em] backdrop-blur',
+                isAvailable ? 'text-foreground' : 'text-foreground/70',
+              )}
+            >
+              <span
+                aria-hidden="true"
+                className={cn('size-1.5 rounded-full', isAvailable ? 'bg-primary' : 'bg-foreground/40')}
+              />
+              {dict.status[journey.status]}
+            </span>
+          )}
           {journey.featured && (
-            <span className="bg-primary px-3 py-1.5 text-[10px] uppercase tracking-[0.14em] text-primary-foreground">
+            <span className="ml-auto whitespace-nowrap bg-primary px-3 py-1.5 text-[10px] uppercase tracking-[0.14em] text-primary-foreground">
               {dict.common.featured}
             </span>
           )}
@@ -74,7 +77,7 @@ export function TravelCard({
           </p>
           <Link
             href={href}
-            className="flex shrink-0 items-center gap-2 border border-foreground/60 px-3 py-2.5 lg:px-4 text-[11px] uppercase tracking-[0.14em] text-foreground transition-colors hover:bg-foreground hover:text-background"
+            className="flex shrink-0 items-center gap-2 rounded-[8px] border border-foreground/60 px-3 py-2.5 lg:px-4 text-[11px] uppercase tracking-[0.14em] text-foreground transition-colors hover:bg-foreground hover:text-background"
           >
             {journey.href ? dict.common.more : dict.common.registerInterest}
             <ArrowUpRight className="size-3.5" aria-hidden="true" />
