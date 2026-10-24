@@ -134,7 +134,7 @@ export function HeroScene({
           </video>
         )}
       </div>
-      <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/20 to-background" />
+      <div className="hero-overlay absolute inset-0" />
       {children}
     </section>
   )
