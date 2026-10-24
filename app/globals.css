@@ -223,25 +223,25 @@
   align-items: center;
   justify-content: space-between;
   gap: 1.5rem;
-  width: min(18.5rem, 100%);
-  height: 4.5rem;
-  padding: 0 1.5rem 0 1.75rem;
+  width: min(16.25rem, 100%);
+  height: 4rem;
+  padding: 0 1.3rem 0 1.5rem;
   border-radius: 999px;
   border: 1px solid rgba(255, 255, 255, 0.42);
   background: linear-gradient(
     135deg,
-    rgba(255, 255, 255, 0.16) 0%,
-    rgba(180, 215, 235, 0.08) 38%,
-    rgba(255, 255, 255, 0.04) 65%,
-    rgba(255, 255, 255, 0.14) 100%
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(180, 215, 235, 0.04) 38%,
+    rgba(255, 255, 255, 0.02) 65%,
+    rgba(255, 255, 255, 0.07) 100%
   );
-  /* light blur keeps the sea behind the glass recognisable */
-  -webkit-backdrop-filter: blur(4px) saturate(145%);
-  backdrop-filter: blur(4px) saturate(145%);
+  /* very light blur: the glass stays clear and the sea behind it fully recognisable */
+  -webkit-backdrop-filter: blur(2px) saturate(130%);
+  backdrop-filter: blur(2px) saturate(130%);
   /* Thick glass wall: a bright inner ring, a strong top highlight, a cool lower edge and a warm flare on the right end */
   box-shadow:
     inset 0 0 0 1.5px rgba(255, 255, 255, 0.35),
-    inset 0 0 7px 2px rgba(235, 245, 255, 0.28),
+    inset 0 0 7px 2px rgba(235, 245, 255, 0.16),
     inset 0 3px 5px rgba(255, 255, 255, 0.75),
     inset 0 -4px 8px rgba(150, 210, 240, 0.4),
     inset 3px 0 8px rgba(255, 255, 255, 0.22),
@@ -250,7 +250,7 @@
     0 8px 24px rgba(0, 15, 30, 0.18),
     0 0 12px rgba(180, 215, 235, 0.14);
   color: #fff;
-  font-size: 1.125rem;
+  font-size: 1rem;
   font-weight: 400;
   line-height: 1;
   letter-spacing: -0.005em;
@@ -300,8 +300,8 @@
 .liquid-glass::after {
   z-index: -1;
   background:
-    radial-gradient(55% 40% at 24% 0%, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 70%),
-    radial-gradient(70% 40% at 50% 106%, rgba(170, 220, 245, 0.32), rgba(170, 220, 245, 0) 70%),
+    radial-gradient(55% 40% at 24% 0%, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0) 70%),
+    radial-gradient(70% 40% at 50% 106%, rgba(170, 220, 245, 0.22), rgba(170, 220, 245, 0) 70%),
     radial-gradient(14% 55% at 99% 50%, rgba(255, 200, 150, 0.55), rgba(255, 200, 150, 0) 80%),
     radial-gradient(12% 45% at 1% 55%, rgba(190, 225, 255, 0.35), rgba(190, 225, 255, 0) 80%);
   opacity: 0.85;
@@ -310,8 +310,8 @@
   white-space: nowrap;
 }
 .liquid-glass__arrow {
-  width: 1.75rem;
-  height: 1.75rem;
+  width: 1.5rem;
+  height: 1.5rem;
   flex-shrink: 0;
   filter: drop-shadow(0 1px 6px rgba(0, 18, 36, 0.4));
   transition: transform 480ms cubic-bezier(0.22, 1, 0.36, 1);
@@ -353,18 +353,18 @@
 }
 @media (min-width: 768px) {
   .liquid-glass {
-    width: 20.5rem;
-    height: 5rem;
-    padding: 0 1.75rem 0 2rem;
-    font-size: 1.25rem;
+    width: 18rem;
+    height: 4.375rem;
+    padding: 0 1.5rem 0 1.75rem;
+    font-size: 1.125rem;
   }
 }
 @media (min-width: 1024px) {
   .liquid-glass {
-    width: 22rem;
-    height: 5.75rem;
-    padding: 0 2rem;
-    font-size: 1.375rem;
+    width: 19.5rem;
+    height: 5rem;
+    padding: 0 1.75rem;
+    font-size: 1.25rem;
   }
 }
 @media (prefers-reduced-motion: no-preference) {
