@@ -28,7 +28,8 @@ export function Pricing({ journey, locale, dict, common, status }: { journey: Jo
           </p>
           <Link
             href="#enquire"
-            className="group mt-2 flex w-fit items-center gap-3 bg-primary px-8 py-4 text-xs uppercase tracking-[0.14em] text-primary-foreground transition-opacity hover:opacity-90"
+            /* Oval, in the PANTONE 437 C used by the filled buttons on the other pages */
+            className="enquiry-submit group mt-2 flex w-fit items-center gap-3 rounded-full px-8 py-4 text-xs uppercase tracking-[0.14em]"
           >
             {common.registerInterest}
             <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
