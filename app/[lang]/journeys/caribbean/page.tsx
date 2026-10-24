@@ -2,22 +2,19 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { SiteHeader } from '@/components/site/site-header'
 import { SiteFooter } from '@/components/site/site-footer'
-import { SectionHeading } from '@/components/site/section-heading'
-import { SailingMapLoader } from '@/components/site/sailing-map-loader'
-import { HowItWorks } from '@/components/site/how-it-works'
 import { EnquirySection } from '@/components/site/enquiry-section'
 import { JourneyHero } from '@/components/journey/journey-hero'
 import { JourneyOverview } from '@/components/journey/journey-overview'
-import { Itinerary } from '@/components/journey/itinerary'
-import { YachtDetails } from '@/components/journey/yacht-details'
+import { JourneyHighlights } from '@/components/journey/journey-highlights'
+import { RouteMap } from '@/components/journey/route-map'
+import { DayByDay } from '@/components/journey/day-by-day'
 import { Inclusions } from '@/components/journey/inclusions'
-import { Gallery } from '@/components/journey/gallery'
-import { Pricing } from '@/components/journey/pricing'
+import { YachtDetails } from '@/components/journey/yacht-details'
+import { JourneyActions } from '@/components/journey/journey-actions'
 import { Faq } from '@/components/journey/faq'
 import { getDictionary } from '@/lib/dictionaries'
 import { alternates, isLocale } from '@/lib/i18n'
 import { getJourneys } from '@/lib/journeys'
-import { caribbeanCoordinates, type ItineraryDay } from '@/lib/caribbean'
 
 const PATH = '/journeys/caribbean'
 
@@ -43,19 +40,6 @@ export default async function CaribbeanJourneyPage({ params }: PageProps<'/[lang
   if (!journey) notFound()
 
   const caribbean = dict.caribbean
-  const itinerary: ItineraryDay[] = caribbean.itinerary.days.map((day, i) => ({
-    day: i + 1,
-    ...day,
-    coordinates: caribbeanCoordinates[i],
-  }))
-
-  const routePoints = itinerary.map((day) => ({
-    id: `day-${day.day}`,
-    label: day.place,
-    sublabel: `${caribbean.route.day} ${day.day} · ${day.title}`,
-    marker: String(day.day),
-    coordinates: day.coordinates,
-  }))
 
   return (
     <>
@@ -63,43 +47,18 @@ export default async function CaribbeanJourneyPage({ params }: PageProps<'/[lang
       <main>
         <JourneyHero journey={journey} locale={locale} dict={dict} />
         <JourneyOverview dict={caribbean.overview} />
-
-        <section aria-labelledby="route-title" className="mx-auto max-w-7xl px-6 lg:px-10">
-          <SectionHeading
-            id="route-title"
-            index="02"
-            eyebrow={caribbean.route.eyebrow}
-            title={caribbean.route.title}
-            description={caribbean.route.description}
-          />
-          <div className="reveal mt-14">
-            <SailingMapLoader
-              points={routePoints}
-              showRoute
-              listTitle={caribbean.route.listTitle}
-              exploreLabel={dict.common.exploreJourney}
-              loadingLabel={dict.common.loadingChart}
-              focusZoom={12}
-            />
-          </div>
-        </section>
-
-        <Itinerary days={itinerary} dict={caribbean.itinerary} />
-        <YachtDetails dict={caribbean.yacht} tba={dict.common.tba} />
+        <JourneyHighlights dict={caribbean.highlights} />
+        <RouteMap dict={caribbean.map} />
+        <DayByDay dict={caribbean.days} />
         <Inclusions dict={caribbean.inclusions} />
-        <Gallery dict={caribbean.gallery} />
-        <Pricing journey={journey} locale={locale} dict={caribbean.pricing} common={dict.common} status={dict.status} />
-
-        <div className="border-t border-border">
-          <HowItWorks dict={dict.howItWorks} />
-        </div>
-
+        <YachtDetails dict={caribbean.yacht} />
+        <JourneyActions dict={caribbean.actions} />
         <Faq dict={caribbean.faq} />
 
         <EnquirySection
-          index="09"
+          index="08"
           locale={locale}
-          eyebrow={dict.enquirySection.eyebrow}
+          eyebrow={caribbean.contact.eyebrow}
           form={dict.form}
           journey="caribbean"
           title={
