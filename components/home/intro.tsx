@@ -11,7 +11,8 @@ export function Intro({ dict, index }: { dict: Dictionary['intro']; index?: stri
             {index && <span className="text-foreground">{index} / </span>}
             {dict.eyebrow}
           </p>
-          <p className="font-display text-pretty text-[2rem] leading-[1.08] text-foreground md:text-[2.5rem] xl:text-5xl">
+          {/* Inter Display Light (font-display) with open tracking: the utility's -0.045em made long words run together here */}
+          <p className="font-display text-pretty text-[2rem] leading-[1.17] tracking-[0.015em] [font-kerning:normal] text-foreground md:text-[2.5rem] xl:text-5xl">
             {dict.lead}
           </p>
         </div>
