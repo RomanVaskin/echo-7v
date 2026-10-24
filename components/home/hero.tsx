@@ -1,8 +1,8 @@
 import { existsSync } from 'node:fs'
 import path from 'node:path'
-import Link from 'next/link'
 import type { Dictionary } from '@/lib/dictionaries'
 import { localePath, type Locale } from '@/lib/i18n'
+import { LiquidGlassButton } from '@/components/site/liquid-glass-button'
 import { HeroScene, type HeroVideoSource } from './hero-scene'
 
 const HERO_POSTER = '/images/hero-sailing.png'
@@ -67,9 +67,7 @@ export function Hero({ locale, dict }: { locale: Locale; dict: Dictionary['hero'
       <div className="relative mx-auto w-full max-w-7xl px-6 pb-10 lg:px-10 lg:pb-14">
         <div className="hero-fade flex items-end">
           {/* Scrolls to "01 / Upcoming journeys" on the home page */}
-          <Link href={localePath(locale, '/#schedule')} className="hero-cta">
-            {dict.exploreJourneys}
-          </Link>
+          <LiquidGlassButton href={localePath(locale, '/#schedule')}>{dict.exploreJourneys}</LiquidGlassButton>
         </div>
       </div>
     </HeroScene>
