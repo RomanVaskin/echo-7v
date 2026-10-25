@@ -279,6 +279,7 @@ export const en = {
     map: {
       eyebrow: 'Route',
       label: 'Route map',
+      alt: 'Route map: from Le Marin and Sainte-Anne in Martinique via Saint Lucia (Marigot Bay, Soufrière, the Pitons), Saint Vincent (Wallilabou), Bequia and Mustique to the Grenadines (Tobago Cays, Clifton, Mayreau, Petit Saint Vincent) and back',
       placeholder: 'Route map',
     },
     days: {
