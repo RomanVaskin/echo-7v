@@ -6,8 +6,8 @@ import { dayPhotos } from '@/lib/caribbean'
 
 /**
  * One tall card per day ("Day 1"…), styled as a page of a travel journal: a narrow left strip with
- * four punched holes, then the photo and the day's text. Three cards on desktop, two on tablets, one
- * full-width card on phones; the shared carousel scrolls them.
+ * four punched holes, then the photo and the day's text. Two and a half cards on desktop, about 1.6
+ * on tablets, one card and the edge of the next on phones; the shared carousel scrolls them.
  */
 export function DayByDay({ dict }: { dict: Dictionary['caribbean']['days'] }) {
   return (
@@ -16,7 +16,9 @@ export function DayByDay({ dict }: { dict: Dictionary['caribbean']['days'] }) {
         label={dict.carouselLabel}
         previousLabel={dict.previous}
         nextLabel={dict.next}
-        itemClassName="w-full sm:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-3rem)/3)]"
+        /* Phones: one card and ~15% of the next; tablets: about 1.6 cards; desktop: two and a half up to the
+           strip's right edge (its 2.5rem end padding included, hence 100% - 0.5rem) */
+        itemClassName="w-[85%] sm:w-[calc((100%-1.5rem)/1.6)] lg:w-[calc((100%-0.5rem)/2.5)]"
         toolbar={
           <div className="flex flex-col gap-5">
             <p className="eyebrow flex items-center gap-4">
@@ -47,14 +49,14 @@ export function DayByDay({ dict }: { dict: Dictionary['caribbean']['days'] }) {
                   <p className="eyebrow mb-4 text-[0.8125rem] normal-case tracking-[0.06em] text-primary">
                     {dict.day} {i + 1}
                   </p>
-                  <div className="relative aspect-[4/5] overflow-hidden rounded-xl bg-foreground/[0.04] xl:aspect-[10/11]">
+                  <div className="relative aspect-[3/4] overflow-hidden rounded-xl bg-foreground/[0.04] sm:aspect-[5/6] lg:aspect-square">
                     {photo ? (
                       <Image
                         src={photo}
                         alt={item.place}
                         fill
                         draggable={false}
-                        sizes="(min-width: 1024px) 26vw, (min-width: 640px) 42vw, 90vw"
+                        sizes="(min-width: 1280px) 400px, (min-width: 1024px) 34vw, (min-width: 640px) 55vw, 75vw"
                         className="object-cover"
                       />
                     ) : (
@@ -64,8 +66,11 @@ export function DayByDay({ dict }: { dict: Dictionary['caribbean']['days'] }) {
                       </div>
                     )}
                   </div>
-                  <h3 className="mt-6 font-display text-3xl tracking-[-0.03em] md:text-[2.125rem]">{item.place}</h3>
-                  <p className="mt-4 text-[0.9375rem] leading-relaxed text-muted-foreground">{item.text}</p>
+                  {/* Reserved text area keeps the photo at roughly 55–60% of the page on wider cards */}
+                  <div className="sm:min-h-[14rem]">
+                    <h3 className="mt-6 hyphens-auto break-words font-display text-3xl tracking-[-0.03em] md:text-[2.125rem]">{item.place}</h3>
+                    <p className="mt-4 text-[0.9375rem] leading-relaxed text-muted-foreground">{item.text}</p>
+                  </div>
                 </div>
               </article>
             ),
