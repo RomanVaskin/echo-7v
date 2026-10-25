@@ -5,9 +5,9 @@ import { Carousel } from '@/components/site/carousel'
 import { dayPhotos } from '@/lib/caribbean'
 
 /**
- * One tall card per day ("Day 01"…), styled as a page of a travel journal: a narrow left strip with
+ * One tall card per day ("Day 1"…), styled as a page of a travel journal: a narrow left strip with
  * four punched holes, then the photo and the day's text. Three cards on desktop, two on tablets, one
- * on phones; the shared carousel scrolls them.
+ * full-width card on phones; the shared carousel scrolls them.
  */
 export function DayByDay({ dict }: { dict: Dictionary['caribbean']['days'] }) {
   return (
@@ -16,7 +16,7 @@ export function DayByDay({ dict }: { dict: Dictionary['caribbean']['days'] }) {
         label={dict.carouselLabel}
         previousLabel={dict.previous}
         nextLabel={dict.next}
-        itemClassName="w-[88%] sm:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-3rem)/3)]"
+        itemClassName="w-full sm:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-3rem)/3)]"
         toolbar={
           <div className="flex flex-col gap-5">
             <p className="eyebrow flex items-center gap-4">
@@ -44,6 +44,9 @@ export function DayByDay({ dict }: { dict: Dictionary['caribbean']['days'] }) {
                   ))}
                 </div>
                 <div className="flex min-w-0 flex-1 flex-col p-5 pl-4 md:p-6 md:pl-5">
+                  <p className="eyebrow mb-4 text-[0.8125rem] normal-case tracking-[0.06em] text-primary">
+                    {dict.day} {i + 1}
+                  </p>
                   <div className="relative aspect-[4/5] overflow-hidden rounded-xl bg-foreground/[0.04] xl:aspect-[10/11]">
                     {photo ? (
                       <Image
@@ -51,7 +54,7 @@ export function DayByDay({ dict }: { dict: Dictionary['caribbean']['days'] }) {
                         alt={item.place}
                         fill
                         draggable={false}
-                        sizes="(min-width: 1024px) 26vw, (min-width: 640px) 42vw, 80vw"
+                        sizes="(min-width: 1024px) 26vw, (min-width: 640px) 42vw, 90vw"
                         className="object-cover"
                       />
                     ) : (
@@ -61,16 +64,8 @@ export function DayByDay({ dict }: { dict: Dictionary['caribbean']['days'] }) {
                       </div>
                     )}
                   </div>
-                  <p className="eyebrow mt-6 text-primary">
-                    {dict.day} {String(i + 1).padStart(2, '0')}
-                  </p>
-                  <h3 className="mt-3 font-display text-3xl tracking-[-0.03em] md:text-[2.125rem]">{item.place}</h3>
-                  <p className="mb-6 mt-4 text-[0.9375rem] leading-relaxed text-muted-foreground">{item.text}</p>
-                  {item.activity && (
-                    <p className="mt-auto border-t border-border pt-4 text-xs uppercase tracking-[0.14em] text-foreground/70">
-                      {item.activity}
-                    </p>
-                  )}
+                  <h3 className="mt-6 font-display text-3xl tracking-[-0.03em] md:text-[2.125rem]">{item.place}</h3>
+                  <p className="mt-4 text-[0.9375rem] leading-relaxed text-muted-foreground">{item.text}</p>
                 </div>
               </article>
             ),
