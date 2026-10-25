@@ -44,6 +44,8 @@
   /* PANTONE 437 C: filled buttons on the home page's light sections */
   --button-primary: #8e777f;
   --button-primary-hover: #78636b;
+  /* PANTONE 11-0104 TPG (Vanilla Ice): the paper of the day cards' journal pages */
+  --journal-paper: #f0eada;
   --radius: 0.25rem;
 }
 
@@ -211,6 +213,19 @@
   cursor: grabbing;
   scroll-snap-type: none;
   user-select: none;
+}
+
+/* Journal page (day cards): Vanilla Ice paper with the dark text of the light sections. The day number
+   uses PANTONE 437 C's darker hover shade, which keeps 4.6:1 contrast on the paper */
+.journal-page {
+  color-scheme: light;
+  --background: var(--journal-paper);
+  --foreground: var(--brand-text-dark);
+  --muted-foreground: color-mix(in srgb, var(--brand-text-dark) 75%, var(--journal-paper));
+  --primary: var(--button-primary-hover);
+  --border: rgb(37 39 51 / 0.16);
+  background-color: var(--background);
+  color: var(--foreground);
 }
 
 /* Punched hole of the day cards' journal page: a darker shade of the card's own surface with a soft
