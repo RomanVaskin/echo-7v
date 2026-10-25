@@ -279,6 +279,7 @@ export const en = {
     map: {
       eyebrow: 'Route',
       label: 'Route map',
+      alt: 'Route map: from Le Marin and Sainte-Anne in Martinique via Saint Lucia (Marigot Bay, Soufrière, the Pitons), Saint Vincent (Wallilabou), Bequia and Mustique to the Grenadines (Tobago Cays, Clifton, Mayreau, Petit Saint Vincent) and back',
       placeholder: 'Route map',
     },
     days: {
@@ -291,15 +292,15 @@ export const en = {
       next: 'Next',
       // Days 1–3: demonstration texts; the rest are placeholders until the confirmed programme arrives
       items: [
-        { place: 'Martinique', text: 'Arrival at Le Marin marina, meeting the crew and settling in on board. A welcome dinner and first impressions of the Caribbean Sea.', activity: 'Activity to be announced' },
-        { place: 'Rodney Bay', text: 'A passage to Saint Lucia. Turquoise coves, scenic shores and a first taste of the Caribbean islands’ atmosphere.', activity: 'Activity to be announced' },
-        { place: 'The Majestic Pitons', text: 'Discovering the volcanic peaks of Saint Lucia. Panoramic views, a sea outing and time to unwind against the backdrop of the famous Pitons.', activity: 'Activity to be announced' },
-        { place: 'Day 4 location', text: 'The programme for this day will be published later.', activity: 'Activity to be announced' },
-        { place: 'Day 5 location', text: 'The programme for this day will be published later.', activity: 'Activity to be announced' },
-        { place: 'Day 6 location', text: 'The programme for this day will be published later.', activity: 'Activity to be announced' },
-        { place: 'Day 7 location', text: 'The programme for this day will be published later.', activity: 'Activity to be announced' },
-        { place: 'Day 8 location', text: 'The programme for this day will be published later.', activity: 'Activity to be announced' },
-        { place: 'Day 9 location', text: 'The programme for this day will be published later.', activity: 'Activity to be announced' },
+        { place: 'Martinique', text: 'Arrival at Le Marin marina, meeting the crew and settling in on board. A welcome dinner and first impressions of the Caribbean Sea.' },
+        { place: 'Rodney Bay', text: 'A passage to Saint Lucia. Turquoise coves, scenic shores and a first taste of the Caribbean islands’ atmosphere.' },
+        { place: 'The Majestic Pitons', text: 'Discovering the volcanic peaks of Saint Lucia. Panoramic views, a sea outing and time to unwind against the backdrop of the famous Pitons.' },
+        { place: 'Day 4 location', text: 'The programme for this day will be published later.' },
+        { place: 'Day 5 location', text: 'The programme for this day will be published later.' },
+        { place: 'Day 6 location', text: 'The programme for this day will be published later.' },
+        { place: 'Day 7 location', text: 'The programme for this day will be published later.' },
+        { place: 'Day 8 location', text: 'The programme for this day will be published later.' },
+        { place: 'Day 9 location', text: 'The programme for this day will be published later.' },
       ],
     },
     inclusions: {

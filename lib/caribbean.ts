@@ -12,6 +12,13 @@ export const highlightImages = [
   '/images/hero-sailing.png',
 ]
 
+/** The route map shown in the map section (section 03). Set to `null` to show the text placeholder. */
+export const routeMapImage: { src: string; width: number; height: number } | null = {
+  src: '/images/caribbean-route-map.jpg',
+  width: 1341,
+  height: 971,
+}
+
 /**
  * Photos of the day cards, in day order (`caribbean.days.items`). Temporary Caribbean shots from the
  * site; `null` shows a neutral slot. Replace with photos of each day's location when available.
