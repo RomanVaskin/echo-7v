@@ -33,7 +33,7 @@ export function DayByDay({ dict }: { dict: Dictionary['caribbean']['days'] }) {
           return {
             key: `day-${i + 1}`,
             node: (
-              <article className="flex rounded-2xl border border-border bg-foreground/[0.04]">
+              <article className="journal-page flex rounded-2xl border border-border">
                 {/* Binding strip: four evenly spaced punched holes and a faint fold line */}
                 <div
                   aria-hidden="true"
