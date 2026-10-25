@@ -286,13 +286,14 @@ export const en = {
       title: 'The route, day by day',
       carouselLabel: 'Route by day',
       day: 'Day',
+      photoPlaceholder: 'Photo coming soon',
       previous: 'Previous',
       next: 'Next',
-      // Placeholders until the confirmed route and programme arrive
+      // Days 1–3: demonstration texts; the rest are placeholders until the confirmed programme arrives
       items: [
-        { place: 'Day 1 location', text: 'The programme for this day will be published later.', activity: 'Activity to be announced' },
-        { place: 'Day 2 location', text: 'The programme for this day will be published later.', activity: 'Activity to be announced' },
-        { place: 'Day 3 location', text: 'The programme for this day will be published later.', activity: 'Activity to be announced' },
+        { place: 'Martinique', text: 'Arrival at Le Marin marina, meeting the crew and settling in on board. A welcome dinner and first impressions of the Caribbean Sea.', activity: 'Activity to be announced' },
+        { place: 'Rodney Bay', text: 'A passage to Saint Lucia. Turquoise coves, scenic shores and a first taste of the Caribbean islands’ atmosphere.', activity: 'Activity to be announced' },
+        { place: 'The Majestic Pitons', text: 'Discovering the volcanic peaks of Saint Lucia. Panoramic views, a sea outing and time to unwind against the backdrop of the famous Pitons.', activity: 'Activity to be announced' },
         { place: 'Day 4 location', text: 'The programme for this day will be published later.', activity: 'Activity to be announced' },
         { place: 'Day 5 location', text: 'The programme for this day will be published later.', activity: 'Activity to be announced' },
         { place: 'Day 6 location', text: 'The programme for this day will be published later.', activity: 'Activity to be announced' },
