@@ -13,6 +13,22 @@ export const highlightImages = [
 ]
 
 /**
+ * Photos of the day cards, in day order (`caribbean.days.items`). Temporary Caribbean shots from the
+ * site; `null` shows a neutral slot. Replace with photos of each day's location when available.
+ */
+export const dayPhotos: (string | null)[] = [
+  '/images/caribbean-hero.png',
+  '/images/gallery-reef.png',
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+]
+
+/**
  * The yacht, as named by the client. Photo slots stay empty (neutral placeholders) until confirmed
  * photos of this very yacht are added: put a `/images/...` path in place of `null`.
  */

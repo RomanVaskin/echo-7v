@@ -213,6 +213,23 @@
   user-select: none;
 }
 
+/* Punched hole of the day cards' journal page: a darker shade of the card's own surface with a soft
+   inner shadow on top and a faint light rim below, like a hole through paper */
+.journal-hole {
+  width: 0.75rem;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  background-color: color-mix(in srgb, var(--background) 70%, black);
+  box-shadow:
+    inset 0 1.5px 2.5px rgb(0 0 0 / 0.45),
+    0 1px 0 rgb(255 255 255 / 0.07);
+}
+@media (min-width: 768px) {
+  .journal-hole {
+    width: 0.875rem;
+  }
+}
+
 /* Hero shade over the video: darker at the top for the header and wordmark, light at the bottom so the
    sea stays visible through the clear glass button (it used to fade to a solid background colour there). */
 .hero-overlay {
