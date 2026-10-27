@@ -428,7 +428,7 @@ export const en = {
       // Programme «Новогодние Карибы — маршрут 10 дней»: nine sailing days; disembarkation on the morning of 7 January
       // has no card of its own, and 4–5 January share DAY 08
       items: [
-        { place: 'Martinique · Le Marin', date: 'December 28, 2026', text: 'Arrival in Martinique and settling in on board at Le Marin marina. Meet the crew, then a welcome dinner at a restaurant.' },
+        { place: 'Martinique · Le Marin', date: 'December 28, 2026', text: 'Arrival in Martinique and settling in on board at Le Marin marina. Meet the crew, then a welcome dinner prepared by the chef on board.' },
         { place: 'Saint Lucia · Rodney Bay and The Pitons', date: 'December 29, 2026', text: 'The first passage, to Saint Lucia. A stop at Rodney Bay, then on towards the famous volcanic peaks of The Pitons.' },
         { place: 'Saint Vincent · Wallilabou Bay', date: 'December 30, 2026', text: 'A passage to Saint Vincent, arriving at picturesque Wallilabou Bay, framed by tropical greenery.' },
         { place: 'Mustique · New Year on board', date: 'December 31, 2026', text: 'We welcome the New Year on board the catamaran, in the spirit of a tropical celebration: sparkling wine, a warm Caribbean evening and unforgettable moments among kindred spirits.' },
