@@ -19,6 +19,11 @@ export function Carousel({
   nextLabel,
   toolbar,
   itemClassName = 'w-[86%] sm:w-[58%] md:w-[44%] lg:w-[38%] xl:w-[34%]',
+  stripClassName,
+  scrollTo,
+  onSettle,
+  onStep,
+  stepState,
 }: {
   /** One node per card; each gets its own snap slot. */
   items: { key: string; node: React.ReactNode }[]
@@ -29,10 +34,23 @@ export function Carousel({
   toolbar?: React.ReactNode
   /** Slot widths per breakpoint. */
   itemClassName?: string
+  /** Extra classes for the scrolling strip (e.g. room for a scaled-up card). */
+  stripClassName?: string
+  /** Brings the item with this key into view each time `nonce` changes (programmatic, not reported to onSettle). */
+  scrollTo?: { key: string; nonce: number } | null
+  /** A scroll by the visitor (swipe, drag, wheel) came to rest: the key of the card now leading the strip. */
+  onSettle?: (key: string) => void
+  /** Replaces the arrows' and ←/→ keys' card-by-card scrolling (e.g. to step a selection instead). */
+  onStep?: (direction: 1 | -1) => void
+  /** Arrow availability when `onStep` is used. */
+  stepState?: { prev: boolean; next: boolean }
 }) {
   const scrollerRef = useRef<HTMLUListElement>(null)
   const thumbRef = useRef<HTMLDivElement>(null)
   const [nav, setNav] = useState({ prev: false, next: false, overflow: false })
+  const programmatic = useRef(false)
+  const onSettleRef = useRef(onSettle)
+  onSettleRef.current = onSettle
 
   const prefersReducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
@@ -48,6 +66,7 @@ export function Carousel({
   }
 
   const step = (direction: 1 | -1) => {
+    if (onStep) return onStep(direction)
     const scroller = scrollerRef.current
     if (!scroller) return
     const points = snapPoints(scroller)
@@ -91,6 +110,55 @@ export function Carousel({
       scroller.removeEventListener('scroll', schedule)
       resize.disconnect()
     }
+  }, [items.length])
+
+  // Programmatic scroll to a keyed item (e.g. a day chosen on the map)
+  useEffect(() => {
+    const scroller = scrollerRef.current
+    if (!scroller || !scrollTo) return
+    const index = items.findIndex((item) => item.key === scrollTo.key)
+    if (index < 0) return
+    const target = snapPoints(scroller)[index]
+    if (Math.abs(target - scroller.scrollLeft) < 2) return
+    programmatic.current = true
+    goTo(target)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [scrollTo?.nonce])
+
+  // Report where a visitor's scroll came to rest (scrollend, with a timer for browsers without it)
+  useEffect(() => {
+    const scroller = scrollerRef.current
+    if (!scroller) return
+    let timer = 0
+    const settled = () => {
+      window.clearTimeout(timer)
+      // A mouse drag is still gliding to its card: look again shortly
+      if (scroller.dataset.dragging) {
+        timer = window.setTimeout(settled, 150)
+        return
+      }
+      if (programmatic.current) {
+        programmatic.current = false
+        return
+      }
+      const points = snapPoints(scroller)
+      const left = scroller.scrollLeft
+      const index = points.reduce((best, p, i) => (Math.abs(p - left) < Math.abs(points[best] - left) ? i : best), 0)
+      const key = items[index]?.key
+      if (key) onSettleRef.current?.(key)
+    }
+    const onScroll = () => {
+      window.clearTimeout(timer)
+      timer = window.setTimeout(settled, 180)
+    }
+    scroller.addEventListener('scroll', onScroll, { passive: true })
+    scroller.addEventListener('scrollend', settled)
+    return () => {
+      window.clearTimeout(timer)
+      scroller.removeEventListener('scroll', onScroll)
+      scroller.removeEventListener('scrollend', settled)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [items.length])
 
   // Mouse drag (touch and trackpads use native scrolling).
@@ -195,10 +263,10 @@ export function Carousel({
       <div className="flex flex-wrap items-center gap-x-10 gap-y-6">
         {toolbar}
         <div className={cn('ml-auto hidden gap-3 md:flex', !nav.overflow && 'md:hidden')}>
-          <button type="button" className={arrowClass} onClick={() => step(-1)} disabled={!nav.prev} aria-label={previousLabel}>
+          <button type="button" className={arrowClass} onClick={() => step(-1)} disabled={!(stepState ?? nav).prev} aria-label={previousLabel}>
             <ArrowLeft className="size-4" aria-hidden="true" />
           </button>
-          <button type="button" className={arrowClass} onClick={() => step(1)} disabled={!nav.next} aria-label={nextLabel}>
+          <button type="button" className={arrowClass} onClick={() => step(1)} disabled={!(stepState ?? nav).next} aria-label={nextLabel}>
             <ArrowRight className="size-4" aria-hidden="true" />
           </button>
         </div>
@@ -209,10 +277,13 @@ export function Carousel({
         aria-label={label}
         tabIndex={nav.overflow ? 0 : -1}
         onKeyDown={onKeyDown}
-        className="journey-scroller no-scrollbar relative -mx-6 flex snap-x snap-mandatory gap-6 overflow-x-auto overscroll-x-contain scroll-px-6 px-6 lg:-mx-10 lg:scroll-px-10 lg:px-10 focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-primary"
+        className={cn(
+          'journey-scroller no-scrollbar relative -mx-6 flex snap-x snap-mandatory gap-6 overflow-x-auto overscroll-x-contain scroll-px-6 px-6 lg:-mx-10 lg:scroll-px-10 lg:px-10 focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-primary',
+          stripClassName,
+        )}
       >
         {items.map((item) => (
-          <li key={item.key} className={cn('flex shrink-0 snap-start *:w-full', itemClassName)}>
+          <li key={item.key} data-key={item.key} className={cn('flex shrink-0 snap-start *:w-full', itemClassName)}>
             {item.node}
           </li>
         ))}

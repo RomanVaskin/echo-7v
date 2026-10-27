@@ -1,18 +1,66 @@
+'use client'
+
 import Image from 'next/image'
+import { useEffect, useRef } from 'react'
 import { ImageIcon } from 'lucide-react'
 import type { Dictionary } from '@/lib/dictionaries'
 import { Carousel } from '@/components/site/carousel'
-import { dayPhotos } from '@/lib/caribbean'
+import { routeDays } from '@/lib/caribbean'
+import { cn } from '@/lib/utils'
+import { useRouteDay } from './route-day-context'
+
+const dayKey = (dayId: number) => `day-${dayId}`
 
 /**
  * One tall card per day ("Day 01"…), styled as a page of a travel journal: a narrow left strip with
  * four punched holes, then the photo and the day's text. Two and a half cards on desktop, about 1.6
  * on tablets, one card and the edge of the next on phones; the shared carousel scrolls them.
+ *
+ * Linked to the route map through the shared selected day (route-day-context): the selected card is
+ * slightly enlarged, choosing a marker brings its card into view, and a card, the arrows or a
+ * settled swipe select a day for the map.
  */
 export function DayByDay({ dict }: { dict: Dictionary['caribbean']['days'] }) {
+  const route = useRouteDay()
+  const strip = useRef<HTMLDivElement>(null)
+  const activeDayId = route?.activeDayId ?? null
+  const selection = route?.selection
+
+  // A marker chosen on the map: bring the cards into view if they are off screen (explicit click only)
+  useEffect(() => {
+    if (selection?.source !== 'map' || !strip.current) return
+    const box = strip.current.getBoundingClientRect()
+    if (box.top >= 0 && box.bottom <= window.innerHeight) return
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    strip.current.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' })
+  }, [selection])
+
+  const select = (dayId: number) => route?.setActiveDayId(dayId, 'card')
+
+  // A swipe or drag came to rest: the leading card becomes the selected day, unless the selected
+  // card is still fully in view (e.g. the strip only moved to show a card that was just chosen)
+  const settle = (key: string) => {
+    const strip_ = strip.current?.querySelector('ul')
+    const selected = strip_?.querySelector(`li[data-key="${dayKey(activeDayId ?? 0)}"]`)
+    if (strip_ && selected) {
+      const s = strip_.getBoundingClientRect()
+      const c = selected.getBoundingClientRect()
+      if (c.left >= s.left - 1 && c.right <= Math.min(s.right, window.innerWidth) + 1) return
+    }
+    route?.setActiveDayId(Number(key.replace('day-', '')), 'carousel')
+  }
+  const last = routeDays.length
+
   return (
     <section aria-labelledby="days-title" className="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
+      <div ref={strip}>
       <Carousel
+        // Room above and below the strip so the enlarged card is never clipped (layout unchanged)
+        stripClassName="-my-6 py-6"
+        scrollTo={selection && selection.source !== 'card' ? { key: dayKey(selection.dayId), nonce: selection.nonce } : null}
+        onSettle={route ? (key) => settle(key) : undefined}
+        onStep={route && activeDayId ? (direction) => route.setActiveDayId(Math.min(Math.max(activeDayId + direction, 1), last), 'arrow') : undefined}
+        stepState={route && activeDayId ? { prev: activeDayId > 1, next: activeDayId < last } : undefined}
         label={dict.carouselLabel}
         previousLabel={dict.previous}
         nextLabel={dict.next}
@@ -30,12 +78,30 @@ export function DayByDay({ dict }: { dict: Dictionary['caribbean']['days'] }) {
             </h2>
           </div>
         }
-        items={dict.items.map((item, i) => {
-          const photo = dayPhotos[i]
+        items={routeDays.map(({ dayId, photo }, i) => {
+          const item = dict.items[i]
+          const active = dayId === activeDayId
           return {
-            key: `day-${i + 1}`,
+            key: dayKey(dayId),
             node: (
-              <article className="journal-page flex rounded-2xl border border-border">
+              <article
+                role={route ? 'button' : undefined}
+                tabIndex={route ? 0 : undefined}
+                aria-pressed={route ? active : undefined}
+                aria-label={route ? `${dict.day} ${String(dayId).padStart(2, '0')}, ${item.date}: ${item.place}` : undefined}
+                onClick={() => select(dayId)}
+                onKeyDown={(event) => {
+                  if (event.key !== 'Enter' && event.key !== ' ') return
+                  event.preventDefault()
+                  select(dayId)
+                }}
+                className={cn(
+                  'journal-page relative flex rounded-2xl border border-border transition-[transform,box-shadow] duration-300 ease-out motion-reduce:transition-none focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--button-primary)]',
+                  route && 'cursor-pointer',
+                  // Selected day: slightly larger (transform only, so neighbours do not move) with a deeper shadow
+                  active ? 'z-10 scale-[1.035] shadow-[0_18px_40px_-18px_rgb(0_0_0/0.55)] motion-reduce:scale-100' : 'shadow-[0_8px_24px_-16px_rgb(0_0_0/0.4)]',
+                )}
+              >
                 {/* Binding strip: four evenly spaced punched holes and a faint fold line */}
                 <div
                   aria-hidden="true"
@@ -68,7 +134,7 @@ export function DayByDay({ dict }: { dict: Dictionary['caribbean']['days'] }) {
                   <div className="mt-6 flex flex-col sm:min-h-[15rem]">
                     <p className="eyebrow flex flex-wrap items-baseline gap-x-3 gap-y-1">
                       <span className="text-primary">
-                        {dict.day} {String(i + 1).padStart(2, '0')}
+                        {dict.day} {String(dayId).padStart(2, '0')}
                       </span>
                       <span>{item.date}</span>
                     </p>
@@ -83,6 +149,7 @@ export function DayByDay({ dict }: { dict: Dictionary['caribbean']['days'] }) {
           }
         })}
       />
+      </div>
     </section>
   )
 }
