@@ -44,7 +44,7 @@ function PhotoStrip({
 /** The yacht: name, a short description and swipeable photo strips of the catamaran and its cabins. */
 export function YachtDetails({ dict }: { dict: Dictionary['caribbean']['yacht'] }) {
   return (
-    <section aria-labelledby="yacht-title" className="mx-auto max-w-7xl px-6 pt-24 lg:px-10 lg:pt-32">
+    <section aria-labelledby="yacht-title" className="mx-auto max-w-7xl px-6 pt-16 lg:px-10 lg:pt-24">
       <div className="reveal flex flex-col gap-6 border-t border-border pt-8">
         <p className="eyebrow flex items-center gap-4">
           <span className="text-primary">06</span>
