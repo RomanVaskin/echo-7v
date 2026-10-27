@@ -425,6 +425,8 @@ export const en = {
       photoPlaceholder: 'Photo coming soon',
       showOnMap: 'View on map',
       showOnMapLabel: 'View day {day} on the route map',
+      programmeNote:
+        'The activity programme is provisional and may be adjusted for the weather and the specifics of the route. Local guides, taxis and excursions are paid separately.',
       previous: 'Previous',
       next: 'Next',
       // Programme «Новогодние Карибы — маршрут 10 дней»: nine sailing days; disembarkation on the morning of 7 January
