@@ -717,6 +717,56 @@
   outline-offset: 3px;
 }
 
+/* Booking pages: light Vanilla Ice paper (PANTONE 11-0104 TPG, as on the day cards) with the dark text
+   of the light sections. PANTONE 437 C's darker shade marks prices and the selected option (4.9:1 on
+   the paper); the glass buttons become solid 437 C capsules with white text, since glass needs a dark
+   backdrop. */
+.theme-paper {
+  color-scheme: light;
+  --background: var(--journal-paper);
+  --foreground: var(--brand-text-dark);
+  --card: var(--journal-paper);
+  --card-foreground: var(--brand-text-dark);
+  --popover: var(--journal-paper);
+  --popover-foreground: var(--brand-text-dark);
+  --primary: var(--button-primary-hover);
+  --primary-foreground: #fff;
+  --muted-foreground: color-mix(in srgb, var(--brand-text-dark) 78%, var(--journal-paper));
+  --destructive: #8c2f1e;
+  --border: rgb(37 39 51 / 0.16);
+  --input: rgb(37 39 51 / 0.4);
+  --ring: var(--button-primary);
+  background-color: var(--background);
+  color: var(--foreground);
+}
+.theme-paper .liquid-glass {
+  border-color: var(--button-primary);
+  background: var(--button-primary);
+  color: #fff;
+  box-shadow: 0 10px 24px -14px rgb(72 75 93 / 0.6);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+.theme-paper .liquid-glass::before,
+.theme-paper .liquid-glass::after {
+  display: none;
+}
+.theme-paper .liquid-glass .liquid-glass__label,
+.theme-paper .liquid-glass .liquid-glass__arrow {
+  color: #fff;
+  filter: none;
+  text-shadow: none;
+}
+.theme-paper .liquid-glass:hover:not(:disabled) {
+  border-color: var(--button-primary-hover);
+  background: var(--button-primary-hover);
+  box-shadow: 0 12px 26px -14px rgb(72 75 93 / 0.7);
+}
+.theme-paper .liquid-glass:focus-visible {
+  outline: 2px solid var(--brand-text-dark);
+  outline-offset: 3px;
+}
+
 /* Each wordmark letter flips open around its own vertical axis, from edge-on to flat (as on octobergroup.ru).
    The perspective is in em, so the effect scales with the wordmark. */
 .hero-letters {

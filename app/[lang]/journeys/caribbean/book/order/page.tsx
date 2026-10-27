@@ -42,7 +42,7 @@ export default async function BookingStatusPage({ params, searchParams }: PagePr
   const awaitingPayPal = payments.some((p) => p.kind === 'deposit' && p.status === 'pending')
   const canPayDeposit = booking.status === 'pending_payment' && booking.holdsBerths && !awaitingPayPal
   const canPayBalance = booking.status === 'confirmed' && due > 0
-  const row = 'flex items-baseline justify-between gap-4 border-b border-white/10 py-3'
+  const row = 'flex items-baseline justify-between gap-4 border-b border-border py-3'
   const resultText = typeof result === 'string' ? o.result[result] : undefined
 
   return (
@@ -53,11 +53,11 @@ export default async function BookingStatusPage({ params, searchParams }: PagePr
             {o.reference}: <span className="text-foreground">{booking.id}</span>
           </p>
           {resultText && (
-            <p role="status" className="rounded-xl border border-brand-light/50 px-4 py-3 text-sm leading-relaxed text-brand-light">
+            <p role="status" className="rounded-xl border border-primary/50 px-4 py-3 text-sm leading-relaxed text-primary">
               {resultText}
             </p>
           )}
-          <h2 className={cn('font-display text-4xl md:text-5xl', ['confirmed', 'paid_in_full'].includes(booking.status) ? 'text-foreground' : 'text-brand-light')}>
+          <h2 className={cn('font-display text-4xl md:text-5xl', ['confirmed', 'paid_in_full'].includes(booking.status) ? 'text-foreground' : 'text-primary')}>
             {o.status[booking.status]}
           </h2>
           <p className="max-w-xl leading-relaxed text-muted-foreground">{o.text[booking.status].replace('{time}', holdUntil)}</p>
@@ -83,11 +83,11 @@ export default async function BookingStatusPage({ params, searchParams }: PagePr
           )}
 
           {payments.length > 0 && (
-            <section className="mt-4 border-t border-white/10 pt-6">
+            <section className="mt-4 border-t border-border pt-6">
               <h3 className="eyebrow mb-3">{o.payments}</h3>
               <ul className="flex flex-col text-sm">
                 {payments.map((p) => (
-                  <li key={p.id} className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-b border-white/10 py-3">
+                  <li key={p.id} className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-b border-border py-3">
                     <span>
                       {o.kinds[p.kind]} · {formatUsd(p.amountCents)}
                     </span>
@@ -102,11 +102,11 @@ export default async function BookingStatusPage({ params, searchParams }: PagePr
           )}
 
           {emails.length > 0 && (
-            <section className="border-t border-white/10 pt-6">
+            <section className="border-t border-border pt-6">
               <h3 className="eyebrow mb-3">{o.emails}</h3>
               <div className="flex flex-col gap-3">
                 {emails.map((email) => (
-                  <details key={email.subject + email.sent_at.toISOString()} className="rounded-xl border border-white/10 p-4 text-sm">
+                  <details key={email.subject + email.sent_at.toISOString()} className="rounded-xl border border-border p-4 text-sm">
                     <summary className="cursor-pointer">{email.subject}</summary>
                     {email.transport === 'log' && <p className="mt-3 text-xs text-muted-foreground">{o.emailLogged}</p>}
                     <pre className="mt-2 whitespace-pre-wrap font-sans text-muted-foreground">{email.body}</pre>
@@ -117,7 +117,7 @@ export default async function BookingStatusPage({ params, searchParams }: PagePr
           )}
         </div>
 
-        <aside className="self-start rounded-2xl border border-white/15 bg-white/[0.04] p-6 md:p-7">
+        <aside className="self-start rounded-2xl border border-border bg-white/40 p-6 md:p-7">
           <p className="eyebrow mb-3">{b.summary.title}</p>
           <dl className="text-sm">
             <div className={row}>
@@ -130,7 +130,7 @@ export default async function BookingStatusPage({ params, searchParams }: PagePr
             </div>
             <div className={cn(row, 'py-4')}>
               <dt className="text-muted-foreground">{b.summary.total}</dt>
-              <dd className="font-display text-3xl font-semibold tracking-[-0.02em] text-brand-light">{formatUsd(booking.totalCents)}</dd>
+              <dd className="font-display text-3xl font-semibold tracking-[-0.02em] text-primary">{formatUsd(booking.totalCents)}</dd>
             </div>
             <div className={row}>
               <dt>{o.paid}</dt>
