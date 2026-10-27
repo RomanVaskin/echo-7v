@@ -79,6 +79,30 @@ export const en = {
     string,
     { destination: string; area: string; summary: string; cardTitle?: string; cardLead?: string; tagline?: string; dates?: string }
   >,
+  globe: {
+    eyebrow: 'Explore the World',
+    title: 'The World Awaits',
+    subtitle: 'Explore extraordinary places, one sailing journey at a time.',
+    hint: 'Drag to explore',
+    surprise: 'Surprise Me',
+    explore: 'Explore Journey',
+    close: 'Close',
+    listLabel: 'Destinations',
+    globeLabel: 'Interactive globe with sailing destinations. Use the list of destinations to choose one.',
+    fallbackLabel: 'Globe with sailing destinations',
+    destinations: {
+      exuma: {
+        name: 'Exuma Islands',
+        region: 'The Bahamas',
+        description: '365 islands, turquoise lagoons, white-sand beaches and journeys under sail.',
+      },
+      martinique: {
+        name: 'Caribbean Escape',
+        region: 'Caribbean Sea',
+        description: 'Tropical islands, hidden coves and unforgettable sailing adventures.',
+      },
+    } as Record<string, { name: string; region: string; description: string }>,
+  },
   header: {
     homeLabel: 'seasmates home',
     languageLabel: 'Language',

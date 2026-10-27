@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import { SiteHeader } from '@/components/site/site-header'
 import { SiteFooter } from '@/components/site/site-footer'
 import { ScheduleGrid } from '@/components/home/schedule'
+import { ExploreWorld } from '@/components/site/explore-world'
 import { getDictionary } from '@/lib/dictionaries'
 import { alternates, isLocale } from '@/lib/i18n'
 import { getJourneys } from '@/lib/journeys'
@@ -31,14 +32,19 @@ export default async function JourneysPage({ params }: PageProps<'/[lang]/journe
   return (
     <>
       <SiteHeader locale={locale} path={PATH} dict={dict.header} enquireLabel={dict.common.enquire} />
-      <main className="mx-auto max-w-7xl px-6 pb-24 pt-36 lg:px-10 lg:pb-36 lg:pt-44">
-        <div className="hero-fade flex flex-col gap-6 border-t border-border pt-8">
-          <p className="eyebrow">{dict.allJourneys.eyebrow}</p>
-          <h1 className="font-display text-balance text-5xl md:text-7xl">{dict.allJourneys.title}</h1>
+      <main>
+        <div className="mx-auto max-w-7xl px-6 pb-24 pt-36 lg:px-10 lg:pb-36 lg:pt-44">
+          <div className="hero-fade flex flex-col gap-6 border-t border-border pt-8">
+            <p className="eyebrow">{dict.allJourneys.eyebrow}</p>
+            <h1 className="font-display text-balance text-5xl md:text-7xl">{dict.allJourneys.title}</h1>
+          </div>
+          <div className="mt-12">
+            <ScheduleGrid locale={locale} dict={dict} journeys={journeys} />
+          </div>
         </div>
-        <div className="mt-12">
-          <ScheduleGrid locale={locale} dict={dict} journeys={journeys} />
-        </div>
+
+        {/* Interactive globe at the end of the catalogue */}
+        <ExploreWorld locale={locale} dict={dict.globe} common={dict.common} journeys={journeys} />
       </main>
       <SiteFooter locale={locale} dict={dict.footer} />
     </>
