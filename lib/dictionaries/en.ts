@@ -425,20 +425,22 @@ export const en = {
       photoPlaceholder: 'Photo coming soon',
       showOnMap: 'View on map',
       showOnMapLabel: 'View day {day} on the route map',
+      programmeNote:
+        'The activity programme is provisional and may be adjusted for the weather and the specifics of the route. Local guides, taxis and excursions are paid separately.',
       previous: 'Previous',
       next: 'Next',
       // Programme «Новогодние Карибы — маршрут 10 дней»: nine sailing days; disembarkation on the morning of 7 January
       // has no card of its own, and 4–5 January share DAY 08
       items: [
-        { place: 'Martinique · Le Marin', date: 'December 28, 2026', text: 'Arrival in Martinique and settling in on board at Le Marin marina. Meet the crew, then a welcome dinner prepared by the chef on board.' },
-        { place: 'Saint Lucia · Rodney Bay and The Pitons', date: 'December 29, 2026', text: 'The first passage, to Saint Lucia. A stop at Rodney Bay, then on towards the famous volcanic peaks of The Pitons.' },
-        { place: 'Saint Vincent · Wallilabou Bay', date: 'December 30, 2026', text: 'A passage to Saint Vincent, arriving at picturesque Wallilabou Bay, framed by tropical greenery.' },
-        { place: 'Mustique · New Year on board', date: 'December 31, 2026', text: 'We welcome the New Year on board the catamaran, in the spirit of a tropical celebration: sparkling wine, a warm Caribbean evening and unforgettable moments among kindred spirits.' },
-        { place: 'Mustique → Tobago Cays', date: 'January 1, 2027', text: 'The first morning of the year on Mustique. After lunch, a passage to the Tobago Cays, known for their turquoise lagoons.' },
-        { place: 'Tobago Cays', date: 'January 2, 2027', text: 'A whole free day among small islands, white beaches and the clear water of the Caribbean Sea: time to rest and explore the archipelago’s nature.' },
-        { place: 'Saint Vincent · Wallilabou Bay', date: 'January 3, 2027', text: 'The passage back to Saint Vincent. Return to Wallilabou Bay and a relaxed evening after the crossing.' },
-        { place: 'Saint Lucia · The Pitons', date: 'January 4–5, 2027', text: 'Back to the famous Pitons of Saint Lucia. Arrival near Soufrière, time to rest on board and a free day with the option of hiking up a Piton.' },
-        { place: 'Martinique · Le Marin', date: 'January 6, 2027', text: 'The final passage to Martinique. Return to Le Marin marina, refuelling the yacht and the end of the sailing part of the journey.' },
+        { place: 'Martinique · Le Marin', date: 'December 28, 2026', text: 'The Caribbean adventure begins! We get to know the yacht and the crew, settle in on board and welcome our first tropical evening over dinner by the chef. Ten nights under sail lie ahead.' },
+        { place: 'Saint Lucia · Marigot Bay and The Pitons', date: 'December 29, 2026', text: 'Our first stop is cosy Marigot Bay, with cafés right by the water and the aromas of Creole cooking. Then we sail along the coast to the majestic Pitons for swimming, snorkelling and SUP at sunset.' },
+        { place: 'Saint Vincent · Wallilabou', date: 'December 30, 2026', text: 'Welcome to the bay of “Pirates of the Caribbean”! We stroll among the sets of the famous film, stop for a rum punch and, time permitting, head to the Dark View Falls.' },
+        { place: 'Mustique · New Year in the Caribbean', date: 'December 31, 2026', text: 'We welcome the New Year in the spirit of a tropical celebration! The evening begins on the yacht with sparkling wine, music and a costume party, and the fun carries on at the legendary Basil’s Bar above the Caribbean Sea.' },
+        { place: 'Mustique → Tobago Cays', date: 'January 1, 2027', text: 'We start the year on the white sands of Macaroni Beach, explore the island in open-top buggies and send postcards from Mustique. After lunch we set course for the turquoise lagoons of the Tobago Cays.' },
+        { place: 'Tobago Cays · Islands of paradise', date: 'January 2, 2027', text: 'We swim with sea turtles, explore the coral reefs and set off in search of pirate treasure. In the evening: grilled lobster, sunset over the islands and a sky full of stars.' },
+        { place: 'Saint Vincent · Wallilabou', date: 'January 3, 2027', text: 'Back to the pirate bay! A walk along the shore, tropical scenery and one more chance to feel like the hero of a sea adventure. And in the evening, time to unwind on the yacht.' },
+        { place: 'Saint Lucia · The Pitons and Soufrière', date: 'January 4–5, 2027', text: 'Two days at the legendary Pitons! A climb up Gros Piton with views across the Caribbean Sea, swimming by the waterfalls, snorkelling off Sugar Beach and the colourful market of Soufrière.' },
+        { place: 'Martinique · Le Marin', date: 'January 6, 2027', text: 'Back to Martinique. Ahead: Les Salines beach, an introduction to local rum traditions and a ti’ punch masterclass. A beautiful finale to our Caribbean journey.' },
       ],
     },
     inclusions: {

@@ -170,6 +170,8 @@ export function DayByDay({ dict }: { dict: Dictionary['caribbean']['days'] }) {
         })}
       />
       </div>
+      {/* One note for the whole programme: shore activities are planned, not guaranteed */}
+      <p className="mt-10 max-w-3xl text-xs leading-relaxed text-muted-foreground">{dict.programmeNote}</p>
     </section>
   )
 }
