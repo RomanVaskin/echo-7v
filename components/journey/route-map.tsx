@@ -39,14 +39,15 @@ export function RouteMap({
     ))
 
   return (
-    <section aria-labelledby="map-title" className="theme-light py-16 lg:py-24">
+    <section aria-labelledby="map-title" className="theme-light route-map-paper pt-12 lg:pt-16">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <h2 id="map-title" className="eyebrow mb-8 flex items-center gap-4">
           <span className="text-foreground">03</span>
           <span>{dict.label}</span>
         </h2>
       </div>
-      {/* The map runs edge to edge across the page */}
+      {/* The map runs edge to edge across the page; the section shares its paper colour, so heading and
+          map read as one sheet with no seam */}
       {content}
     </section>
   )

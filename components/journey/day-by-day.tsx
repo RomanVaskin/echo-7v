@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { useEffect, useRef } from 'react'
-import { ImageIcon } from 'lucide-react'
+import { ArrowRight, ImageIcon, MapPin } from 'lucide-react'
 import type { Dictionary } from '@/lib/dictionaries'
 import { Carousel } from '@/components/site/carousel'
 import { routeDays } from '@/lib/caribbean'
@@ -18,7 +18,8 @@ const dayKey = (dayId: number) => `day-${dayId}`
  *
  * Linked to the route map through the shared selected day (route-day-context): the selected card is
  * slightly enlarged, choosing a marker brings its card into view, and a card, the arrows or a
- * settled swipe select a day for the map.
+ * settled swipe select a day for the map. Each card's «View on map» button also takes the page to
+ * the map and its marker.
  */
 export function DayByDay({ dict }: { dict: Dictionary['caribbean']['days'] }) {
   const route = useRouteDay()
@@ -57,7 +58,7 @@ export function DayByDay({ dict }: { dict: Dictionary['caribbean']['days'] }) {
       <Carousel
         // Room above and below the strip so the enlarged card is never clipped (layout unchanged)
         stripClassName="-my-6 py-6"
-        scrollTo={selection && selection.source !== 'card' ? { key: dayKey(selection.dayId), nonce: selection.nonce } : null}
+        scrollTo={selection && selection.source !== 'card' && selection.source !== 'card-map' ? { key: dayKey(selection.dayId), nonce: selection.nonce } : null}
         onSettle={route ? (key) => settle(key) : undefined}
         onStep={route && activeDayId ? (direction) => route.setActiveDayId(Math.min(Math.max(activeDayId + direction, 1), last), 'arrow') : undefined}
         stepState={route && activeDayId ? { prev: activeDayId > 1, next: activeDayId < last } : undefined}
@@ -66,7 +67,7 @@ export function DayByDay({ dict }: { dict: Dictionary['caribbean']['days'] }) {
         nextLabel={dict.next}
         /* Phones: one card and ~15% of the next; tablets: about 1.6 cards; desktop: two and a half up to the
            strip's right edge (its 2.5rem end padding included, hence 100% - 0.5rem) */
-        itemClassName="w-[85%] sm:w-[calc((100%-1.5rem)/1.6)] lg:w-[calc((100%-0.5rem)/2.5)]"
+        itemClassName="w-[88%] min-[360px]:w-[85%] sm:w-[calc((100%-1.5rem)/1.6)] lg:w-[calc((100%-0.5rem)/2.5)]"
         toolbar={
           <div className="flex flex-col gap-5">
             <p className="eyebrow flex items-center gap-4">
@@ -85,13 +86,17 @@ export function DayByDay({ dict }: { dict: Dictionary['caribbean']['days'] }) {
             key: dayKey(dayId),
             node: (
               <article
-                role={route ? 'button' : undefined}
+                // A group, not a button: it holds the «View on map» button. A click (or Enter/Space on the
+                // focused card) selects the day for the map without scrolling the page
+                role={route ? 'group' : undefined}
                 tabIndex={route ? 0 : undefined}
-                aria-pressed={route ? active : undefined}
+                aria-current={route && active ? 'true' : undefined}
                 aria-label={route ? `${dict.day} ${String(dayId).padStart(2, '0')}, ${item.date}: ${item.place}` : undefined}
-                onClick={() => select(dayId)}
+                onClick={(event) => {
+                  if (!(event.target as Element).closest('button')) select(dayId)
+                }}
                 onKeyDown={(event) => {
-                  if (event.key !== 'Enter' && event.key !== ' ') return
+                  if (event.target !== event.currentTarget || (event.key !== 'Enter' && event.key !== ' ')) return
                   event.preventDefault()
                   select(dayId)
                 }}
@@ -111,7 +116,7 @@ export function DayByDay({ dict }: { dict: Dictionary['caribbean']['days'] }) {
                     <span key={hole} className="journal-hole" />
                   ))}
                 </div>
-                <div className="flex min-w-0 flex-1 flex-col p-5 pl-4 md:p-6 md:pl-5">
+                <div className="flex min-w-0 flex-1 flex-col p-4 pl-3 sm:p-5 sm:pl-4 md:p-6 md:pl-5">
                   <div className="relative aspect-[2/3] overflow-hidden rounded-xl bg-foreground/[0.04] sm:aspect-[5/6] lg:aspect-square">
                     {photo ? (
                       <Image
@@ -131,7 +136,7 @@ export function DayByDay({ dict }: { dict: Dictionary['caribbean']['days'] }) {
                     )}
                   </div>
                   {/* Day, date, place and programme; the reserved height keeps the photo at roughly 55–60% of the page */}
-                  <div className="mt-6 flex flex-col sm:min-h-[15rem]">
+                  <div className="mt-6 flex flex-1 flex-col sm:min-h-[15rem]">
                     <p className="eyebrow flex flex-wrap items-baseline gap-x-3 gap-y-1">
                       <span className="text-primary">
                         {dict.day} {String(dayId).padStart(2, '0')}
@@ -142,6 +147,21 @@ export function DayByDay({ dict }: { dict: Dictionary['caribbean']['days'] }) {
                       {item.place}
                     </h3>
                     <p className="mt-4 text-[0.9375rem] leading-relaxed text-muted-foreground">{item.text}</p>
+                    {/* Pinned to the bottom, so all nine buttons sit on one line whatever the text length */}
+                    {route && (
+                      <div className="mt-auto pt-6">
+                      <button
+                        type="button"
+                        className="day-map-button"
+                        aria-label={dict.showOnMapLabel.replace('{day}', String(dayId))}
+                        onClick={() => route.setActiveDayId(dayId, 'card-map')}
+                      >
+                        <MapPin aria-hidden="true" className="day-map-button__icon" strokeWidth={1.25} />
+                        <span>{dict.showOnMap}</span>
+                        <ArrowRight aria-hidden="true" className="day-map-button__arrow" strokeWidth={1.25} />
+                      </button>
+                      </div>
+                    )}
                   </div>
                 </div>
               </article>

@@ -1,6 +1,7 @@
 'use client'
 
 import type { Dictionary } from '@/lib/dictionaries'
+import { useEffect, useRef } from 'react'
 import { routeDays, routeMapPoints } from '@/lib/caribbean'
 import { cn } from '@/lib/utils'
 import { useRouteDay } from './route-day-context'
@@ -9,14 +10,35 @@ import { useRouteDay } from './route-day-context'
 /**
  * Clickable day markers laid over the route map image, on its printed anchorages. Each marker
  * carries a day (dayId); the selected one is larger, in the accent colour, with a thin ring and a
- * soft pulse. Choosing a marker selects the day and brings its card into view.
+ * soft pulse. Choosing a marker selects the day and brings its card into view; a card's «View on
+ * map» button brings the page here.
  */
 export function RouteMapMarkers({ days, label }: { days: Dictionary['caribbean']['days']; label: string }) {
   const route = useRouteDay()
+  const layer = useRef<HTMLDivElement>(null)
+  const selection = route?.selection
+
+  // «View on map» on a card: scroll smoothly to the map section, its heading at the top, unless the
+  // selected marker would then be off screen (tall map on wide screens), then centre the marker
+  useEffect(() => {
+    if (selection?.source !== 'card-map' || !layer.current) return
+    const section = layer.current.closest('section') ?? layer.current
+    const marker = layer.current.querySelector(`[data-day="${selection.dayId}"]`)
+    const gap = 16
+    let top = section.getBoundingClientRect().top + window.scrollY - gap
+    if (marker) {
+      const box = marker.getBoundingClientRect()
+      const markerY = box.top + window.scrollY + box.height / 2
+      if (markerY - top > window.innerHeight - 64) top = markerY - window.innerHeight / 2
+    }
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    window.scrollTo({ top: Math.max(top, 0), behavior: reduce ? 'auto' : 'smooth' })
+  }, [selection])
+
   if (!route) return null
 
   return (
-    <div className="route-markers absolute inset-0" role="group" aria-label={label}>
+    <div ref={layer} className="route-markers absolute inset-0" role="group" aria-label={label}>
       {routeDays.map(({ dayId, mapPoint }, i) => {
         const point = routeMapPoints[mapPoint]
         const sameStop = routeDays.filter((d) => d.mapPoint === mapPoint)
@@ -28,6 +50,7 @@ export function RouteMapMarkers({ days, label }: { days: Dictionary['caribbean']
         return (
           <button
             key={dayId}
+            data-day={dayId}
             type="button"
             aria-pressed={active}
             aria-label={`${days.day} ${String(dayId).padStart(2, '0')}, ${item.date}: ${item.place}`}
