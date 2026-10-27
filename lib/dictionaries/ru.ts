@@ -77,6 +77,31 @@ export const ru: Dictionary = {
       summary: 'Гранитные валуны, белый песок и тёплые воды Индийского океана.',
     },
   },
+  globe: {
+    // Section copy in English on purpose, as approved; destination texts are translated
+    eyebrow: 'Explore the World',
+    title: 'The World Awaits',
+    subtitle: 'Explore extraordinary places, one sailing journey at a time.',
+    hint: 'Drag to explore',
+    surprise: 'Surprise Me',
+    explore: 'Explore Journey',
+    close: 'Закрыть',
+    listLabel: 'Направления',
+    globeLabel: 'Интерактивный глобус с направлениями путешествий. Выбрать направление можно в списке.',
+    fallbackLabel: 'Глобус с направлениями путешествий',
+    destinations: {
+      exuma: {
+        name: 'Exuma Islands',
+        region: 'Багамские острова',
+        description: '365 островов, бирюзовые лагуны, белоснежные пляжи и путешествия под парусами.',
+      },
+      martinique: {
+        name: 'Caribbean Escape',
+        region: 'Карибское море',
+        description: 'Тропические острова, скрытые бухты и незабываемые парусные приключения.',
+      },
+    },
+  },
   header: {
     homeLabel: 'seasmates — на главную',
     languageLabel: 'Язык',
