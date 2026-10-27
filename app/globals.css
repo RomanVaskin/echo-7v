@@ -228,6 +228,12 @@
   color: var(--foreground);
 }
 
+/* Route map section: the sampled paper colour of the map image itself (its edges are a flat
+   #E6E1CE), so the «03 Route map» heading sits on the map's own sheet without a band or a seam */
+.route-map-paper {
+  --background: #e6e1ce;
+}
+
 /* Day markers over the route map image. The button is a generous touch target; the dot inside is
    small, in the dark ink of the map; the selected day grows, turns PANTONE 437 C with a thin ring
    and a soft, slow pulse (no pulse with reduced motion). */
@@ -303,6 +309,91 @@
       0 0 0 3px var(--journal-paper),
       0 0 0 4px var(--button-primary),
       0 0 18px 7px rgb(142 119 127 / 0.5);
+  }
+}
+
+/* «View on map» on the day cards: a thin outlined pill in the dusty pink (4087 C) with graphite text,
+   a map pin and an arrow. Hover tints the pill faintly and nudges the arrow; no fills, no scaling. */
+.day-map-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  max-width: 100%;
+  min-height: 2.75rem;
+  padding: 0.75rem 1.25rem;
+  border: 1px solid var(--brand-light);
+  border-radius: 999px;
+  background-color: transparent;
+  color: var(--brand-text-dark);
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color 220ms ease,
+    border-color 220ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.day-map-button__icon,
+.day-map-button__arrow {
+  width: 0.9375rem;
+  height: 0.9375rem;
+  flex-shrink: 0;
+}
+.day-map-button__arrow {
+  transition: transform 220ms ease;
+}
+.day-map-button:hover {
+  background-color: color-mix(in srgb, var(--brand-light) 12%, transparent);
+  border-color: var(--button-primary);
+}
+.day-map-button:hover .day-map-button__arrow {
+  transform: translateX(3px);
+}
+.day-map-button:active {
+  background-color: color-mix(in srgb, var(--brand-light) 22%, transparent);
+  border-color: var(--button-primary-hover);
+}
+.day-map-button:focus-visible {
+  outline: 2px solid var(--button-primary);
+  outline-offset: 3px;
+}
+@media (max-width: 639px) {
+  /* Narrow cards: the pill spans the text column with tighter spacing, so the label stays on one line */
+  .day-map-button {
+    width: 100%;
+    justify-content: center;
+    gap: 0.375rem;
+    padding: 0.75rem 0.625rem;
+    font-size: 0.65625rem;
+    letter-spacing: 0.06em;
+  }
+  .day-map-button__icon,
+  .day-map-button__arrow {
+    width: 0.8125rem;
+    height: 0.8125rem;
+  }
+}
+@media (max-width: 359px) {
+  /* The smallest phones: the pin gives way so the whole label still fits */
+  .day-map-button {
+    font-size: 0.625rem;
+    letter-spacing: 0.05em;
+  }
+  .day-map-button__icon {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .day-map-button,
+  .day-map-button__arrow {
+    transition: none;
+  }
+  .day-map-button:hover .day-map-button__arrow {
+    transform: none;
   }
 }
 

@@ -423,6 +423,8 @@ export const ru: Dictionary = {
       carouselLabel: 'Маршрут по дням',
       day: 'Day',
       photoPlaceholder: 'Фото появится позже',
+      showOnMap: 'Посмотреть на карте',
+      showOnMapLabel: 'Посмотреть день {day} на карте маршрута',
       previous: 'Назад',
       next: 'Вперёд',
       // Programme «Новогодние Карибы — маршрут 10 дней»: nine sailing days; disembarkation on the morning of 7 January

@@ -423,6 +423,8 @@ export const en = {
       carouselLabel: 'Route by day',
       day: 'Day',
       photoPlaceholder: 'Photo coming soon',
+      showOnMap: 'View on map',
+      showOnMapLabel: 'View day {day} on the route map',
       previous: 'Previous',
       next: 'Next',
       // Programme «Новогодние Карибы — маршрут 10 дней»: nine sailing days; disembarkation on the morning of 7 January
