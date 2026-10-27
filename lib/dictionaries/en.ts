@@ -425,17 +425,18 @@ export const en = {
       photoPlaceholder: 'Photo coming soon',
       previous: 'Previous',
       next: 'Next',
-      // Days 1–3: demonstration texts; the rest are placeholders until the confirmed programme arrives
+      // Programme «Новогодние Карибы — маршрут 10 дней»: nine sailing days; disembarkation on the morning of 7 January
+      // has no card of its own, and 4–5 January share DAY 08
       items: [
-        { place: 'Martinique', text: 'Arrival at Le Marin marina, meeting the crew and settling in on board. A welcome dinner and first impressions of the Caribbean Sea.' },
-        { place: 'Rodney Bay', text: 'A passage to Saint Lucia. Turquoise coves, scenic shores and a first taste of the Caribbean islands’ atmosphere.' },
-        { place: 'The Majestic Pitons', text: 'Discovering the volcanic peaks of Saint Lucia. Panoramic views, a sea outing and time to unwind against the backdrop of the famous Pitons.' },
-        { place: 'Day 4 location', text: 'The programme for this day will be published later.' },
-        { place: 'Day 5 location', text: 'The programme for this day will be published later.' },
-        { place: 'Day 6 location', text: 'The programme for this day will be published later.' },
-        { place: 'Day 7 location', text: 'The programme for this day will be published later.' },
-        { place: 'Day 8 location', text: 'The programme for this day will be published later.' },
-        { place: 'Day 9 location', text: 'The programme for this day will be published later.' },
+        { place: 'Martinique · Le Marin', date: 'December 28, 2026', text: 'Arrival in Martinique and settling in on board at Le Marin marina. Meet the crew, then a welcome dinner at a restaurant.' },
+        { place: 'Saint Lucia · Rodney Bay and The Pitons', date: 'December 29, 2026', text: 'The first passage, to Saint Lucia. A stop at Rodney Bay, then on towards the famous volcanic peaks of The Pitons.' },
+        { place: 'Saint Vincent · Wallilabou Bay', date: 'December 30, 2026', text: 'A passage to Saint Vincent, arriving at picturesque Wallilabou Bay, framed by tropical greenery.' },
+        { place: 'Mustique · New Year on board', date: 'December 31, 2026', text: 'We welcome the New Year on board the catamaran, in the spirit of a tropical celebration: sparkling wine, a warm Caribbean evening and unforgettable moments among kindred spirits.' },
+        { place: 'Mustique → Tobago Cays', date: 'January 1, 2027', text: 'The first morning of the year on Mustique. After lunch, a passage to the Tobago Cays, known for their turquoise lagoons.' },
+        { place: 'Tobago Cays', date: 'January 2, 2027', text: 'A whole free day among small islands, white beaches and the clear water of the Caribbean Sea: time to rest and explore the archipelago’s nature.' },
+        { place: 'Saint Vincent · Wallilabou Bay', date: 'January 3, 2027', text: 'The passage back to Saint Vincent. Return to Wallilabou Bay and a relaxed evening after the crossing.' },
+        { place: 'Saint Lucia · The Pitons', date: 'January 4–5, 2027', text: 'Back to the famous Pitons of Saint Lucia. Arrival near Soufrière, time to rest on board and a free day with the option of hiking up a Piton.' },
+        { place: 'Martinique · Le Marin', date: 'January 6, 2027', text: 'The final passage to Martinique. Return to Le Marin marina, refuelling the yacht and the end of the sailing part of the journey.' },
       ],
     },
     inclusions: {

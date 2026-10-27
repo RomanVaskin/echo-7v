@@ -20,19 +20,20 @@ export const routeMapImage: { src: string; width: number; height: number } | nul
 }
 
 /**
- * Photos of the day cards, in day order (`caribbean.days.items`). Temporary Caribbean shots from the
- * site; `null` shows a neutral slot. Replace with photos of each day's location when available.
+ * Photos of the day cards, in day order (`caribbean.days.items`). `position` is the CSS
+ * object-position that keeps the subject in frame when the card crops the photo (square on desktop,
+ * portrait on phones). Replace a file or a path here: the component does not change.
  */
-export const dayPhotos: (string | null)[] = [
-  '/images/caribbean-hero.png',
-  '/images/gallery-reef.png',
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
+export const dayPhotos: ({ src: string; position?: string } | null)[] = [
+  { src: '/images/day-01-martinique-le-marin.png', position: '50% 55%' },
+  { src: '/images/day-02-saint-lucia-pitons.png', position: '50% 40%' },
+  { src: '/images/day-03-saint-vincent-wallilabou.png', position: '50% 60%' },
+  { src: '/images/day-04-mustique-new-year.png', position: '50% 45%' },
+  { src: '/images/day-05-tobago-cays.png', position: '50% 35%' },
+  { src: '/images/day-06-tobago-cays-turtle.png', position: '50% 50%' },
+  { src: '/images/day-07-wallilabou-bay.png', position: '50% 60%' },
+  { src: '/images/day-08-saint-lucia-pitons.png', position: '50% 40%' },
+  { src: '/images/day-09-martinique-return.png', position: '50% 55%' },
 ]
 
 /**
