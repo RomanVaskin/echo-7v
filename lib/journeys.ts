@@ -32,6 +32,8 @@ export type Journey = JourneyBase & {
   summary: string
   /** Card title when it differs from the destination name. */
   cardTitle?: string
+  /** Short headline above the card's description. */
+  cardLead?: string
   /** Short description shown on the journey card; only set for journeys with a confirmed programme. */
   tagline?: string
 }
@@ -53,9 +55,10 @@ const journeysBase: JourneyBase[] = [
     coordinates: [12.85, -61.3],
   },
   {
-    slug: 'cyclades',
-    region: 'Mediterranean',
-    image: '/images/mediterranean.png',
+    slug: 'bahamas',
+    region: 'Caribbean',
+    // Temporary: the site's turquoise-lagoon shot until a photo of the Exumas is added
+    image: '/images/gallery-reef.png',
     nights: null,
     dates: null,
     vessel: null,
@@ -63,7 +66,7 @@ const journeysBase: JourneyBase[] = [
     pricePerPerson: null,
     status: 'coming-soon',
     href: null,
-    coordinates: [36.9, 25.2],
+    coordinates: [24.2, -76.4],
   },
   {
     slug: 'dalmatia',

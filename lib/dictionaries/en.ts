@@ -56,10 +56,14 @@ export const en = {
         'Sail into the New Year aboard a private yacht in the Caribbean, exploring tropical islands and turquoise waters. Enjoy an intimate escape for eight guests, with a private skipper and chef, and celebrate New Year’s Eve with a festive dinner under the stars.',
       dates: 'Dec 28, 2026 – Jan 7, 2027',
     },
-    cyclades: {
-      destination: 'The Cyclades',
-      area: 'Greece',
-      summary: 'Whitewashed villages, meltemi winds and long Aegean evenings.',
+    bahamas: {
+      destination: 'The Bahamas',
+      area: 'Exuma',
+      summary: '365 islands. One unforgettable journey.',
+      cardLead: '365 islands. One unforgettable journey.',
+      tagline:
+        'Turquoise lagoons, uninhabited islands and the white-sand beaches of the Exuma archipelago. Swim with nurse sharks, meet the famous swimming pigs and discover hidden Bahamian coves under sail.',
+      dates: 'February 2027',
     },
     dalmatia: {
       destination: 'Dalmatian Coast',
@@ -73,7 +77,7 @@ export const en = {
     },
   } as Record<
     string,
-    { destination: string; area: string; summary: string; cardTitle?: string; tagline?: string; dates?: string }
+    { destination: string; area: string; summary: string; cardTitle?: string; cardLead?: string; tagline?: string; dates?: string }
   >,
   header: {
     homeLabel: 'seasmates home',
