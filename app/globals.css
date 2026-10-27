@@ -228,6 +228,84 @@
   color: var(--foreground);
 }
 
+/* Day markers over the route map image. The button is a generous touch target; the dot inside is
+   small, in the dark ink of the map; the selected day grows, turns PANTONE 437 C with a thin ring
+   and a soft, slow pulse (no pulse with reduced motion). */
+.route-markers {
+  --route-spread: 0.8rem;
+}
+@media (max-width: 639px) {
+  /* The map is small on phones: smaller dots, closer pairs */
+  .route-markers {
+    --route-spread: 0.5rem;
+  }
+  .route-markers .route-marker {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  .route-markers .route-marker__dot {
+    width: 0.8125rem;
+    height: 0.8125rem;
+    font-size: 0.5rem;
+  }
+  .route-markers .route-marker__dot--active {
+    width: 1.25rem;
+    height: 1.25rem;
+    font-size: 0.6875rem;
+  }
+}
+.route-marker {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  -webkit-tap-highlight-color: transparent;
+}
+.route-marker:focus-visible {
+  outline: 2px solid var(--button-primary);
+  outline-offset: 1px;
+}
+.route-marker__dot {
+  width: 1.125rem;
+  height: 1.125rem;
+  font-size: 0.625rem;
+  color: var(--brand-text-light);
+  background-color: color-mix(in srgb, var(--brand-dark) 88%, transparent);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.25);
+}
+.route-marker:hover .route-marker__dot {
+  background-color: var(--button-primary-hover);
+}
+.route-marker__dot--active {
+  width: 1.75rem;
+  height: 1.75rem;
+  font-size: 0.8125rem;
+  background-color: var(--button-primary);
+  box-shadow:
+    0 0 0 3px var(--journal-paper),
+    0 0 0 4px var(--button-primary),
+    0 0 14px 4px rgb(142 119 127 / 0.45);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .route-marker__dot--active {
+    animation: route-marker-pulse 2.4s ease-in-out infinite;
+  }
+}
+@keyframes route-marker-pulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 3px var(--journal-paper),
+      0 0 0 4px var(--button-primary),
+      0 0 10px 2px rgb(142 119 127 / 0.35);
+  }
+  50% {
+    box-shadow:
+      0 0 0 3px var(--journal-paper),
+      0 0 0 4px var(--button-primary),
+      0 0 18px 7px rgb(142 119 127 / 0.5);
+  }
+}
+
 /* Punched hole of the day cards' journal page: a darker shade of the card's own surface with a soft
    inner shadow on top and a faint light rim below, like a hole through paper */
 .journal-hole {

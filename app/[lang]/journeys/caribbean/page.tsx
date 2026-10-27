@@ -8,6 +8,7 @@ import { JourneyOverview } from '@/components/journey/journey-overview'
 import { JourneyHighlights } from '@/components/journey/journey-highlights'
 import { RouteMap } from '@/components/journey/route-map'
 import { DayByDay } from '@/components/journey/day-by-day'
+import { RouteDayProvider } from '@/components/journey/route-day-context'
 import { Inclusions } from '@/components/journey/inclusions'
 import { YachtDetails } from '@/components/journey/yacht-details'
 import { JourneyActions } from '@/components/journey/journey-actions'
@@ -49,8 +50,11 @@ export default async function CaribbeanJourneyPage({ params }: PageProps<'/[lang
         <JourneyHero journey={journey} locale={locale} dict={dict} />
         <JourneyOverview dict={caribbean.overview} />
         <JourneyHighlights dict={caribbean.highlights} />
-        <RouteMap dict={caribbean.map} />
-        <DayByDay dict={caribbean.days} />
+        {/* The map's day markers and the day cards share one selected day */}
+        <RouteDayProvider>
+          <RouteMap dict={caribbean.map} days={caribbean.days} />
+          <DayByDay dict={caribbean.days} />
+        </RouteDayProvider>
         <Inclusions dict={caribbean.inclusions} />
         <YachtDetails dict={caribbean.yacht} />
         <JourneyActions dict={caribbean.actions} bookingHref={journey.bookingHref ?? null} />
