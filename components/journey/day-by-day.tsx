@@ -53,7 +53,7 @@ export function DayByDay({ dict }: { dict: Dictionary['caribbean']['days'] }) {
   const last = routeDays.length
 
   return (
-    <section aria-labelledby="days-title" className="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
+    <section aria-labelledby="days-title" className="mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-24">
       <div ref={strip}>
       <Carousel
         // Room above and below the strip so the enlarged card is never clipped (layout unchanged)

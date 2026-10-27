@@ -6,7 +6,7 @@ import { highlightImages } from '@/lib/caribbean'
 /** Five themed cards in one horizontal row; texts in the dictionaries, photos in lib/caribbean.ts. */
 export function JourneyHighlights({ dict }: { dict: Dictionary['caribbean']['highlights'] }) {
   return (
-    <section aria-labelledby="highlights-title" className="mx-auto max-w-7xl px-6 pb-24 lg:px-10 lg:pb-32">
+    <section aria-labelledby="highlights-title" className="mx-auto max-w-7xl px-6 pb-16 lg:px-10 lg:pb-24">
       <Carousel
         label={dict.carouselLabel}
         previousLabel={dict.previous}

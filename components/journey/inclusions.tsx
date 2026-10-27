@@ -21,7 +21,7 @@ function List({ title, items }: { title: string; items: string[] }) {
 export function Inclusions({ dict }: { dict: Dictionary['caribbean']['inclusions'] }) {
   return (
     <section aria-labelledby="inclusions-title" className="theme-light">
-      <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
+      <div className="mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-20">
         <SectionHeading id="inclusions-title" index="05" eyebrow={dict.eyebrow} title={dict.title} description={dict.note} />
         <div className="mt-10 grid divide-y divide-border md:mt-14 md:grid-cols-2 md:divide-x md:divide-y-0">
           <List title={dict.includedTitle} items={dict.included} />

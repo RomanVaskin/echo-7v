@@ -4,7 +4,7 @@ import { SectionHeading } from '@/components/site/section-heading'
 
 export function Faq({ dict }: { dict: Dictionary['caribbean']['faq'] }) {
   return (
-    <section aria-labelledby="faq-title" className="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-36">
+    <section aria-labelledby="faq-title" className="mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-24">
       <SectionHeading id="faq-title" index="07" eyebrow={dict.eyebrow} title={dict.title} />
       <div className="mt-14 flex flex-col lg:pl-[33%]">
         {dict.items.map((item) => (
