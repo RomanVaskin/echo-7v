@@ -1,13 +1,14 @@
 'use client'
 
 import { useActionState, useEffect, useRef, useState } from 'react'
+import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { ArrowLeft, Check } from 'lucide-react'
 import { submitBooking, type BookingState } from '@/app/actions/booking'
 import { LiquidGlassAction } from '@/components/site/liquid-glass-button'
 import type { Dictionary } from '@/lib/dictionaries'
 import type { Locale } from '@/lib/i18n'
-import { formatUsd, type CabinOptionId } from '@/lib/booking/voyage'
+import { cabinOptionImages, formatUsd, type CabinOptionId } from '@/lib/booking/voyage'
 import { cn } from '@/lib/utils'
 
 export type OptionView = {
@@ -95,7 +96,8 @@ function OptionCard({ dict, option, selected, onSelect }: { dict: Dict; option: 
         !option.available && 'cursor-not-allowed opacity-50 hover:border-white/15',
       )}
     >
-      <div className="flex gap-4">
+      {/* Phones: radio and photo on top, text below; wider screens: one row */}
+      <div className="grid grid-cols-[1.25rem_minmax(0,1fr)] gap-x-4 gap-y-4 md:grid-cols-[1.25rem_auto_minmax(0,1fr)] md:items-start">
         <span
           aria-hidden="true"
           className={cn(
@@ -105,7 +107,11 @@ function OptionCard({ dict, option, selected, onSelect }: { dict: Dict; option: 
         >
           {selected && <Check className="size-3" strokeWidth={2.5} />}
         </span>
-        <span className="flex flex-col gap-2">
+        {/* Cabin photo */}
+        <span className="relative h-24 w-32 shrink-0 overflow-hidden rounded-xl border border-white/10 md:h-24 md:w-28">
+          <Image src={cabinOptionImages[option.id]} alt="" fill sizes="128px" className="object-cover" />
+        </span>
+        <span className="col-start-2 flex min-w-0 flex-col gap-2 md:col-start-3">
           <span className="font-display text-2xl tracking-[-0.02em] md:text-[1.75rem]">{option.title}</span>
           <span className="max-w-md text-[0.9375rem] leading-relaxed text-muted-foreground">{option.description}</span>
           <span className="eyebrow mt-1">
@@ -192,7 +198,7 @@ export function BookingFlow({ locale, dict, options, freeCabins }: { locale: Loc
     <div ref={top} className="scroll-mt-28">
       <Steps dict={dict} current={step} />
 
-      <div className="mt-10 grid gap-10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:gap-14">
+      <div className="mt-10 grid grid-cols-[minmax(0,1fr)] gap-10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:gap-14">
         {step === 0 ? (
           <div className="flex flex-col gap-6">
             <div className="flex flex-wrap items-baseline justify-between gap-3">

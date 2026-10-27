@@ -38,6 +38,16 @@ export const cabinOptions: Record<CabinOptionId, CabinOption> = {
   'private-two': { id: 'private-two', guests: 2, berths: 2, privateCabin: true, discountRate: 0 },
 }
 
+/**
+ * Cabin photo on each accommodation card. Temporary: the site's cabin shot for all three until
+ * photos of the yacht's own cabins are added (put a `/images/...` path per option).
+ */
+export const cabinOptionImages: Record<CabinOptionId, string> = {
+  shared: '/images/yacht-cabin.png',
+  'private-solo': '/images/yacht-cabin.png',
+  'private-two': '/images/yacht-cabin.png',
+}
+
 export function isCabinOptionId(value: string): value is CabinOptionId {
   return (cabinOptionIds as readonly string[]).includes(value)
 }

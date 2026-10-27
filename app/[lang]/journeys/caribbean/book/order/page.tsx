@@ -42,7 +42,7 @@ export default async function OrderPage({ params, searchParams }: PageProps<'/[l
 
   return (
     <BookingShell locale={locale} dict={dict} path="/journeys/caribbean/book/order">
-      <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:gap-14">
+      <div className="grid grid-cols-[minmax(0,1fr)] gap-10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:gap-14">
         <div className="flex flex-col gap-6">
           <p className="eyebrow">
             {o.reference}: <span className="text-foreground">{order.id}</span>
