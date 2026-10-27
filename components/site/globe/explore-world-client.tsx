@@ -161,14 +161,17 @@ export function ExploreWorldClient({
         {/* The globe */}
         <div className="flex flex-col items-center gap-5">
           <div className="relative aspect-square w-full max-w-[620px]">
-            {/* Soft contact shadow under the sphere */}
-            <div aria-hidden="true" className="absolute inset-x-[26%] bottom-[2%] h-[6%] rounded-[50%] bg-black/25 blur-xl" />
+            {/* Light pooling under the glass sphere */}
+            <div
+              aria-hidden="true"
+              className="absolute inset-x-[14%] bottom-[-2%] h-[12%] rounded-[50%] bg-[radial-gradient(closest-side,rgba(170,215,255,0.32),rgba(170,215,255,0))] blur-md"
+            />
             {/* Placeholder until the scene is ready */}
             <div
               aria-hidden="true"
               className={cn(
-                'absolute inset-[5.5%] rounded-full bg-[#ddd5c4] transition-opacity duration-700',
-                ready || webgl === false ? 'opacity-0' : 'opacity-15',
+                'absolute inset-[5.5%] rounded-full border border-white/25 bg-white/[0.03] transition-opacity duration-700',
+                ready || webgl === false ? 'opacity-0' : 'opacity-100',
               )}
             />
             {webgl === false ? (

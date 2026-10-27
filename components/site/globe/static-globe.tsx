@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { geoDistance, geoGraticule10, geoOrthographic, geoPath } from 'd3-geo'
+import { geoDistance, geoOrthographic, geoPath } from 'd3-geo'
 import { loadLand, type LandData } from './land'
 import type { GlobePoint } from './globe-scene'
 
@@ -37,9 +37,19 @@ export function StaticGlobe({
 
   return (
     <svg viewBox={`0 0 ${size} ${size}`} className="absolute inset-0 size-full" role="img" aria-label={label}>
-      <circle cx={size / 2} cy={size / 2} r={size / 2 - 4} fill="#ddd5c4" />
-      <path d={path(geoGraticule10()) ?? ''} fill="none" stroke="#484b5d" strokeOpacity={0.12} strokeWidth={0.6} />
-      {land && <path d={path(land.land) ?? ''} fill="#f0eada" stroke="#484b5d" strokeOpacity={0.3} strokeWidth={0.6} />}
+      <defs>
+        <radialGradient id="glass-rim" cx="50%" cy="50%" r="50%">
+          <stop offset="70%" stopColor="#d6ebff" stopOpacity={0.04} />
+          <stop offset="100%" stopColor="#ffffff" stopOpacity={0.45} />
+        </radialGradient>
+        <radialGradient id="glass-light" cx="32%" cy="26%" r="22%">
+          <stop offset="0%" stopColor="#ffffff" stopOpacity={0.5} />
+          <stop offset="100%" stopColor="#ffffff" stopOpacity={0} />
+        </radialGradient>
+      </defs>
+      <circle cx={size / 2} cy={size / 2} r={size / 2 - 4} fill="url(#glass-rim)" />
+      {land && <path d={path(land.land) ?? ''} fill="#e6f2ff" fillOpacity={0.14} stroke="#6db6ff" strokeWidth={1.4} />}
+      <circle cx={size / 2} cy={size / 2} r={size / 2 - 4} fill="url(#glass-light)" />
       {points.map((point) => {
         const xy = projection([point.lon, point.lat])
         // Skip points on the far side
@@ -47,8 +57,8 @@ export function StaticGlobe({
         return (
           <g key={point.id} transform={`translate(${xy[0]} ${xy[1]})`} className="cursor-pointer" onClick={() => onPick(point.id)}>
             <circle r={18} fill="transparent" />
-            {point.id === selectedId && <circle r={11} fill="none" stroke="#c8a26a" strokeWidth={1.2} />}
-            <circle r={5} fill="#c8a26a" />
+            {point.id === selectedId && <circle r={11} fill="none" stroke="#6db6ff" strokeWidth={1.2} />}
+            <circle r={5} fill="#ffffff" />
           </g>
         )
       })}

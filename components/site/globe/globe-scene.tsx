@@ -10,11 +10,10 @@ export type GlobeRequest = { id: string; spin: boolean; nonce: number }
 
 type Quality = 'high' | 'low'
 
-/* Sculptural palette: ivory land on a slightly deeper ivory sea, ink lines and brass markers */
-const LAND = [240, 234, 218] // PANTONE 11-0104 TPG, the site's journal paper
-const SEA = [221, 213, 196]
-const INK = '#484b5d' // PANTONE 4131 C
-const BRASS = '#c8a26a'
+/* Glass globe: a clear sphere with a light rim, land as pale glass with glowing blue coastlines */
+const GLOW = new THREE.Color('#4aa3ff')
+const GLOW_HEX = '#6db6ff'
+const LIGHT_DIR = new THREE.Vector3(-0.55, 0.65, 0.55).normalize() // upper left, view space
 
 /** Land relief, as a share of the globe radius. */
 const RELIEF = 0.018
@@ -25,16 +24,17 @@ const IDLE_BEFORE_AUTO = 2.5 // s
 
 type Earth = {
   geometry: THREE.SphereGeometry
-  texture: THREE.CanvasTexture
+  /** Blurred land mask (0…1) on the sphere's UVs: drives the glass fill and the glowing edge. */
+  heightTexture: THREE.DataTexture
   coast: THREE.BufferGeometry
-  graticule: THREE.BufferGeometry
+  glints: THREE.BufferGeometry
   /** Relief (0…1) at a latitude/longitude. */
   heightAt: (lat: number, lon: number) => number
 }
 
 function buildEarth({ land, coast }: LandData, quality: Quality): Earth {
   // Relief: a softly blurred land mask pushes the sphere's vertices outwards
-  const maskW = quality === 'high' ? 1024 : 768
+  const maskW = quality === 'high' ? 2048 : 1024
   const maskH = maskW / 2
   const maskPixels = drawLandMask(land, maskW, maskH).getContext('2d')!.getImageData(0, 0, maskW, maskH).data
   const heights = new Float32Array(maskW * maskH)
@@ -81,51 +81,169 @@ function buildEarth({ land, coast }: LandData, quality: Quality): Earth {
     normal.setXYZ(b, n.x, n.y, n.z)
   }
 
-  // Colour: a crisp land mask mixed with a faint gypsum grain
-  const colorW = quality === 'high' ? 2048 : 1024
-  const colorH = colorW / 2
-  const colorCanvas = drawLandMask(land, colorW, colorH)
-  const ctx = colorCanvas.getContext('2d')!
-  const image = ctx.getImageData(0, 0, colorW, colorH)
-  const data = image.data
-  for (let i = 0; i < data.length; i += 4) {
-    const m = data[i] / 255
-    const grain = (Math.random() - 0.5) * 7
-    data[i] = SEA[0] + (LAND[0] - SEA[0]) * m + grain
-    data[i + 1] = SEA[1] + (LAND[1] - SEA[1]) * m + grain
-    data[i + 2] = SEA[2] + (LAND[2] - SEA[2]) * m + grain
+  // The mask as a texture, rows flipped to match the UVs (v = 1 at the top)
+  const bytes = new Uint8Array(maskW * maskH)
+  for (let y = 0; y < maskH; y++) {
+    for (let x = 0; x < maskW; x++) bytes[(maskH - 1 - y) * maskW + x] = Math.round(heights[y * maskW + x] * 255)
   }
-  ctx.putImageData(image, 0, 0)
-  const texture = new THREE.CanvasTexture(colorCanvas)
-  texture.colorSpace = THREE.SRGBColorSpace
-  texture.anisotropy = 4
+  const heightTexture = new THREE.DataTexture(bytes, maskW, maskH, THREE.RedFormat, THREE.UnsignedByteType)
+  heightTexture.wrapS = THREE.RepeatWrapping
+  heightTexture.magFilter = THREE.LinearFilter
+  heightTexture.minFilter = THREE.LinearFilter
+  heightTexture.needsUpdate = true
 
   // Coastlines, just above the bevel's midpoint
   const coastPoints: number[] = []
+  const coastVertices: [number, number][] = []
   for (const line of coast.coordinates) {
     for (let i = 1; i < line.length; i++) {
       const [lon0, lat0] = line[i - 1]
       const [lon1, lat1] = line[i]
       coastPoints.push(...latLonToVector(lat0, lon0, 1 + RELIEF * 0.55), ...latLonToVector(lat1, lon1, 1 + RELIEF * 0.55))
+      coastVertices.push([lat0, lon0])
     }
   }
   const coastGeometry = new THREE.BufferGeometry()
   coastGeometry.setAttribute('position', new THREE.Float32BufferAttribute(coastPoints, 3))
 
-  // Meridians and parallels every 15°, at sea level: the raised land covers them
-  const grid: number[] = []
-  const r = 1.0015
-  for (let lon = -180; lon < 180; lon += 15) {
-    for (let lat = -80; lat < 80; lat += 2) grid.push(...latLonToVector(lat, lon, r), ...latLonToVector(lat + 2, lon, r))
+  // A few sparkles along the coasts, like light caught in the glass edge (fixed seed: same every load)
+  let seed = 7
+  const random = () => ((seed = (seed * 16807) % 2147483647) - 1) / 2147483646
+  const glintPositions: number[] = []
+  const glintPhases: number[] = []
+  const count = quality === 'high' ? 46 : 28
+  for (let i = 0; i < count; i++) {
+    const [lat, lon] = coastVertices[Math.floor(random() * coastVertices.length)]
+    glintPositions.push(...latLonToVector(lat, lon, 1 + RELIEF * 0.7))
+    glintPhases.push(random() * Math.PI * 2)
   }
-  for (let lat = -75; lat <= 75; lat += 15) {
-    for (let lon = -180; lon < 180; lon += 2) grid.push(...latLonToVector(lat, lon, r), ...latLonToVector(lat, lon + 2, r))
-  }
-  const graticule = new THREE.BufferGeometry()
-  graticule.setAttribute('position', new THREE.Float32BufferAttribute(grid, 3))
+  const glints = new THREE.BufferGeometry()
+  glints.setAttribute('position', new THREE.Float32BufferAttribute(glintPositions, 3))
+  glints.setAttribute('phase', new THREE.Float32BufferAttribute(glintPhases, 1))
 
-  return { geometry, texture, coast: coastGeometry, graticule, heightAt }
+  return { geometry, heightTexture, coast: coastGeometry, glints, heightAt }
 }
+
+/* Shaders. "facing" is the view-space z of the outward direction: > 0 on the hemisphere facing
+   the viewer, so the far side can be drawn faintly through the glass. */
+const facingVertex = /* glsl */ `
+  varying float vFacing;
+  void setFacing(vec3 p) { vFacing = normalize(normalMatrix * normalize(p)).z; }
+`
+
+const landVertex = /* glsl */ `
+  ${facingVertex}
+  varying vec2 vUv;
+  varying vec3 vNormal;
+  varying vec3 vView;
+  void main() {
+    vUv = uv;
+    vec4 mv = modelViewMatrix * vec4(position, 1.0);
+    vView = -mv.xyz;
+    vNormal = normalize(normalMatrix * normal);
+    setFacing(position);
+    gl_Position = projectionMatrix * mv;
+  }
+`
+
+const landFragment = /* glsl */ `
+  uniform sampler2D uHeight;
+  uniform vec3 uGlow;
+  uniform vec3 uLight;
+  uniform float uOpacity;
+  varying vec2 vUv;
+  varying vec3 vNormal;
+  varying vec3 vView;
+  varying float vFacing;
+  void main() {
+    float h = texture2D(uHeight, vUv).r;
+    if (h < 0.3) discard;
+    vec3 n = normalize(vNormal);
+    vec3 v = normalize(vView);
+    float fresnel = pow(1.0 - abs(dot(n, v)), 2.0);
+    // Bright band along the coast, clear glass inland
+    float edge = smoothstep(0.3, 0.48, h) * (1.0 - smoothstep(0.5, 0.92, h));
+    // Light catches the raised edges only, not the flat land
+    float spec = pow(max(dot(reflect(-uLight, n), v), 0.0), 60.0) * smoothstep(0.25, 0.6, edge);
+    vec3 color = mix(vec3(0.9, 0.95, 1.0), uGlow, edge * 0.85) + spec;
+    float alpha = 0.045 + 0.2 * fresnel + edge * 0.8 + spec * 0.8;
+    alpha *= mix(0.22, 1.0, smoothstep(-0.15, 0.35, vFacing)) * uOpacity;
+    gl_FragColor = vec4(color, clamp(alpha, 0.0, 1.0));
+  }
+`
+
+const glassVertex = /* glsl */ `
+  varying vec3 vNormal;
+  varying vec3 vView;
+  void main() {
+    vec4 mv = modelViewMatrix * vec4(position, 1.0);
+    vView = -mv.xyz;
+    vNormal = normalize(normalMatrix * normal);
+    gl_Position = projectionMatrix * mv;
+  }
+`
+
+const glassFragment = /* glsl */ `
+  uniform vec3 uLight;
+  uniform float uStrength;
+  varying vec3 vNormal;
+  varying vec3 vView;
+  void main() {
+    vec3 n = normalize(vNormal);
+    vec3 v = normalize(vView);
+    float fresnel = pow(1.0 - abs(dot(n, v)), 3.0);
+    vec3 r = reflect(-uLight, n);
+    float highlight = pow(max(dot(r, v), 0.0), 160.0) * 1.4 + pow(max(dot(r, v), 0.0), 14.0) * 0.07;
+    vec3 color = mix(vec3(0.82, 0.91, 1.0), vec3(1.0), fresnel);
+    float alpha = (0.01 + fresnel * 0.75 + highlight) * uStrength;
+    gl_FragColor = vec4(color, clamp(alpha, 0.0, 1.0));
+  }
+`
+
+const lineVertex = /* glsl */ `
+  ${facingVertex}
+  void main() {
+    setFacing(position);
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+  }
+`
+
+const lineFragment = /* glsl */ `
+  uniform vec3 uGlow;
+  varying float vFacing;
+  void main() {
+    float alpha = mix(0.14, 0.95, smoothstep(-0.15, 0.3, vFacing));
+    gl_FragColor = vec4(uGlow, alpha);
+  }
+`
+
+const glintVertex = /* glsl */ `
+  ${facingVertex}
+  attribute float phase;
+  uniform float uTime;
+  uniform float uPixelRatio;
+  varying float vAlpha;
+  void main() {
+    setFacing(position);
+    float twinkle = pow(0.5 + 0.5 * sin(uTime * 1.3 + phase * 3.0), 6.0);
+    vAlpha = twinkle * smoothstep(0.0, 0.45, vFacing);
+    vec4 mv = modelViewMatrix * vec4(position, 1.0);
+    gl_PointSize = (10.0 + 26.0 * twinkle) * uPixelRatio;
+    gl_Position = projectionMatrix * mv;
+  }
+`
+
+const glintFragment = /* glsl */ `
+  uniform vec3 uGlow;
+  varying float vAlpha;
+  void main() {
+    vec2 d = gl_PointCoord - 0.5;
+    float core = exp(-dot(d, d) * 90.0);
+    float rays = max(0.0, 1.0 - abs(d.x) * 60.0) * (1.0 - abs(d.y) * 2.0) + max(0.0, 1.0 - abs(d.y) * 60.0) * (1.0 - abs(d.x) * 2.0);
+    float a = (core + rays * 0.55) * vAlpha;
+    gl_FragColor = vec4(mix(uGlow, vec3(1.0), core), a);
+  }
+`
 
 const easeInOutCubic = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2)
 const wrapAngle = (a: number) => Math.atan2(Math.sin(a), Math.cos(a))
@@ -139,6 +257,23 @@ type Motion = {
   moved: boolean
   lastInteraction: number
   tween: { fromYaw: number; fromPitch: number; toYaw: number; toPitch: number; start: number; duration: number; id: string } | null
+}
+
+let halo: THREE.CanvasTexture | null = null
+/** Soft radial glow shared by all markers. */
+function haloTexture() {
+  if (halo) return halo
+  const canvas = document.createElement('canvas')
+  canvas.width = canvas.height = 64
+  const ctx = canvas.getContext('2d')!
+  const gradient = ctx.createRadialGradient(32, 32, 0, 32, 32, 32)
+  gradient.addColorStop(0, 'rgba(255,255,255,0.9)')
+  gradient.addColorStop(0.25, 'rgba(255,255,255,0.35)')
+  gradient.addColorStop(1, 'rgba(255,255,255,0)')
+  ctx.fillStyle = gradient
+  ctx.fillRect(0, 0, 64, 64)
+  halo = new THREE.CanvasTexture(canvas)
+  return halo
 }
 
 function Marker({
@@ -189,12 +324,16 @@ function Marker({
   return (
     <group ref={group} position={position}>
       <mesh ref={dot}>
-        <sphereGeometry args={[0.014, 24, 24]} />
-        <meshStandardMaterial color={BRASS} metalness={0.55} roughness={0.32} emissive={BRASS} emissiveIntensity={0.18} />
+        <sphereGeometry args={[0.012, 24, 24]} />
+        <meshBasicMaterial color="#ffffff" />
+      </mesh>
+      <mesh renderOrder={5}>
+        <circleGeometry args={[0.03, 32]} />
+        <meshBasicMaterial map={haloTexture()} color={GLOW_HEX} transparent depthWrite={false} blending={THREE.AdditiveBlending} />
       </mesh>
       <mesh ref={ring}>
         <ringGeometry args={[0.026, 0.0295, 64]} />
-        <meshBasicMaterial color={BRASS} transparent opacity={0} depthWrite={false} side={THREE.DoubleSide} />
+        <meshBasicMaterial color={GLOW_HEX} transparent opacity={0} depthWrite={false} side={THREE.DoubleSide} blending={THREE.AdditiveBlending} />
       </mesh>
       {/* Generous invisible hit area for fingers */}
       <mesh
@@ -245,6 +384,51 @@ function Globe({
   const globe = useRef<THREE.Group>(null)
   const { gl, clock } = useThree()
   const earth = useMemo(() => buildEarth(land, quality), [land, quality])
+  const pixelRatio = useThree((state) => state.viewport.dpr)
+  const materials = useMemo(() => {
+    const common = { transparent: true, depthWrite: false }
+    const landMaterial = (side: THREE.Side, opacity: number) =>
+      new THREE.ShaderMaterial({
+        ...common,
+        side,
+        vertexShader: landVertex,
+        fragmentShader: landFragment,
+        uniforms: {
+          uHeight: { value: earth.heightTexture },
+          uGlow: { value: GLOW },
+          uLight: { value: LIGHT_DIR },
+          uOpacity: { value: opacity },
+        },
+      })
+    const glassMaterial = (side: THREE.Side, strength: number) =>
+      new THREE.ShaderMaterial({
+        ...common,
+        side,
+        vertexShader: glassVertex,
+        fragmentShader: glassFragment,
+        uniforms: { uLight: { value: LIGHT_DIR }, uStrength: { value: strength } },
+      })
+    return {
+      land: landMaterial(THREE.FrontSide, 1),
+      landBack: landMaterial(THREE.BackSide, 1),
+      glass: glassMaterial(THREE.FrontSide, 1),
+      glassBack: glassMaterial(THREE.BackSide, 0.22),
+      coast: new THREE.ShaderMaterial({
+        ...common,
+        blending: THREE.AdditiveBlending,
+        vertexShader: lineVertex,
+        fragmentShader: lineFragment,
+        uniforms: { uGlow: { value: GLOW } },
+      }),
+      glints: new THREE.ShaderMaterial({
+        ...common,
+        blending: THREE.AdditiveBlending,
+        vertexShader: glintVertex,
+        fragmentShader: glintFragment,
+        uniforms: { uGlow: { value: GLOW }, uTime: { value: 0 }, uPixelRatio: { value: 1 } },
+      }),
+    }
+  }, [earth])
   // Opening view: the western Atlantic and the Caribbean, slightly from above
   const motion = useRef<Motion>({
     yaw: (68 * Math.PI) / 180,
@@ -260,11 +444,17 @@ function Globe({
   useEffect(
     () => () => {
       earth.geometry.dispose()
-      earth.texture.dispose()
+      earth.heightTexture.dispose()
+      earth.glints.dispose()
+      materials.land.dispose()
+      materials.landBack.dispose()
+      materials.glass.dispose()
+      materials.glassBack.dispose()
+      materials.coast.dispose()
+      materials.glints.dispose()
       earth.coast.dispose()
-      earth.graticule.dispose()
     },
-    [earth],
+    [earth, materials],
   )
 
   // Turn to a destination: the shortest way, or with an extra full turn for "Surprise Me"
@@ -388,19 +578,22 @@ function Globe({
       if (!reducedMotion && !selectedId && now - m.lastInteraction > IDLE_BEFORE_AUTO) m.yaw += AUTO_SPEED * dt
     }
     if (globe.current) globe.current.rotation.set(m.pitch, m.yaw, 0)
+    // Sparkles twinkle; with reduced motion they hold still
+    materials.glints.uniforms.uTime.value = reducedMotion ? 1.2 : now
+    materials.glints.uniforms.uPixelRatio.value = pixelRatio
   })
 
   return (
     <group ref={globe}>
-      <mesh geometry={earth.geometry}>
-        <meshStandardMaterial map={earth.texture} roughness={0.93} metalness={0} />
+      {/* Back to front: far side of the glass and land, then the near side, lines and sparkles */}
+      <mesh geometry={earth.geometry} material={materials.glassBack} renderOrder={0} scale={0.999} />
+      <mesh geometry={earth.geometry} material={materials.landBack} renderOrder={1} />
+      <mesh geometry={earth.geometry} material={materials.land} renderOrder={2} />
+      <lineSegments geometry={earth.coast} material={materials.coast} renderOrder={3} />
+      <mesh material={materials.glass} renderOrder={4} scale={1 + RELIEF * 1.3}>
+        <sphereGeometry args={[1, 96, 64]} />
       </mesh>
-      <lineSegments geometry={earth.graticule}>
-        <lineBasicMaterial color={INK} transparent opacity={0.12} depthWrite={false} />
-      </lineSegments>
-      <lineSegments geometry={earth.coast}>
-        <lineBasicMaterial color={INK} transparent opacity={0.28} depthWrite={false} />
-      </lineSegments>
+      <points geometry={earth.glints} material={materials.glints} renderOrder={6} />
       {points.map((point) => (
         <Marker
           key={point.id}
@@ -468,10 +661,6 @@ export default function GlobeScene({ active, label, onReady, ...props }: GlobeSc
             onReady()
           }}
         >
-          {/* Soft light from the upper left */}
-          <hemisphereLight args={['#fffaf0', '#6b6d7a', 1.15]} />
-          <directionalLight position={[-3.2, 3, 3.6]} intensity={2.3} color="#fff8ec" />
-          <ambientLight intensity={0.4} />
           <Globe land={land} quality={quality} setCursor={setCursor} {...props} />
         </Canvas>
       )}
