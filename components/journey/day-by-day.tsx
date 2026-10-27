@@ -5,7 +5,7 @@ import { Carousel } from '@/components/site/carousel'
 import { dayPhotos } from '@/lib/caribbean'
 
 /**
- * One tall card per day ("Day 1"…), styled as a page of a travel journal: a narrow left strip with
+ * One tall card per day ("Day 01"…), styled as a page of a travel journal: a narrow left strip with
  * four punched holes, then the photo and the day's text. Two and a half cards on desktop, about 1.6
  * on tablets, one card and the edge of the next on phones; the shared carousel scrolls them.
  */
@@ -46,10 +46,7 @@ export function DayByDay({ dict }: { dict: Dictionary['caribbean']['days'] }) {
                   ))}
                 </div>
                 <div className="flex min-w-0 flex-1 flex-col p-5 pl-4 md:p-6 md:pl-5">
-                  <p className="eyebrow mb-4 text-[0.8125rem] normal-case tracking-[0.06em] text-primary">
-                    {dict.day} {i + 1}
-                  </p>
-                  <div className="relative aspect-[3/4] overflow-hidden rounded-xl bg-foreground/[0.04] sm:aspect-[5/6] lg:aspect-square">
+                  <div className="relative aspect-[2/3] overflow-hidden rounded-xl bg-foreground/[0.04] sm:aspect-[5/6] lg:aspect-square">
                     {photo ? (
                       <Image
                         src={photo}
@@ -66,9 +63,17 @@ export function DayByDay({ dict }: { dict: Dictionary['caribbean']['days'] }) {
                       </div>
                     )}
                   </div>
-                  {/* Reserved text area keeps the photo at roughly 55–60% of the page on wider cards */}
-                  <div className="sm:min-h-[14rem]">
-                    <h3 className="mt-6 hyphens-auto break-words font-display text-3xl tracking-[-0.03em] md:text-[2.125rem]">{item.place}</h3>
+                  {/* Day, date, place and programme; the reserved height keeps the photo at roughly 55–60% of the page */}
+                  <div className="mt-6 flex flex-col sm:min-h-[15rem]">
+                    <p className="eyebrow flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                      <span className="text-primary">
+                        {dict.day} {String(i + 1).padStart(2, '0')}
+                      </span>
+                      <span>{item.date}</span>
+                    </p>
+                    <h3 className="mt-3 text-balance hyphens-auto break-words font-display text-[1.75rem] leading-[1.12] tracking-[-0.03em] md:text-[2rem]">
+                      {item.place}
+                    </h3>
                     <p className="mt-4 text-[0.9375rem] leading-relaxed text-muted-foreground">{item.text}</p>
                   </div>
                 </div>
