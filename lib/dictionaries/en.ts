@@ -32,6 +32,8 @@ export const en = {
     sailingYachtIn: 'Sailing yacht in',
     perPerson: '/ person',
     more: 'Explore',
+    book: 'Book now',
+    priceFrom: 'from',
   },
   status: {
     'enquiries-open': 'Enquiries open',

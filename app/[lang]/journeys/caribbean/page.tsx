@@ -12,6 +12,7 @@ import { Inclusions } from '@/components/journey/inclusions'
 import { YachtDetails } from '@/components/journey/yacht-details'
 import { JourneyActions } from '@/components/journey/journey-actions'
 import { Faq } from '@/components/journey/faq'
+import { MobileBookBar } from '@/components/journey/mobile-book-bar'
 import { getDictionary } from '@/lib/dictionaries'
 import { alternates, isLocale } from '@/lib/i18n'
 import { getJourneys } from '@/lib/journeys'
@@ -52,7 +53,7 @@ export default async function CaribbeanJourneyPage({ params }: PageProps<'/[lang
         <DayByDay dict={caribbean.days} />
         <Inclusions dict={caribbean.inclusions} />
         <YachtDetails dict={caribbean.yacht} />
-        <JourneyActions dict={caribbean.actions} />
+        <JourneyActions dict={caribbean.actions} bookingHref={journey.bookingHref ?? null} />
         <Faq dict={caribbean.faq} />
 
         <EnquirySection
@@ -70,6 +71,15 @@ export default async function CaribbeanJourneyPage({ params }: PageProps<'/[lang
           description={dict.enquirySection.caribbean.description}
         />
       </main>
+      {journey.bookingHref && journey.pricePerPerson && (
+        <MobileBookBar
+          href={journey.bookingHref}
+          price={journey.pricePerPerson}
+          perPerson={dict.common.perPerson}
+          from={dict.common.priceFrom}
+          label={dict.common.book}
+        />
+      )}
       <SiteFooter locale={locale} dict={dict.footer} />
     </>
   )

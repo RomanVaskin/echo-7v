@@ -33,6 +33,8 @@ export const ru: Dictionary = {
     sailingYachtIn: 'Парусная яхта —',
     perPerson: '/ чел.',
     more: 'Подробнее',
+    book: 'Забронировать',
+    priceFrom: 'от',
   },
   status: {
     'enquiries-open': 'Приём заявок открыт',
