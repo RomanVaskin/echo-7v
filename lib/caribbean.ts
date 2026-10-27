@@ -20,20 +20,20 @@ export const routeMapImage: { src: string; width: number; height: number } | nul
 }
 
 /**
- * Photos of the day cards, in day order (`caribbean.days.items`). Temporary shots from the site
- * matched to each stop's mood (the same place keeps the same photo); `null` shows a neutral slot
- * until a photo of that location is added. Replace a path here: the component does not change.
+ * Photos of the day cards, in day order (`caribbean.days.items`). `position` is the CSS
+ * object-position that keeps the subject in frame when the card crops the photo (square on desktop,
+ * portrait on phones). Replace a file or a path here: the component does not change.
  */
-export const dayPhotos: (string | null)[] = [
-  '/images/caribbean-hero.png', // 1 Martinique · Le Marin
-  null, // 2 Saint Lucia · Rodney Bay and The Pitons
-  '/images/hero-sailing.png', // 3 Saint Vincent · Wallilabou Bay (the passage)
-  '/images/gallery-deck.png', // 4 Mustique · New Year's Eve
-  '/images/gallery-helm.png', // 5 Mustique → Tobago Cays (the passage)
-  '/images/gallery-reef.png', // 6 Tobago Cays
-  '/images/hero-sailing.png', // 7 Saint Vincent · Wallilabou Bay
-  null, // 8 Saint Lucia · The Pitons
-  '/images/caribbean-hero.png', // 9 Martinique · Le Marin
+export const dayPhotos: ({ src: string; position?: string } | null)[] = [
+  { src: '/images/day-01-martinique-le-marin.png', position: '50% 55%' },
+  { src: '/images/day-02-saint-lucia-pitons.png', position: '50% 40%' },
+  { src: '/images/day-03-saint-vincent-wallilabou.png', position: '50% 60%' },
+  { src: '/images/day-04-mustique-new-year.png', position: '50% 45%' },
+  { src: '/images/day-05-tobago-cays.png', position: '50% 35%' },
+  { src: '/images/day-06-tobago-cays-turtle.png', position: '50% 50%' },
+  { src: '/images/day-07-wallilabou-bay.png', position: '50% 60%' },
+  { src: '/images/day-08-saint-lucia-pitons.png', position: '50% 40%' },
+  { src: '/images/day-09-martinique-return.png', position: '50% 55%' },
 ]
 
 /**

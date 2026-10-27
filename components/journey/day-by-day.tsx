@@ -49,12 +49,13 @@ export function DayByDay({ dict }: { dict: Dictionary['caribbean']['days'] }) {
                   <div className="relative aspect-[2/3] overflow-hidden rounded-xl bg-foreground/[0.04] sm:aspect-[5/6] lg:aspect-square">
                     {photo ? (
                       <Image
-                        src={photo}
+                        src={photo.src}
                         alt={item.place}
                         fill
                         draggable={false}
                         sizes="(min-width: 1280px) 400px, (min-width: 1024px) 34vw, (min-width: 640px) 55vw, 75vw"
                         className="object-cover"
+                        style={{ objectPosition: photo.position }}
                       />
                     ) : (
                       <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 text-xs uppercase tracking-[0.14em] text-muted-foreground">

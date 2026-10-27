@@ -431,7 +431,7 @@ export const en = {
         { place: 'Martinique · Le Marin', date: 'December 28, 2026', text: 'Arrival in Martinique and settling in on board at Le Marin marina. Meet the crew, then a welcome dinner at a restaurant.' },
         { place: 'Saint Lucia · Rodney Bay and The Pitons', date: 'December 29, 2026', text: 'The first passage, to Saint Lucia. A stop at Rodney Bay, then on towards the famous volcanic peaks of The Pitons.' },
         { place: 'Saint Vincent · Wallilabou Bay', date: 'December 30, 2026', text: 'A passage to Saint Vincent, arriving at picturesque Wallilabou Bay, framed by tropical greenery.' },
-        { place: 'Mustique · Basil’s Bar', date: 'December 31, 2026', text: 'Arrival on Mustique. Free time on the island, then New Year’s Eve at the legendary Basil’s Bar.' },
+        { place: 'Mustique · New Year on board', date: 'December 31, 2026', text: 'We welcome the New Year on board the catamaran, in the spirit of a tropical celebration: sparkling wine, a warm Caribbean evening and unforgettable moments among kindred spirits.' },
         { place: 'Mustique → Tobago Cays', date: 'January 1, 2027', text: 'The first morning of the year on Mustique. After lunch, a passage to the Tobago Cays, known for their turquoise lagoons.' },
         { place: 'Tobago Cays', date: 'January 2, 2027', text: 'A whole free day among small islands, white beaches and the clear water of the Caribbean Sea: time to rest and explore the archipelago’s nature.' },
         { place: 'Saint Vincent · Wallilabou Bay', date: 'January 3, 2027', text: 'The passage back to Saint Vincent. Return to Wallilabou Bay and a relaxed evening after the crossing.' },
