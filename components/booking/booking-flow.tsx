@@ -40,7 +40,7 @@ function Steps({ dict, current }: { dict: Dict; current: number }) {
           aria-current={i === current ? 'step' : undefined}
           className={cn('eyebrow flex items-center gap-2', i === current ? 'text-foreground' : 'text-muted-foreground/70')}
         >
-          <span className={i <= current ? 'text-brand-light' : undefined}>0{i + 1}</span>
+          <span className={i <= current ? 'text-primary' : undefined}>0{i + 1}</span>
           {label}
         </li>
       ))}
@@ -51,9 +51,9 @@ function Steps({ dict, current }: { dict: Dict; current: number }) {
 /** Order summary: updates with the chosen accommodation. Amounts are display only; the server recomputes them. */
 function Summary({ dict, option, dueDate, compact = false }: { dict: Dict; option: OptionView; dueDate: string; compact?: boolean }) {
   const s = dict.summary
-  const row = 'flex items-baseline justify-between gap-4 border-b border-white/10 py-3'
+  const row = 'flex items-baseline justify-between gap-4 border-b border-border py-3'
   return (
-    <div className={cn('rounded-2xl border border-white/15 bg-white/[0.04]', compact ? 'p-5' : 'p-6 md:p-7')}>
+    <div className={cn('rounded-2xl border border-border bg-white/40', compact ? 'p-5' : 'p-6 md:p-7')}>
       {!compact && <p className="eyebrow mb-3">{s.title}</p>}
       <dl className="text-sm">
         <div className={row}>
@@ -66,7 +66,7 @@ function Summary({ dict, option, dueDate, compact = false }: { dict: Dict; optio
         </div>
         <div className={cn(row, 'py-4')}>
           <dt className="text-muted-foreground">{s.total}</dt>
-          <dd className="font-display text-3xl font-semibold tracking-[-0.02em] text-brand-light">{formatUsd(option.totalCents)}</dd>
+          <dd className="font-display text-3xl font-semibold tracking-[-0.02em] text-primary">{formatUsd(option.totalCents)}</dd>
         </div>
         <div className={row}>
           <dt>{s.deposit}</dt>
@@ -92,8 +92,8 @@ function OptionCard({ dict, option, selected, onSelect }: { dict: Dict; option: 
       onClick={onSelect}
       className={cn(
         'group flex w-full flex-col gap-5 rounded-2xl border p-6 text-left transition-colors md:flex-row md:items-center md:justify-between md:gap-8 md:p-7',
-        selected ? 'border-brand-light bg-white/[0.07]' : 'border-white/15 bg-white/[0.035] hover:border-white/35',
-        !option.available && 'cursor-not-allowed opacity-50 hover:border-white/15',
+        selected ? 'border-primary bg-white/70' : 'border-border bg-white/40 hover:border-foreground/35',
+        !option.available && 'cursor-not-allowed opacity-50 hover:border-border',
       )}
     >
       {/* Phones: radio and photo on top, text below; wider screens: one row */}
@@ -102,13 +102,13 @@ function OptionCard({ dict, option, selected, onSelect }: { dict: Dict; option: 
           aria-hidden="true"
           className={cn(
             'mt-1.5 flex size-5 shrink-0 items-center justify-center rounded-full border transition-colors',
-            selected ? 'border-brand-light bg-brand-light text-brand-text-dark' : 'border-white/40',
+            selected ? 'border-primary bg-primary text-primary-foreground' : 'border-foreground/40',
           )}
         >
           {selected && <Check className="size-3" strokeWidth={2.5} />}
         </span>
         {/* Cabin photo */}
-        <span className="relative h-24 w-32 shrink-0 overflow-hidden rounded-xl border border-white/10 md:h-24 md:w-28">
+        <span className="relative h-24 w-32 shrink-0 overflow-hidden rounded-xl border border-border md:h-24 md:w-28">
           <Image src={cabinOptionImages[option.id]} alt="" fill sizes="128px" className="object-cover" />
         </span>
         <span className="col-start-2 flex min-w-0 flex-col gap-2 md:col-start-3">
@@ -123,13 +123,13 @@ function OptionCard({ dict, option, selected, onSelect }: { dict: Dict; option: 
       <span className="flex shrink-0 flex-col items-start gap-1.5 pl-9 md:items-end md:pl-0">
         {option.savingCents > 0 && (
           <span className="flex items-center gap-3">
-            <span className="rounded-full border border-brand-light px-2.5 py-1 text-[10px] uppercase tracking-[0.14em] text-brand-light">
+            <span className="rounded-full border border-primary px-2.5 py-1 text-[10px] uppercase tracking-[0.14em] text-primary">
               {dict.save}
             </span>
             <s className="text-sm text-muted-foreground">{formatUsd(option.listCents)}</s>
           </span>
         )}
-        <span className="font-display text-3xl font-semibold tracking-[-0.02em] text-brand-light md:text-4xl">
+        <span className="font-display text-3xl font-semibold tracking-[-0.02em] text-primary md:text-4xl">
           {formatUsd(option.totalCents)}
         </span>
         {option.savingCents > 0 && (
@@ -258,7 +258,7 @@ export function BookingFlow({
             </fieldset>
 
             {option.guestCount === 2 && (
-              <fieldset className="flex flex-col gap-6 border-t border-white/10 pt-8">
+              <fieldset className="flex flex-col gap-6 border-t border-border pt-8">
                 <legend className="eyebrow mb-6 text-foreground">{f.second}</legend>
                 <div className="grid gap-6 sm:grid-cols-2">
                   <Field name="guest2FirstName" label={f.firstName} required maxLength={60} defaultValue={v.guest2FirstName} error={e.guest2FirstName} />
@@ -279,7 +279,7 @@ export function BookingFlow({
                 name="consent"
                 required
                 aria-invalid={Boolean(e.consent)}
-                className="mt-0.5 size-4 shrink-0 accent-[var(--brand-light)]"
+                className="mt-0.5 size-4 shrink-0 accent-[var(--primary)]"
               />
               <span>
                 {f.consent}
@@ -299,7 +299,7 @@ export function BookingFlow({
             )}
 
             {notice && (
-              <p role="status" className="rounded-xl border border-brand-light/50 px-4 py-3 text-sm leading-relaxed text-brand-light">
+              <p role="status" className="rounded-xl border border-primary/50 px-4 py-3 text-sm leading-relaxed text-primary">
                 {notice}
               </p>
             )}
