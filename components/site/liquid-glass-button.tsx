@@ -18,18 +18,34 @@ export function LiquidGlassButton({
   return (
     <Link href={href} className={cn('liquid-glass', className)}>
       <span className="liquid-glass__label">{children}</span>
-      <svg
-        className="liquid-glass__arrow"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.4"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        aria-hidden="true"
-      >
-        <path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" />
-      </svg>
+      <Arrow />
     </Link>
+  )
+}
+
+/** The same glass capsule as a button (forms, booking steps). */
+export function LiquidGlassAction({ children, className, ...props }: React.ButtonHTMLAttributes<HTMLButtonElement>) {
+  return (
+    <button {...props} className={cn('liquid-glass', className)}>
+      <span className="liquid-glass__label">{children}</span>
+      <Arrow />
+    </button>
+  )
+}
+
+function Arrow() {
+  return (
+    <svg
+      className="liquid-glass__arrow"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.4"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" />
+    </svg>
   )
 }
