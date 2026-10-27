@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { LiquidGlassButton } from '@/components/site/liquid-glass-button'
 import type { Dictionary } from '@/lib/dictionaries'
 import { formatNights, localePath, type Locale } from '@/lib/i18n'
 import type { Journey } from '@/lib/journeys'
@@ -52,6 +53,20 @@ export function JourneyHero({ journey, locale, dict }: { journey: Journey; local
               </span>
             </div>
           ))}
+          {/* Price and the main way into online booking */}
+          {journey.pricePerPerson && (
+            <div className="flex flex-col gap-1">
+              <span className="eyebrow">{dict.common.from}</span>
+              <span className="font-display text-2xl font-semibold tracking-[-0.02em] text-brand-light">
+                {journey.pricePerPerson} <span className="text-sm font-normal text-muted-foreground">{dict.common.perPerson}</span>
+              </span>
+            </div>
+          )}
+          {journey.bookingHref && (
+            <LiquidGlassButton href={journey.bookingHref} className="liquid-glass--block col-span-2 self-center md:col-span-1">
+              {dict.common.book}
+            </LiquidGlassButton>
+          )}
         </div>
       </div>
     </section>

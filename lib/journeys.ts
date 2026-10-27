@@ -21,6 +21,8 @@ type JourneyBase = {
   pricePerPerson: string | null
   status: AvailabilityStatus
   href: string | null
+  /** Online booking page, for journeys sold online. */
+  bookingHref?: string | null
   featured?: boolean
   coordinates: [number, number]
 }
@@ -51,6 +53,7 @@ const journeysBase: JourneyBase[] = [
     pricePerPerson: '$4,200',
     status: 'enquiries-open',
     href: '/journeys/caribbean',
+    bookingHref: '/journeys/caribbean/book',
     featured: true,
     coordinates: [12.85, -61.3],
   },
@@ -106,6 +109,7 @@ export function getJourneys(locale: Locale, dict: Dictionary): Journey[] {
     ...dict.journeys[journey.slug],
     regionLabel: dict.regions[journey.region],
     href: journey.href ? localePath(locale, journey.href) : null,
+    bookingHref: journey.bookingHref ? localePath(locale, journey.bookingHref) : null,
   }))
 }
 

@@ -3,11 +3,13 @@
 import { redirect } from 'next/navigation'
 import { getDictionary } from '@/lib/dictionaries'
 import { defaultLocale, isLocale, localePath } from '@/lib/i18n'
-import { handlePaymentNotice } from '@/lib/booking/events'
-import { paymentProvider, sign } from '@/lib/booking/payments'
-import { createBalancePayment, createBooking, getOrder, getPayment } from '@/lib/booking/service'
-import type { Traveller } from '@/lib/booking/store'
+import { createBooking, getBookingDetails, type Guest } from '@/lib/booking/bookings'
+import { startPayment, type PaymentKind } from '@/lib/booking/payment-flow'
 import { cabinOptions, isCabinOptionId } from '@/lib/booking/voyage'
+import { hasDatabase } from '@/lib/db'
+import { sendBookingEmail } from '@/lib/email/send'
+import { paypalReady } from '@/lib/payments/paypal'
+import { requestOrigin } from '@/lib/request-origin'
 
 type Field =
   | 'firstName'
@@ -41,7 +43,8 @@ export async function submitBooking(_prev: BookingState, formData: FormData): Pr
   const get = (name: string) => String(formData.get(name) ?? '').trim()
   const localeRaw = get('locale')
   const locale = isLocale(localeRaw) ? localeRaw : defaultLocale
-  const t = getDictionary(locale).booking.form.errors
+  const f = getDictionary(locale).booking.form
+  const t = f.errors
   const optionId = get('option')
   if (!isCabinOptionId(optionId)) return { status: 'error', message: t.review }
   const twoGuests = cabinOptions[optionId].guests === 2
@@ -67,48 +70,47 @@ export async function submitBooking(_prev: BookingState, formData: FormData): Pr
   if (formData.get('consent') !== 'on') errors.consent = t.consent
   if (Object.keys(errors).length > 0) return { status: 'error', message: t.review, errors, values }
 
-  const guests: Traveller[] = [
+  const guests: Guest[] = [
     { firstName: values.firstName, lastName: values.lastName, email: values.email, phone: values.phone, country: values.country },
   ]
   if (twoGuests) {
     guests.push({ firstName: values.guest2FirstName, lastName: values.guest2LastName, email: values.guest2Email || undefined })
   }
 
-  const provider = paymentProvider()
-  const result = createBooking({ option: optionId, locale, guests, requests: values.requests.slice(0, 1000), provider: provider.name })
-  if ('error' in result) return { status: 'error', message: t.unavailable, values, unavailable: true }
+  if (!hasDatabase() || !paypalReady()) return { status: 'error', message: f.notAvailable, values }
+  const result = await createBooking({ option: optionId, locale, guests, requests: values.requests.slice(0, 1000) })
+  if ('error' in result) {
+    if (result.error === 'unavailable') return { status: 'error', message: t.unavailable, values, unavailable: true }
+    return { status: 'error', message: result.error === 'late' ? f.late : f.notAvailable, values }
+  }
+  const { booking } = result
+  await sendBookingEmail('booking_received', booking.id, `booking_received:${booking.id}`)
 
-  const { redirectUrl } = await provider.createCheckout({ order: result.order, payment: result.payment, locale })
-  redirect(redirectUrl)
+  let approveUrl: string | null = null
+  try {
+    approveUrl = await startPayment(booking.id, 'deposit', await requestOrigin())
+  } catch (error) {
+    console.error('[booking] could not start the deposit payment', booking.id, error)
+  }
+  // On failure the booking page offers the payment again
+  redirect(approveUrl ?? `${bookingPath(locale, booking.id, booking.token)}&result=error`)
 }
 
-const orderPath = (locale: string, id: string, token: string) =>
+const bookingPath = (locale: string, id: string, token: string) =>
   `${localePath(isLocale(locale) ? locale : defaultLocale, '/journeys/caribbean/book/order')}?id=${id}&t=${token}`
 
-/**
- * Demo checkout only: stands in for the provider. It sends itself the same signed notice a real
- * provider would post to /api/payments/webhook, and the notice goes through the same verification.
- */
-export async function completeDemoPayment(formData: FormData) {
-  const paymentId = String(formData.get('payment') ?? '')
-  const outcome = formData.get('outcome') === 'succeeded' ? 'payment.succeeded' : 'payment.failed'
-  const found = getPayment(paymentId)
-  if (!found) redirect('/')
-  const raw = JSON.stringify({ type: outcome, paymentId, providerRef: `demo_${Date.now().toString(36)}` })
-  await handlePaymentNotice(raw, sign(raw))
-  redirect(orderPath(found.order.locale, found.order.id, found.order.token))
-}
-
-/** Opens the payment of the remaining 70% (or resumes the deposit payment of a held booking). */
-export async function payRemaining(formData: FormData) {
+/** From the booking page: pays the deposit (while berths are held) or the remaining balance through PayPal. */
+export async function payBooking(formData: FormData) {
   const id = String(formData.get('id') ?? '')
   const token = String(formData.get('t') ?? '')
-  const found = getOrder(id, token)
-  if (!found) redirect('/')
-  const provider = paymentProvider()
-  let payment = found.payments.find((p) => p.kind === 'deposit' && p.status === 'pending')
-  if (found.order.status === 'confirmed') payment = createBalancePayment(id, token, provider.name)?.payment
-  if (!payment) redirect(orderPath(found.order.locale, id, token))
-  const { redirectUrl } = await provider.createCheckout({ order: found.order, payment, locale: found.order.locale })
-  redirect(redirectUrl)
+  const kind: PaymentKind = formData.get('kind') === 'balance' ? 'balance' : 'deposit'
+  const details = await getBookingDetails(id, token)
+  if (!details) redirect('/')
+  let approveUrl: string | null = null
+  try {
+    approveUrl = await startPayment(id, kind, await requestOrigin())
+  } catch (error) {
+    console.error('[booking] could not start payment', id, error)
+  }
+  redirect(approveUrl ?? `${bookingPath(details.booking.locale, id, token)}&result=error`)
 }

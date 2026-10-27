@@ -49,7 +49,7 @@ function Steps({ dict, current }: { dict: Dict; current: number }) {
 }
 
 /** Order summary: updates with the chosen accommodation. Amounts are display only; the server recomputes them. */
-function Summary({ dict, option, compact = false }: { dict: Dict; option: OptionView; compact?: boolean }) {
+function Summary({ dict, option, dueDate, compact = false }: { dict: Dict; option: OptionView; dueDate: string; compact?: boolean }) {
   const s = dict.summary
   const row = 'flex items-baseline justify-between gap-4 border-b border-white/10 py-3'
   return (
@@ -77,7 +77,7 @@ function Summary({ dict, option, compact = false }: { dict: Dict; option: Option
           <dd className="text-muted-foreground">{formatUsd(option.balanceCents)}</dd>
         </div>
       </dl>
-      {!compact && <p className="mt-3 text-xs leading-relaxed text-muted-foreground">{s.balanceNote}</p>}
+      {!compact && <p className="mt-3 text-xs leading-relaxed text-muted-foreground">{s.balanceNote.replace('{date}', dueDate)}</p>}
     </div>
   )
 }
@@ -169,7 +169,23 @@ function Field({
 
 const initialState: BookingState = { status: 'idle' }
 
-export function BookingFlow({ locale, dict, options, freeCabins }: { locale: Locale; dict: Dict; options: OptionView[]; freeCabins: number }) {
+export function BookingFlow({
+  locale,
+  dict,
+  options,
+  freeCabins,
+  dueDate,
+  notice,
+}: {
+  locale: Locale
+  dict: Dict
+  options: OptionView[]
+  /** null while availability is unknown (no database). */
+  freeCabins: number | null
+  dueDate: string
+  /** Shown instead of payment when online booking is not possible. */
+  notice?: string
+}) {
   const router = useRouter()
   const top = useRef<HTMLDivElement>(null)
   const [step, setStep] = useState<0 | 1>(0)
@@ -203,7 +219,7 @@ export function BookingFlow({ locale, dict, options, freeCabins }: { locale: Loc
           <div className="flex flex-col gap-6">
             <div className="flex flex-wrap items-baseline justify-between gap-3">
               <h2 className="font-display text-3xl md:text-4xl">{dict.chooseTitle}</h2>
-              <p className="eyebrow">{dict.cabinsLeft.replace('{free}', String(freeCabins))}</p>
+              {freeCabins !== null && <p className="eyebrow">{dict.cabinsLeft.replace('{free}', String(freeCabins))}</p>}
             </div>
             {state.unavailable && (
               <p role="alert" className="text-sm text-destructive">
@@ -273,7 +289,7 @@ export function BookingFlow({ locale, dict, options, freeCabins }: { locale: Loc
 
             {/* Phones: a compact summary right above the payment button */}
             <div className="lg:hidden">
-              <Summary dict={dict} option={option} compact />
+              <Summary dict={dict} option={option} dueDate={dueDate} compact />
             </div>
 
             {state.status === 'error' && !state.unavailable && state.message && (
@@ -282,8 +298,14 @@ export function BookingFlow({ locale, dict, options, freeCabins }: { locale: Loc
               </p>
             )}
 
+            {notice && (
+              <p role="status" className="rounded-xl border border-brand-light/50 px-4 py-3 text-sm leading-relaxed text-brand-light">
+                {notice}
+              </p>
+            )}
+
             <div className="flex flex-col gap-3">
-              <LiquidGlassAction type="submit" disabled={pending} className="liquid-glass--block sm:max-w-sm">
+              <LiquidGlassAction type="submit" disabled={pending || Boolean(notice)} className="liquid-glass--block sm:max-w-sm">
                 {pending ? f.paying : f.pay.replace('{amount}', formatUsd(option.depositCents))}
               </LiquidGlassAction>
               <p className="text-xs text-muted-foreground">{f.secure}</p>
@@ -292,7 +314,7 @@ export function BookingFlow({ locale, dict, options, freeCabins }: { locale: Loc
         )}
 
         <aside className={cn('flex flex-col gap-5 self-start lg:sticky lg:top-28', step === 1 && 'hidden lg:flex')}>
-          <Summary dict={dict} option={option} />
+          <Summary dict={dict} option={option} dueDate={dueDate} />
           {step === 0 && (
             <LiquidGlassAction type="button" onClick={() => go(1)} disabled={!option.available} className="liquid-glass--block">
               {dict.continue}

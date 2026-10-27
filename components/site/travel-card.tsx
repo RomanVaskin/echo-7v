@@ -79,27 +79,54 @@ export function TravelCard({
           <p className={cn('text-[0.9375rem] leading-relaxed text-foreground/85', journey.cardLead ? 'mt-3' : 'mt-6')}>{journey.tagline}</p>
         )}
 
-        <div className="mt-auto flex items-end justify-between gap-2.5 pt-10 max-[359px]:gap-1.5 sm:gap-3">
-          {/* Price in the palette's warm sand (PANTONE 4087 C), bold; the "/ person" note stays light */}
-          <p className="shrink-0 whitespace-nowrap font-display text-xl lg:text-2xl">
-            {journey.pricePerPerson && (
-              <>
-                <span className="font-semibold tracking-[-0.02em] text-brand-light">{journey.pricePerPerson}</span>{' '}
-                <span className="text-sm text-muted-foreground max-[359px]:text-xs lg:text-base">{dict.common.perPerson}</span>
-              </>
-            )}
-          </p>
-          <Link
-            href={href}
-            /* From sm up: same width on every card, growing into the free space up to 13.5rem. On phones it
-               shrinks to its label (tighter padding and tracking) so it stays on one line beside the price. */
-            className="ml-auto flex shrink-0 items-center justify-between gap-1.5 whitespace-nowrap rounded-[8px] border border-foreground/60 px-2.5 py-2.5 text-[10px] uppercase tracking-[0.1em] max-[359px]:gap-1 max-[359px]:px-2 max-[359px]:tracking-[0.06em] text-foreground transition-colors hover:bg-foreground hover:text-background sm:min-w-[8rem] sm:max-w-[13.5rem] sm:flex-1 sm:shrink sm:gap-2 sm:px-4 sm:text-[11px] sm:tracking-[0.14em]"
-          >
-            {journey.href ? dict.common.more : dict.common.registerInterest}
-            <ArrowUpRight className="size-3 sm:size-3.5" aria-hidden="true" />
-            <span className="sr-only">{` — ${journey.destination}`}</span>
-          </Link>
-        </div>
+        {journey.bookingHref ? (
+          /* Journeys sold online: the price on its own line, then "Explore" and "Book now" side by side */
+          <div className="mt-auto flex flex-col gap-4 pt-10">
+            <p className="whitespace-nowrap font-display text-xl lg:text-2xl">
+              <span className="font-semibold tracking-[-0.02em] text-brand-light">{journey.pricePerPerson}</span>{' '}
+              <span className="text-sm text-muted-foreground lg:text-base">{dict.common.perPerson}</span>
+            </p>
+            <div className="grid grid-cols-2 gap-2.5">
+              <Link
+                href={href}
+                className="flex items-center justify-center gap-1.5 rounded-full border border-foreground/60 px-3 py-3 text-[10px] uppercase tracking-[0.12em] max-[359px]:gap-1 max-[359px]:px-1.5 max-[359px]:tracking-[0.04em] text-foreground transition-colors hover:bg-foreground hover:text-background sm:text-[11px]"
+              >
+                {dict.common.more}
+                <ArrowUpRight className="size-3 sm:size-3.5" aria-hidden="true" />
+                <span className="sr-only">{` — ${journey.destination}`}</span>
+              </Link>
+              <Link
+                href={journey.bookingHref}
+                className="enquiry-submit flex items-center justify-center rounded-full px-3 py-3 text-[10px] uppercase tracking-[0.12em] max-[359px]:px-1.5 max-[359px]:tracking-[0.04em] sm:text-[11px]"
+              >
+                {dict.common.book}
+                <span className="sr-only">{` — ${journey.destination}`}</span>
+              </Link>
+            </div>
+          </div>
+        ) : (
+          <div className="mt-auto flex items-end justify-between gap-2.5 pt-10 max-[359px]:gap-1.5 sm:gap-3">
+            {/* Price in the palette's warm sand (PANTONE 4087 C), bold; the "/ person" note stays light */}
+            <p className="shrink-0 whitespace-nowrap font-display text-xl lg:text-2xl">
+              {journey.pricePerPerson && (
+                <>
+                  <span className="font-semibold tracking-[-0.02em] text-brand-light">{journey.pricePerPerson}</span>{' '}
+                  <span className="text-sm text-muted-foreground max-[359px]:text-xs lg:text-base">{dict.common.perPerson}</span>
+                </>
+              )}
+            </p>
+            <Link
+              href={href}
+              /* From sm up: same width on every card, growing into the free space up to 13.5rem. On phones it
+                 shrinks to its label (tighter padding and tracking) so it stays on one line beside the price. */
+              className="ml-auto flex shrink-0 items-center justify-between gap-1.5 whitespace-nowrap rounded-[8px] border border-foreground/60 px-2.5 py-2.5 text-[10px] uppercase tracking-[0.1em] max-[359px]:gap-1 max-[359px]:px-2 max-[359px]:tracking-[0.06em] text-foreground transition-colors hover:bg-foreground hover:text-background sm:min-w-[8rem] sm:max-w-[13.5rem] sm:flex-1 sm:shrink sm:gap-2 sm:px-4 sm:text-[11px] sm:tracking-[0.14em]"
+            >
+              {journey.href ? dict.common.more : dict.common.registerInterest}
+              <ArrowUpRight className="size-3 sm:size-3.5" aria-hidden="true" />
+              <span className="sr-only">{` — ${journey.destination}`}</span>
+            </Link>
+          </div>
+        )}
       </div>
     </article>
   )
