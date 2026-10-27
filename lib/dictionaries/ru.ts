@@ -57,10 +57,14 @@ export const ru: Dictionary = {
         'Sail into the New Year aboard a private yacht in the Caribbean, exploring tropical islands and turquoise waters. Enjoy an intimate escape for eight guests, with a private skipper and chef, and celebrate New Year’s Eve with a festive dinner under the stars.',
       dates: '28.12.26 – 07.01.27',
     },
-    cyclades: {
-      destination: 'Киклады',
-      area: 'Греция',
-      summary: 'Белоснежные деревушки, ветры мелтеми и долгие вечера на Эгейском море.',
+    bahamas: {
+      destination: 'Багамские острова',
+      area: 'Багамы',
+      summary: '365 островов. Одно незабываемое путешествие.',
+      cardLead: '365 островов. Одно незабываемое путешествие.',
+      tagline:
+        'Бирюзовые лагуны, необитаемые острова и белоснежные пляжи архипелага Эксума. Плавайте с акулами-няньками, знакомьтесь со знаменитыми плавающими свиньями и открывайте скрытые бухты Багам под парусами.',
+      dates: 'Февраль 2027',
     },
     dalmatia: {
       destination: 'Далматинское побережье',

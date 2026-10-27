@@ -74,7 +74,10 @@ export function TravelCard({
             {journey.nights && <p>{formatNights(locale, journey.nights)}</p>}
           </div>
         )}
-        {journey.tagline && <p className="mt-6 text-[0.9375rem] leading-relaxed text-foreground/85">{journey.tagline}</p>}
+        {journey.cardLead && <p className="mt-6 font-display text-xl leading-snug tracking-[-0.01em]">{journey.cardLead}</p>}
+        {journey.tagline && (
+          <p className={cn('text-[0.9375rem] leading-relaxed text-foreground/85', journey.cardLead ? 'mt-3' : 'mt-6')}>{journey.tagline}</p>
+        )}
 
         <div className="mt-auto flex items-end justify-between gap-2.5 pt-10 max-[359px]:gap-1.5 sm:gap-3">
           {/* Price in the palette's warm sand (PANTONE 4087 C), bold; the "/ person" note stays light */}
