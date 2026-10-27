@@ -3,20 +3,33 @@
  * and are computed here, on the server; the browser only ever sends the option's id.
  */
 export const caribbeanVoyage = {
+  /** The trip's row in the database (db/migrations/001_booking.sql): prices and dates are read from there. */
+  tripId: 'caribbean-new-year-2026',
   journey: 'caribbean',
   title: 'Caribbean New Year Escape',
   startDate: '2026-12-28',
   endDate: '2027-01-07',
   nights: 10,
   currency: 'USD',
-  /** Four guest cabins of one category, two berths each: eight guests at most. */
-  cabins: ['cabin-1', 'cabin-2', 'cabin-3', 'cabin-4'],
-  berthsPerCabin: 2,
-  seatPriceCents: 4_200_00,
-  depositRate: 0.3,
   /** An unpaid booking holds its berths this long, then they are released. */
   holdMinutes: 30,
+  /** A payment PayPal reports as pending (e.g. an eCheck) keeps the berths this long. */
+  pendingHoldHours: 72,
 } as const
+
+/**
+ * Mirror of the trip row seeded in the database, used only to show prices while the database is not
+ * connected (online payment is then switched off). Prices charged always come from the database.
+ */
+export const displayPricing = { seatPriceCents: 4_200_00, depositPercent: 30, balanceDueDate: '2026-11-28' } as const
+
+/**
+ * Bookings made after the balance due date (30 days before departure) do not get the 30/70 split
+ * automatically. Until the owner approves a rule, online booking then closes and guests are asked
+ * to get in touch ('contact'). 'full_payment' (pay 100% at once) is prepared but needs approval.
+ */
+export type LateBookingRule = 'contact' | 'full_payment'
+export const lateBookingRule: LateBookingRule = 'contact'
 
 export const cabinOptionIds = ['shared', 'private-solo', 'private-two'] as const
 export type CabinOptionId = (typeof cabinOptionIds)[number]
@@ -62,11 +75,13 @@ export type Quote = {
   balanceCents: number
 }
 
-export function quote(optionId: CabinOptionId): Quote {
+export type Pricing = { seatPriceCents: number; depositPercent: number }
+
+export function quote(optionId: CabinOptionId, pricing: Pricing): Quote {
   const option = cabinOptions[optionId]
-  const listCents = caribbeanVoyage.seatPriceCents * option.berths
+  const listCents = pricing.seatPriceCents * option.berths
   const totalCents = Math.round(listCents * (1 - option.discountRate))
-  const depositCents = Math.round(totalCents * caribbeanVoyage.depositRate)
+  const depositCents = Math.round((totalCents * pricing.depositPercent) / 100)
   return {
     option: optionId,
     listCents,
