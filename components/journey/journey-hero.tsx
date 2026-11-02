@@ -22,7 +22,7 @@ export function JourneyHero({ journey, locale, dict }: { journey: Journey; local
       {/* Breadcrumb sits right under the header's wordmark */}
       <nav
         aria-label={dict.caribbean.breadcrumbLabel}
-        className="hero-fade relative mx-auto w-full max-w-7xl px-6 pt-24 lg:px-10 lg:pt-28"
+        className="hero-fade relative mx-auto w-full max-w-7xl px-6 pt-[4.5rem] lg:px-10 lg:pt-20"
       >
         <ol className="eyebrow flex items-center gap-3">
           <li>
@@ -37,7 +37,7 @@ export function JourneyHero({ journey, locale, dict }: { journey: Journey; local
         </ol>
       </nav>
 
-      <div className="relative mx-auto mt-auto flex w-full max-w-7xl flex-col gap-12 px-6 pb-12 pt-24 lg:px-10 lg:pb-16">
+      <div className="relative mx-auto mt-auto flex w-full max-w-7xl flex-col gap-12 px-6 pb-20 pt-24 lg:px-10 lg:pb-28">
         {/* Same title as the journey's card */}
         <h1 className="hero-fade font-display text-balance text-6xl md:text-8xl lg:text-9xl">
           {journey.cardTitle ?? journey.destination}
@@ -50,7 +50,14 @@ export function JourneyHero({ journey, locale, dict }: { journey: Journey; local
             <div key={item.label} className="flex flex-col gap-1">
               <span className="eyebrow">{item.label}</span>
               <span className={item.value ? 'text-foreground' : 'text-sm tracking-[0.14em] text-muted-foreground'}>
-                {item.value ?? dict.common.tba}
+                {/* The long English date range ends on its own line ("Dec 28, 2026 –" / "Jan 7, 2027"), as on the card */}
+                {item.value && locale === 'en'
+                  ? item.value.split(' – ').map((part, i, parts) => (
+                      <span key={part} className="block">
+                        {i < parts.length - 1 ? `${part} –` : part}
+                      </span>
+                    ))
+                  : (item.value ?? dict.common.tba)}
               </span>
             </div>
           ))}

@@ -147,9 +147,9 @@ export function DayByDay({ dict }: { dict: Dictionary['caribbean']['days'] }) {
                       {item.place}
                     </h3>
                     <p className="mt-4 text-[0.9375rem] leading-relaxed text-muted-foreground">{item.text}</p>
-                    {/* Pinned to the bottom, so all nine buttons sit on one line whatever the text length */}
+                    {/* Right under the day's text */}
                     {route && (
-                      <div className="mt-auto pt-6">
+                      <div className="pt-6">
                       <button
                         type="button"
                         className="day-map-button"
