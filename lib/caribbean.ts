@@ -72,6 +72,7 @@ export const caribbeanYacht = {
     '/images/yacht-catamaran-4.jpg',
     '/images/yacht-catamaran-5.jpg',
   ] as (string | null)[],
-  cabinPhotos: [null, null, null] as (string | null)[],
+  // A guest cabin, its en-suite shower room, a second cabin
+  cabinPhotos: ['/images/yacht-cabin-1.jpg', '/images/yacht-cabin-2.jpg', '/images/yacht-cabin-3.jpg'] as (string | null)[],
 }
 
