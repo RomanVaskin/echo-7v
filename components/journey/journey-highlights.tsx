@@ -34,9 +34,9 @@ export function JourneyHighlights({ dict }: { dict: Dictionary['caribbean']['hig
                 className="object-cover"
               />
               <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/45 via-55% to-transparent" />
-              <div className="absolute inset-x-0 bottom-0 flex flex-col gap-2 px-5 pb-4 [text-shadow:0_1px_8px_rgb(0_0_0/0.35)] sm:px-6 sm:pb-5 md:px-7">
+              <div className="absolute inset-x-0 bottom-0 flex flex-col gap-2 px-4 pb-4 [text-shadow:0_1px_8px_rgb(0_0_0/0.35)] sm:px-6 sm:pb-5 md:px-7">
                 <h3 className="font-display text-[1.625rem] tracking-[-0.03em] text-white sm:text-3xl">{item.title}</h3>
-                <p className="text-[0.9375rem] leading-relaxed text-white/85">{item.text}</p>
+                <p className="hyphens-auto text-justify text-[0.9375rem] leading-relaxed text-white/85 sm:hyphens-manual sm:text-left">{item.text}</p>
               </div>
             </article>
           ),
