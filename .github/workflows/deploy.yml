@@ -1,8 +1,8 @@
 name: Deploy SeaSmates to Beget
 
 on:
-  push:
-    branches: [main]
+  # Beget auto-deploy paused; GitHub updates should deploy via Vercel.
+  # Restore push trigger when Beget is available again.
   workflow_dispatch:
 
 permissions:
