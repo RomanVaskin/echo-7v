@@ -5,7 +5,8 @@ import { localePath, type Locale } from '@/lib/i18n'
 import { LiquidGlassButton } from '@/components/site/liquid-glass-button'
 import { HeroScene, type HeroVideoSource } from './hero-scene'
 
-const HERO_POSTER = '/images/hero-sailing.png'
+// First frame of the hero video, so the still and the video start from the same picture
+const HERO_POSTER = '/images/hero-video-poster.jpg'
 
 const WORDMARK = 'seasmates'
 // Letter-by-letter 3D flip, right to left: starts after the background fades in, one letter every 70ms.
@@ -17,8 +18,9 @@ const LETTER_STAGGER_S = 0.07
  * Missing files are skipped, and with none present the hero shows the poster image only.
  */
 const HERO_VIDEO_CANDIDATES: HeroVideoSource[] = [
-  { src: '/videos/hero.webm', type: 'video/webm' },
+  // H.264 first: it plays everywhere (Safari included); VP9 is the fallback
   { src: '/videos/hero.mp4', type: 'video/mp4' },
+  { src: '/videos/hero.webm', type: 'video/webm' },
 ]
 
 const heroVideoSources = HERO_VIDEO_CANDIDATES.filter((source) =>

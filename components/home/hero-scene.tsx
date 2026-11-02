@@ -6,8 +6,8 @@ import { useEffect, useRef, useState } from 'react'
 export type HeroVideoSource = { src: string; type: string }
 
 /**
- * - `scrub`: the video position follows the scroll (desktop, fine pointer).
- * - `loop`: muted autoplay with parallax — touch devices, or when seeking proves too slow.
+ * - `scrub`: the video position follows the scroll (not used by default).
+ * - `loop`: muted autoplay with parallax — the default whenever there is a video.
  * - `still`: poster only — no video file, reduced motion or data saver.
  */
 type Mode = 'scrub' | 'loop' | 'still'
@@ -20,8 +20,8 @@ function pickMode(hasVideo: boolean): Mode {
   const connection = (navigator as Navigator & { connection?: { saveData?: boolean; effectiveType?: string } })
     .connection
   if (connection?.saveData || /(^|-)2g$/.test(connection?.effectiveType ?? '')) return 'still'
-  if (window.matchMedia('(pointer: coarse)').matches || window.innerWidth < 768) return 'loop'
-  return 'scrub'
+  // The hero video plays on its own everywhere; `scrub` stays available for footage meant to follow the scroll
+  return 'loop'
 }
 
 export function HeroScene({
