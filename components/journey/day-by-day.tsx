@@ -116,15 +116,16 @@ export function DayByDay({ dict }: { dict: Dictionary['caribbean']['days'] }) {
                     <span key={hole} className="journal-hole" />
                   ))}
                 </div>
-                <div className="flex min-w-0 flex-1 flex-col p-4 pl-3 sm:p-5 sm:pl-4 md:p-6 md:pl-5">
-                  <div className="relative aspect-[2/3] overflow-hidden rounded-xl bg-foreground/[0.04] sm:aspect-[5/6] lg:aspect-square">
+                {/* Photo nearly edge to edge, with the day, date and place in white over its lower part */}
+                <div className="flex min-w-0 flex-1 flex-col p-2 pl-2 md:p-2.5 md:pl-2.5">
+                  <div className="relative aspect-[2/3] overflow-hidden rounded-xl bg-foreground/[0.04] sm:aspect-[5/6]">
                     {photo ? (
                       <Image
                         src={photo.src}
                         alt={item.place}
                         fill
                         draggable={false}
-                        sizes="(min-width: 1280px) 400px, (min-width: 1024px) 34vw, (min-width: 640px) 55vw, 75vw"
+                        sizes="(min-width: 1280px) 460px, (min-width: 1024px) 38vw, (min-width: 640px) 60vw, 85vw"
                         className="object-cover"
                         style={{ objectPosition: photo.position }}
                       />
@@ -134,23 +135,25 @@ export function DayByDay({ dict }: { dict: Dictionary['caribbean']['days'] }) {
                         {dict.photoPlaceholder}
                       </div>
                     )}
+                    <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 via-40% to-transparent" />
+                    <div className="absolute inset-x-0 bottom-0 flex flex-col gap-2 p-4 text-white [text-shadow:0_1px_8px_rgb(0_0_0/0.35)] md:p-5">
+                      <p className="eyebrow flex flex-wrap items-baseline gap-x-3 gap-y-1 text-white/85">
+                        <span>
+                          {dict.day} {String(dayId).padStart(2, '0')}
+                        </span>
+                        <span>{item.date}</span>
+                      </p>
+                      <h3 className="text-balance hyphens-auto break-words font-display text-[1.75rem] leading-[1.08] tracking-[-0.03em] text-white md:text-[2rem]">
+                        {item.place}
+                      </h3>
+                    </div>
                   </div>
-                  {/* Day, date, place and programme; the reserved height keeps the photo at roughly 55–60% of the page */}
-                  <div className="mt-6 flex flex-1 flex-col sm:min-h-[15rem]">
-                    <p className="eyebrow flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                      <span className="text-primary">
-                        {dict.day} {String(dayId).padStart(2, '0')}
-                      </span>
-                      <span>{item.date}</span>
-                    </p>
-                    {/* Room for the longest title (two lines; three on phones and small laptops), so every card's text starts at the same height */}
-                    <h3 className="mt-3 min-h-[3.36em] sm:min-h-[2.24em] lg:min-h-[3.36em] xl:min-h-[2.24em] text-balance hyphens-auto break-words font-display text-[1.75rem] leading-[1.12] tracking-[-0.03em] md:text-[2rem]">
-                      {item.place}
-                    </h3>
-                    <p className="mt-4 text-[0.9375rem] leading-relaxed text-muted-foreground">{item.text}</p>
+                  {/* The day's programme right under the photo */}
+                  <div className="mt-4 flex flex-1 flex-col px-2 pb-2 md:px-2.5">
+                    <p className="text-[0.9375rem] leading-relaxed text-muted-foreground">{item.text}</p>
                     {/* Pinned to the bottom of the text block, so all nine buttons line up */}
                     {route && (
-                      <div className="mt-auto pt-6">
+                      <div className="mt-auto pt-5">
                       <button
                         type="button"
                         className="day-map-button"
