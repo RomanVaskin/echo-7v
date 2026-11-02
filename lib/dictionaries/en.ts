@@ -402,13 +402,13 @@ export const en = {
       carouselLabel: 'Journey highlights',
       previous: 'Previous',
       next: 'Next',
-      // Temporary themed cards; their photos are set in lib/caribbean.ts
+      // Themed cards; their photos are set in lib/caribbean.ts
       items: [
-        { title: 'Life on board', text: 'A story about how a day on the yacht unfolds will appear here.' },
-        { title: 'Islands', text: 'A story about the islands and anchorages of the route will appear here.' },
-        { title: 'The sea', text: 'A story about time in and by the water will appear here.' },
-        { title: 'At the helm', text: 'A story about sailing and how guests take part in the passages will appear here.' },
-        { title: 'New Year at sea', text: 'A story about welcoming the New Year at sea will appear here.' },
+        { title: 'Nature', text: 'New islands, turquoise lagoons and stunning views. The Caribbean at its most beautiful — from the sea.' },
+        { title: 'Your own crew', text: 'Eight guests, shared adventures and evenings under the stars. The feel of a group of friends.' },
+        { title: 'Private chef', text: 'Fresh produce, signature dishes and dinners with a sea view — all right on board.' },
+        { title: 'Feel the wind', text: 'Take the sails and feel the freedom of the sea. No experience needed — the crew will teach you everything.' },
+        { title: 'New Year together', text: 'A festive dinner, sparkling wine and music. Welcome the New Year in the middle of the Caribbean Sea.' },
       ],
     },
     map: {

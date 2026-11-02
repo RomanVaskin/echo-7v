@@ -21,8 +21,8 @@ export function JourneyHighlights({ dict }: { dict: Dictionary['caribbean']['hig
         items={dict.items.map((item, i) => ({
           key: item.title,
           node: (
-            // Tall photo card; the title and text sit over a dark fade at the bottom of the picture
-            <article className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-border">
+            // Tall photo card (taller on phones, so the text always fits); the title and text sit over a dark fade at the bottom
+            <article className="relative aspect-[2/3] overflow-hidden sm:aspect-[4/5] rounded-2xl border border-border">
               <Image
                 src={highlightImages[i] ?? '/placeholder.svg'}
                 alt=""
@@ -31,9 +31,9 @@ export function JourneyHighlights({ dict }: { dict: Dictionary['caribbean']['hig
                 sizes="(min-width: 1024px) 30vw, (min-width: 640px) 46vw, 80vw"
                 className="object-cover"
               />
-              <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 via-45% to-transparent" />
-              <div className="absolute inset-x-0 bottom-0 flex flex-col gap-3 p-6 md:p-7">
-                <h3 className="font-display text-3xl tracking-[-0.03em] text-white">{item.title}</h3>
+              <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/45 via-55% to-transparent" />
+              <div className="absolute inset-x-0 bottom-0 flex flex-col gap-3 p-5 [text-shadow:0_1px_8px_rgb(0_0_0/0.35)] sm:p-6 md:p-7">
+                <h3 className="font-display text-[1.625rem] tracking-[-0.03em] text-white sm:text-3xl">{item.title}</h3>
                 <p className="text-[0.9375rem] leading-relaxed text-white/85">{item.text}</p>
               </div>
             </article>
