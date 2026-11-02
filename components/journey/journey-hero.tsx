@@ -9,12 +9,13 @@ export function JourneyHero({ journey, locale, dict }: { journey: Journey; local
   return (
     <section className="relative flex min-h-svh flex-col overflow-hidden">
       <Image
-        src={journey.image || '/placeholder.svg'}
+        src={journey.heroImage || journey.image || '/placeholder.svg'}
         alt={dict.featuredJourney.imageAlt}
         fill
         priority
         sizes="100vw"
-        className="object-cover"
+        // Phones crop the landscape photo to its catamaran
+        className="object-cover object-[40%_50%] sm:object-center"
       />
       <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-background/10 to-background" />
 
