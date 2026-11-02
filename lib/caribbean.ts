@@ -5,10 +5,10 @@
 
 /** Photos of the five highlight cards, in the order of `caribbean.highlights.items`. Temporary themed shots. */
 export const highlightImages = [
-  '/images/gallery-deck.png',
-  '/images/caribbean-hero.png',
-  '/images/gallery-reef.png',
-  '/images/gallery-helm.png',
+  '/images/highlight-1.jpg',
+  '/images/highlight-3.jpg',
+  '/images/highlight-2.jpg',
+  '/images/highlight-4.jpg',
   '/images/hero-sailing.png',
 ]
 
