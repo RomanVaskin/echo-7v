@@ -14,6 +14,8 @@ type JourneyBase = {
   slug: string
   region: Region
   image: string
+  /** Full-screen photo at the top of the journey page, when it differs from the card's `image`. */
+  heroImage?: string
   nights: number | null
   dates: string | null
   vessel: string | null
@@ -45,6 +47,7 @@ const journeysBase: JourneyBase[] = [
     slug: 'caribbean',
     region: 'Caribbean',
     image: '/images/caribbean-hero.png',
+    heroImage: '/images/caribbean-page-hero.jpg',
     nights: 10,
     // Localised dates live in the dictionaries (journeys.<slug>.dates).
     dates: null,
