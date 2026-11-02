@@ -64,7 +64,14 @@ export const routeDays: RouteDay[] = [
 export const caribbeanYacht = {
   name: 'Lagoon 450 SporTop Toja',
   year: '2018',
-  exteriorPhotos: [null, null, null, null] as (string | null)[],
+  // Lagoon 450: under sail, the cockpit, the galley, at anchor off an island, the saloon and galley
+  exteriorPhotos: [
+    '/images/yacht-catamaran-1.jpg',
+    '/images/yacht-catamaran-2.jpg',
+    '/images/yacht-catamaran-3.jpg',
+    '/images/yacht-catamaran-4.jpg',
+    '/images/yacht-catamaran-5.jpg',
+  ] as (string | null)[],
   cabinPhotos: [null, null, null] as (string | null)[],
 }
 
