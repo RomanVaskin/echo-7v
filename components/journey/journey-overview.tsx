@@ -14,7 +14,7 @@ export function JourneyOverview({ dict }: { dict: Dictionary['caribbean']['overv
           </>
         }
       />
-      <p className="reveal mt-8 max-w-2xl text-lg leading-relaxed text-foreground/85 lg:ml-[33%]">{dict.primary}</p>
+      <p className="reveal mt-8 max-w-2xl text-lg leading-relaxed text-foreground/85">{dict.primary}</p>
     </section>
   )
 }
