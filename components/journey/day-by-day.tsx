@@ -143,13 +143,14 @@ export function DayByDay({ dict }: { dict: Dictionary['caribbean']['days'] }) {
                       </span>
                       <span>{item.date}</span>
                     </p>
-                    <h3 className="mt-3 text-balance hyphens-auto break-words font-display text-[1.75rem] leading-[1.12] tracking-[-0.03em] md:text-[2rem]">
+                    {/* Room for the longest title (two lines; three on phones and small laptops), so every card's text starts at the same height */}
+                    <h3 className="mt-3 min-h-[3.36em] sm:min-h-[2.24em] lg:min-h-[3.36em] xl:min-h-[2.24em] text-balance hyphens-auto break-words font-display text-[1.75rem] leading-[1.12] tracking-[-0.03em] md:text-[2rem]">
                       {item.place}
                     </h3>
                     <p className="mt-4 text-[0.9375rem] leading-relaxed text-muted-foreground">{item.text}</p>
-                    {/* Right under the day's text */}
+                    {/* Pinned to the bottom of the text block, so all nine buttons line up */}
                     {route && (
-                      <div className="pt-6">
+                      <div className="mt-auto pt-6">
                       <button
                         type="button"
                         className="day-map-button"
