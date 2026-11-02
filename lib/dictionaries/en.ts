@@ -404,11 +404,11 @@ export const en = {
       next: 'Next',
       // Themed cards; their photos are set in lib/caribbean.ts
       items: [
-        { title: 'Nature', text: 'Every day brings new islands, turquoise lagoons and breathtaking scenery. The Caribbean shows its most beautiful side — from the sea.' },
-        { title: 'Your own crew', text: 'A small group of like-minded people, shared adventures and evenings under the stars. On board, it is easy to feel among friends.' },
-        { title: 'A taste of the journey', text: 'A private chef cooks with fresh produce right on board. Breakfasts overlooking the lagoon and dinners that become part of the memories.' },
-        { title: 'Feel the wind', text: 'Try your hand at the sails and feel the yacht respond to you. The professional crew will show you the basics — no experience needed.' },
-        { title: 'New Year together', text: 'A festive dinner, sparkling wine, music and good company in the middle of the Caribbean Sea. Welcome the New Year in a way you will want to remember.' },
+        { title: 'Nature', text: 'New islands, turquoise lagoons and stunning views. The Caribbean at its most beautiful — from the sea.' },
+        { title: 'Your own crew', text: 'Eight guests, shared adventures and evenings under the stars. The feel of a group of friends.' },
+        { title: 'Private chef', text: 'Fresh produce, signature dishes and dinners with a sea view — all right on board.' },
+        { title: 'Feel the wind', text: 'Take the sails and feel the freedom of the sea. No experience needed — the crew will teach you everything.' },
+        { title: 'New Year together', text: 'A festive dinner, sparkling wine and music. Welcome the New Year in the middle of the Caribbean Sea.' },
       ],
     },
     map: {
