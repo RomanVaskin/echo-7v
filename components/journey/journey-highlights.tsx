@@ -11,7 +11,9 @@ export function JourneyHighlights({ dict }: { dict: Dictionary['caribbean']['hig
         label={dict.carouselLabel}
         previousLabel={dict.previous}
         nextLabel={dict.next}
-        itemClassName="w-[80%] sm:w-[46%] md:w-[38%] lg:w-[30%] xl:w-[26%]"
+        // Half the usual gap between cards; the cards take the freed space
+        stripClassName="gap-3"
+        itemClassName="w-[calc(80%+0.75rem)] sm:w-[calc(46%+0.75rem)] md:w-[calc(38%+0.75rem)] lg:w-[calc(30%+0.75rem)] xl:w-[calc(26%+0.75rem)]"
         toolbar={
           <h2 id="highlights-title" className="eyebrow flex items-center gap-4">
             <span className="text-primary">02</span>
@@ -32,7 +34,7 @@ export function JourneyHighlights({ dict }: { dict: Dictionary['caribbean']['hig
                 className="object-cover"
               />
               <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/45 via-55% to-transparent" />
-              <div className="absolute inset-x-0 bottom-0 flex flex-col gap-3 p-5 [text-shadow:0_1px_8px_rgb(0_0_0/0.35)] sm:p-6 md:p-7">
+              <div className="absolute inset-x-0 bottom-0 flex flex-col gap-2 px-5 pb-4 [text-shadow:0_1px_8px_rgb(0_0_0/0.35)] sm:px-6 sm:pb-5 md:px-7">
                 <h3 className="font-display text-[1.625rem] tracking-[-0.03em] text-white sm:text-3xl">{item.title}</h3>
                 <p className="text-[0.9375rem] leading-relaxed text-white/85">{item.text}</p>
               </div>
