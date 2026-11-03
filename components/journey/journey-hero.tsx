@@ -39,9 +39,9 @@ export function JourneyHero({ journey, locale, dict }: { journey: Journey; local
       </nav>
 
       {/* The title sits high, right under the breadcrumb and above the boat; the facts row stays at the bottom */}
-      <div className="relative mx-auto flex w-full max-w-7xl flex-1 flex-col justify-between gap-16 px-6 pb-20 pt-8 lg:px-10 lg:pb-28 lg:pt-10">
+      <div className="relative mx-auto flex w-full max-w-7xl flex-1 flex-col justify-between gap-16 px-6 pb-20 pt-16 sm:pt-20 lg:px-10 lg:pb-28 lg:pt-24">
         {/* Same title as the journey's card */}
-        <h1 className="hero-fade font-display text-balance text-6xl md:text-8xl xl:text-9xl">
+        <h1 className="hero-fade font-display text-balance text-[2.75rem] leading-[1.05] min-[400px]:text-5xl sm:text-6xl md:text-8xl xl:text-9xl">
           {journey.cardTitle ?? journey.destination}
         </h1>
         <div className="grid grid-cols-2 gap-6 border-t border-foreground/20 pt-6 md:grid-cols-4">

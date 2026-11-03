@@ -229,23 +229,23 @@
 }
 
 /* Journey page hero photo (a portrait shot): phones keep the catamaran left of centre; on wider screens
-   the crop moves with the viewport height, so the boat sits just below the fixed-size title */
+   the crop moves with the viewport height, so the title sits on the water between the beach and the boat */
 .journey-hero-photo {
   object-position: 45% 50%;
 }
 @media (min-width: 640px) {
   .journey-hero-photo {
-    object-position: 50% 15%;
+    object-position: 50% 10%;
   }
 }
 @media (min-width: 640px) and (min-height: 850px) {
   .journey-hero-photo {
-    object-position: 50% 22%;
+    object-position: 50% 19%;
   }
 }
 @media (min-width: 640px) and (min-height: 1000px) {
   .journey-hero-photo {
-    object-position: 50% 30%;
+    object-position: 50% 27%;
   }
 }
 
