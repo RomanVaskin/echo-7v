@@ -26,7 +26,7 @@ export function Intro({ dict, index }: { dict: Dictionary['intro']; index?: stri
         </div>
       </div>
       <div className="relative min-h-[360px] md:min-h-[480px] lg:min-h-[600px]">
-        <Image src="/images/gallery-deck.png" alt={dict.imageAlt} fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
+        <Image src="/images/home-club.jpg" alt={dict.imageAlt} fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover object-[50%_75%]" />
       </div>
     </section>
   )
