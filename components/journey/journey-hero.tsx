@@ -14,8 +14,9 @@ export function JourneyHero({ journey, locale, dict }: { journey: Journey; local
         fill
         priority
         sizes="100vw"
-        // Portrait photo: keep the catamaran in frame on wide screens
-        className="object-cover object-[45%_50%] sm:object-[50%_42%]"
+        // Portrait photo: on wide screens the crop follows the viewport height (globals.css), so the
+        // catamaran sits below the title
+        className="journey-hero-photo object-cover"
       />
       <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-background/10 to-background" />
 
@@ -37,9 +38,10 @@ export function JourneyHero({ journey, locale, dict }: { journey: Journey; local
         </ol>
       </nav>
 
-      <div className="relative mx-auto mt-auto flex w-full max-w-7xl flex-col gap-24 px-6 pb-20 pt-24 md:gap-28 lg:px-10 lg:pb-28">
-        {/* Same title as the journey's card; a wide gap lifts it above the facts row */}
-        <h1 className="hero-fade font-display text-balance text-6xl md:text-8xl lg:text-9xl">
+      {/* The title sits high, right under the breadcrumb and above the boat; the facts row stays at the bottom */}
+      <div className="relative mx-auto flex w-full max-w-7xl flex-1 flex-col justify-between gap-16 px-6 pb-20 pt-8 lg:px-10 lg:pb-28 lg:pt-10">
+        {/* Same title as the journey's card */}
+        <h1 className="hero-fade font-display text-balance text-6xl md:text-8xl xl:text-9xl">
           {journey.cardTitle ?? journey.destination}
         </h1>
         <div className="grid grid-cols-2 gap-6 border-t border-foreground/20 pt-6 md:grid-cols-4">

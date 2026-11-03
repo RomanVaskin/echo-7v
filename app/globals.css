@@ -228,6 +228,27 @@
   color: var(--foreground);
 }
 
+/* Journey page hero photo (a portrait shot): phones keep the catamaran left of centre; on wider screens
+   the crop moves with the viewport height, so the boat sits just below the fixed-size title */
+.journey-hero-photo {
+  object-position: 45% 50%;
+}
+@media (min-width: 640px) {
+  .journey-hero-photo {
+    object-position: 50% 15%;
+  }
+}
+@media (min-width: 640px) and (min-height: 850px) {
+  .journey-hero-photo {
+    object-position: 50% 22%;
+  }
+}
+@media (min-width: 640px) and (min-height: 1000px) {
+  .journey-hero-photo {
+    object-position: 50% 30%;
+  }
+}
+
 /* Route map section: the sampled paper colour of the map image itself (its edges are a flat
    #E6E1CE), so the «03 Route map» heading sits on the map's own sheet without a band or a seam */
 .route-map-paper {
