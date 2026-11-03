@@ -14,8 +14,8 @@ export function JourneyHero({ journey, locale, dict }: { journey: Journey; local
         fill
         priority
         sizes="100vw"
-        // Portrait photo: keep the catamaran (right of centre) in frame
-        className="object-cover object-[72%_50%] sm:object-[50%_55%]"
+        // Phones crop the landscape photo to its catamaran
+        className="object-cover object-[40%_50%] sm:object-center"
       />
       <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-background/10 to-background" />
 
@@ -37,8 +37,8 @@ export function JourneyHero({ journey, locale, dict }: { journey: Journey; local
         </ol>
       </nav>
 
-      <div className="relative mx-auto mt-auto flex w-full max-w-7xl flex-col gap-12 px-6 pb-20 pt-24 lg:px-10 lg:pb-28">
-        {/* Same title as the journey's card */}
+      <div className="relative mx-auto mt-auto flex w-full max-w-7xl flex-col gap-24 px-6 pb-20 pt-24 md:gap-28 lg:px-10 lg:pb-28">
+        {/* Same title as the journey's card; a wide gap lifts it above the facts row */}
         <h1 className="hero-fade font-display text-balance text-6xl md:text-8xl lg:text-9xl">
           {journey.cardTitle ?? journey.destination}
         </h1>
