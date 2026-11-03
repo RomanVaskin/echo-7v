@@ -435,6 +435,50 @@
   }
 }
 
+/* Top binding of the day cards: three holes at 20/50/80% with a twisted cotton cord running through
+   them and a loose end curling up from the first hole (after a hand-stitched paper notebook). */
+.journal-binding {
+  position: relative;
+  height: 2.5rem;
+  flex-shrink: 0;
+}
+.journal-binding .journal-hole {
+  position: absolute;
+  top: 50%;
+  translate: -50% -50%;
+}
+.journal-cord {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 20%;
+  right: 20%;
+  height: 3px;
+  translate: 0 -50%;
+  border-radius: 999px;
+  background:
+    repeating-linear-gradient(115deg, rgb(0 0 0 / 0.1) 0 1px, transparent 1px 4px),
+    #f7f3ea;
+  box-shadow: 0 1px 1.5px rgb(0 0 0 / 0.25);
+}
+.journal-cord-tail {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 20%;
+  width: 4rem;
+  height: 2rem;
+  /* the path starts at (62, 16) of the 64×32 box: put that point on the first hole */
+  translate: calc(-62 / 64 * 100%) -50%;
+  overflow: visible;
+}
+.journal-cord-tail path {
+  stroke: #f7f3ea;
+  stroke-width: 3;
+  stroke-linecap: round;
+  filter: drop-shadow(0 1px 1px rgb(0 0 0 / 0.25));
+}
+
 /* Hero shade over the video: darker at the top for the header and wordmark, light at the bottom so the
    sea stays visible through the clear glass button (it used to fade to a solid background colour there). */
 .hero-overlay {
