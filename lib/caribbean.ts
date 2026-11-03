@@ -9,7 +9,7 @@ export const highlightImages = [
   '/images/highlight-3.jpg',
   '/images/highlight-2.jpg',
   '/images/highlight-4.webp',
-  '/images/hero-sailing.png',
+  '/images/highlight-5.jpg',
 ]
 
 /** The route map shown in the map section (section 03). Set to `null` to show the text placeholder. */
