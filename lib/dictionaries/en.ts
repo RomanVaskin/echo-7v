@@ -407,7 +407,7 @@ export const en = {
         { title: 'Nature', text: 'New islands, turquoise lagoons and stunning views. The Caribbean at its most beautiful — from the sea.' },
         { title: 'Your own crew', text: 'Eight guests, shared adventures and evenings under the stars. The feel of a group of friends.' },
         { title: 'Private chef', text: 'Fresh produce, signature dishes and dinners with a sea view — all right on board.' },
-        { title: 'Feel the wind', text: 'Take the sails and feel the freedom of the sea. No experience needed — the crew will teach you everything.' },
+        { title: 'Feel the wind', text: 'Take the sails and feel the freedom of the sea.' },
         { title: 'New Year together', text: 'A festive dinner, sparkling wine and music. Welcome the New Year in the middle of the Caribbean Sea.' },
       ],
     },
