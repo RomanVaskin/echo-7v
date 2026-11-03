@@ -33,15 +33,21 @@ export default async function JourneysPage({ params }: PageProps<'/[lang]/journe
     <>
       <SiteHeader locale={locale} path={PATH} dict={dict.header} enquireLabel={dict.common.enquire} />
       <main>
-        <div className="mx-auto max-w-7xl px-6 pb-24 pt-36 lg:px-10 lg:pb-36 lg:pt-44">
+        <div className="mx-auto max-w-7xl px-6 pb-12 pt-36 lg:px-10 lg:pb-16 lg:pt-44">
           <div className="hero-fade flex flex-col gap-6 border-t border-border pt-8">
             <p className="eyebrow">{dict.allJourneys.eyebrow}</p>
             <h1 className="font-display text-balance text-5xl md:text-7xl">{dict.allJourneys.title}</h1>
           </div>
-          <div className="mt-12">
+        </div>
+        {/* Dark journey cards on the light 4087 C band, as on the home page, so each card reads as a card */}
+        <section aria-labelledby="journeys-title" className="theme-light">
+          <h2 id="journeys-title" className="sr-only">
+            {dict.allJourneys.title}
+          </h2>
+          <div className="mx-auto max-w-7xl px-6 py-12 lg:px-10 lg:py-16">
             <ScheduleGrid locale={locale} dict={dict} journeys={journeys} />
           </div>
-        </div>
+        </section>
 
         {/* Interactive globe at the end of the catalogue */}
         <ExploreWorld locale={locale} dict={dict.globe} common={dict.common} journeys={journeys} />
