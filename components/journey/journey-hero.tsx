@@ -5,6 +5,14 @@ import type { Dictionary } from '@/lib/dictionaries'
 import { formatNights, localePath, type Locale } from '@/lib/i18n'
 import type { Journey } from '@/lib/journeys'
 
+/** Splits a title into two lines with as many words in each as possible. */
+function twoLines(title: string) {
+  const words = title.split(' ')
+  if (words.length < 2) return [title]
+  const middle = Math.ceil(words.length / 2)
+  return [words.slice(0, middle).join(' '), words.slice(middle).join(' ')]
+}
+
 export function JourneyHero({ journey, locale, dict }: { journey: Journey; locale: Locale; dict: Dictionary }) {
   return (
     <section className="relative flex min-h-svh flex-col overflow-hidden">
@@ -42,7 +50,12 @@ export function JourneyHero({ journey, locale, dict }: { journey: Journey; local
       <div className="relative mx-auto flex w-full max-w-7xl flex-1 flex-col justify-between gap-16 px-6 pb-20 pt-16 sm:pt-20 lg:px-10 lg:pb-28 lg:pt-24">
         {/* Same title as the journey's card */}
         <h1 className="hero-fade font-display text-balance text-[2.75rem] leading-[1.05] min-[400px]:text-5xl sm:text-6xl md:text-8xl xl:text-9xl">
-          {journey.cardTitle ?? journey.destination}
+          {/* Always two lines on every screen ("Caribbean New" / "Year Escape"): words split evenly */}
+          {twoLines(journey.cardTitle ?? journey.destination).map((line) => (
+            <span key={line} className="block">
+              {line}
+            </span>
+          ))}
         </h1>
         <div className="grid grid-cols-2 gap-6 border-t border-foreground/20 pt-6 md:grid-cols-4">
           {[
