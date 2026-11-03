@@ -14,8 +14,8 @@ export function JourneyHero({ journey, locale, dict }: { journey: Journey; local
         fill
         priority
         sizes="100vw"
-        // Portrait photo: keep the catamaran in frame on wide screens
-        className="object-cover object-[45%_50%] sm:object-[50%_42%]"
+        // Portrait photo: keep the catamaran (right of centre) in frame
+        className="object-cover object-[72%_50%] sm:object-[50%_55%]"
       />
       <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-background/10 to-background" />
 
