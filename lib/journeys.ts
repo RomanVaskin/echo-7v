@@ -46,7 +46,7 @@ const journeysBase: JourneyBase[] = [
   {
     slug: 'caribbean',
     region: 'Caribbean',
-    image: '/images/caribbean-page-hero.jpg',
+    image: '/images/caribbean-page-hero-2.jpg',
     heroImage: '/images/caribbean-page-hero-2.jpg',
     nights: 10,
     // Localised dates live in the dictionaries (journeys.<slug>.dates).
