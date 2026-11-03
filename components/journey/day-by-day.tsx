@@ -101,23 +101,25 @@ export function DayByDay({ dict }: { dict: Dictionary['caribbean']['days'] }) {
                   select(dayId)
                 }}
                 className={cn(
-                  'journal-page relative flex rounded-2xl border border-border transition-[transform,box-shadow] duration-300 ease-out motion-reduce:transition-none focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--button-primary)]',
+                  'journal-page relative flex flex-col rounded-2xl border border-border transition-[transform,box-shadow] duration-300 ease-out motion-reduce:transition-none focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--button-primary)]',
                   route && 'cursor-pointer',
                   // Selected day: slightly larger (transform only, so neighbours do not move) with a deeper shadow
                   active ? 'z-10 scale-[1.035] shadow-[0_18px_40px_-18px_rgb(0_0_0/0.55)] motion-reduce:scale-100' : 'shadow-[0_8px_24px_-16px_rgb(0_0_0/0.4)]',
                 )}
               >
-                {/* Binding strip: four evenly spaced punched holes and a faint fold line */}
-                <div
-                  aria-hidden="true"
-                  className="flex w-9 shrink-0 flex-col items-center justify-evenly border-r border-foreground/[0.07] py-8 md:w-10"
-                >
-                  {[0, 1, 2, 3].map((hole) => (
-                    <span key={hole} className="journal-hole" />
+                {/* Bound along the top like a hand-stitched notebook: three punched holes with a cotton cord
+                    threaded through them, its loose end curling off the first hole */}
+                <div aria-hidden="true" className="journal-binding">
+                  <span className="journal-cord" />
+                  <svg className="journal-cord-tail" viewBox="0 0 64 32" fill="none">
+                    <path d="M62 16 C 48 16, 34 13, 22 10 C 11 7, 3 11, 7 18 C 11 25, 26 23, 40 20" />
+                  </svg>
+                  {['20%', '50%', '80%'].map((left) => (
+                    <span key={left} className="journal-hole" style={{ left }} />
                   ))}
                 </div>
-                {/* Photo nearly edge to edge, with the day, date and place in white over its lower part */}
-                <div className="flex min-w-0 flex-1 flex-col p-2 pl-2 md:p-2.5 md:pl-2.5">
+                {/* Photo centred with equal margins on both sides, the day, date and place in white over its lower part */}
+                <div className="flex min-w-0 flex-1 flex-col px-3 pb-3 md:px-3.5 md:pb-3.5">
                   <div className="relative aspect-[2/3] overflow-hidden rounded-xl bg-foreground/[0.04] sm:aspect-[5/6]">
                     {photo ? (
                       <Image
