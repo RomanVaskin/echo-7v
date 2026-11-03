@@ -8,7 +8,7 @@ export const highlightImages = [
   '/images/highlight-1.jpg',
   '/images/highlight-3.jpg',
   '/images/highlight-2.jpg',
-  '/images/highlight-4.jpg',
+  '/images/highlight-4.webp',
   '/images/hero-sailing.png',
 ]
 
