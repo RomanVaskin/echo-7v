@@ -35,15 +35,16 @@ export default async function TeamPage({ params }: PageProps<'/[lang]/team'>) {
     <>
       <SiteHeader locale={locale} path={PATH} dict={dict.header} enquireLabel={dict.common.enquire} />
       <main>
-        {/* First screen: the open-sea photo already used on the home page, toned down for the white text */}
+        {/* First screen: a catamaran under sail among white cliffs, toned down for the white text */}
         <section className="relative flex min-h-[78svh] items-end overflow-hidden">
           <Image
-            src="/images/hero-sailing.png"
+            src="/images/team/team-hero.jpg"
             alt={t.imageAlt}
             fill
             priority
             sizes="100vw"
-            className="object-cover"
+            // Portrait photo: keep the catamaran (lower half) in frame on wide screens
+            className="object-cover object-[50%_70%]"
           />
           <div aria-hidden="true" className="absolute inset-0 bg-background/45" />
           <div className="relative mx-auto w-full max-w-7xl px-6 pb-16 pt-40 lg:px-10 lg:pb-24">
