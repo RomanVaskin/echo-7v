@@ -38,7 +38,7 @@ export default async function HomePage({ params }: PageProps<'/[lang]'>) {
       <SiteHeader locale={locale} path="/" dict={dict.header} enquireLabel={dict.common.enquire} />
       <main>
         <Hero locale={locale} dict={dict.hero} />
-        <section id="schedule" aria-labelledby="schedule-title" className="theme-light theme-light--soft">
+        <section id="schedule" aria-labelledby="schedule-title" className="theme-light">
           <div className="mx-auto max-w-7xl px-6 pb-14 pt-16 lg:px-10 lg:pb-20 lg:pt-20">
             <ScheduleGrid
               locale={locale}
@@ -66,7 +66,7 @@ export default async function HomePage({ params }: PageProps<'/[lang]'>) {
 
         <EnquirySection
           index="04"
-          tone="soft"
+          tone="light"
           locale={locale}
           eyebrow={dict.enquirySection.eyebrow}
           form={dict.form}

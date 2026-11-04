@@ -40,7 +40,7 @@ export default async function JourneysPage({ params }: PageProps<'/[lang]/journe
           </div>
         </div>
         {/* Dark journey cards on the light 4087 C band, as on the home page, so each card reads as a card */}
-        <section aria-labelledby="journeys-title" className="theme-light theme-light--soft">
+        <section aria-labelledby="journeys-title" className="theme-light">
           <h2 id="journeys-title" className="sr-only">
             {dict.allJourneys.title}
           </h2>

@@ -38,6 +38,8 @@
 /* seasmates palette: PANTONE 4087 C (light sections) and PANTONE 4131 C (dark sections) */
 :root {
   --brand-light: #b79f97;
+  /* Light section background: 4087 C lifted two or three tones towards white */
+  --brand-light-soft: color-mix(in srgb, var(--brand-light) 70%, white);
   --brand-dark: #484b5d;
   --brand-text-dark: #252733;
   --brand-text-light: #f8f6f3;
@@ -77,16 +79,16 @@
 /* Light sections with dark text */
 .theme-light {
   color-scheme: light;
-  --background: var(--brand-light);
+  --background: var(--brand-light-soft);
   --foreground: var(--brand-text-dark);
-  --card: var(--brand-light);
+  --card: var(--brand-light-soft);
   --card-foreground: var(--brand-text-dark);
-  --popover: var(--brand-light);
+  --popover: var(--brand-light-soft);
   --popover-foreground: var(--brand-text-dark);
   /* the active filter and the send button: dark fill with light text */
   --primary: var(--brand-dark);
   --primary-foreground: var(--brand-text-light);
-  /* only the full text colour reaches 4.5:1 on #B79F97, so secondary text uses it too */
+  /* secondary text uses the full text colour too (it was chosen for 4.5:1 on the darker #B79F97) */
   --muted-foreground: var(--brand-text-dark);
   --destructive: #5c1d13;
   --border: rgb(37 39 51 / 0.3);
@@ -215,10 +217,6 @@
   user-select: none;
 }
 
-/* A softer light band (All journeys): PANTONE 4087 C lifted two or three tones towards white */
-.theme-light.theme-light--soft {
-  --background: color-mix(in srgb, var(--brand-light) 70%, white);
-}
 /* Journal page (day cards): Vanilla Ice paper with the dark text of the light sections. The day number
    uses PANTONE 437 C's darker hover shade, which keeps 4.6:1 contrast on the paper */
 .journal-page {
