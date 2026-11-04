@@ -8,7 +8,7 @@ import { SiteFooter } from '@/components/site/site-footer'
 import { SectionHeading } from '@/components/site/section-heading'
 import { getDictionary } from '@/lib/dictionaries'
 import { alternates, isLocale, localePath } from '@/lib/i18n'
-import { TEAM_PLACEHOLDERS, teamMembers } from '@/lib/team'
+import { TEAM_PLACEHOLDERS, teamMembers, teamPlaceholderPhotos } from '@/lib/team'
 
 const PATH = '/team'
 
@@ -89,9 +89,21 @@ export default async function TeamPage({ params }: PageProps<'/[lang]/team'>) {
                 : Array.from({ length: TEAM_PLACEHOLDERS }, (_, i) => (
                     // empty frames keep the layout until real members are added in lib/team.ts
                     <li key={i} aria-hidden="true" className="reveal flex flex-col gap-5">
-                      <div className="flex aspect-[4/5] items-end bg-foreground/10 p-6">
-                        <span className="eyebrow">{t.photoPending}</span>
-                      </div>
+                      {teamPlaceholderPhotos[i] ? (
+                        <div className="relative aspect-[4/5] overflow-hidden bg-foreground/10">
+                          <Image
+                            src={teamPlaceholderPhotos[i]}
+                            alt=""
+                            fill
+                            sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                            className="object-cover"
+                          />
+                        </div>
+                      ) : (
+                        <div className="flex aspect-[4/5] items-end bg-foreground/10 p-6">
+                          <span className="eyebrow">{t.photoPending}</span>
+                        </div>
+                      )}
                       <div className="border-t border-border" />
                     </li>
                   ))}
