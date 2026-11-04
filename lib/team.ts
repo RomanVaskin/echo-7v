@@ -24,3 +24,6 @@ export const teamMembers: TeamMember[] = []
 
 /** Number of placeholder cards shown until real members are added. */
 export const TEAM_PLACEHOLDERS = 3
+
+/** Photos for the placeholder cards, in order, until names and roles are added above. */
+export const teamPlaceholderPhotos: string[] = ['/images/team/artem.jpg', '/images/team/galya.jpg']
