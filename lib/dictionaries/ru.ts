@@ -361,6 +361,7 @@ export const ru: Dictionary = {
     filterLabel: 'Фильтр историй по категории',
     all: 'Все',
     categories: {
+      travel: 'Путешествия',
       destinations: 'Направления',
       'yacht-life': 'Жизнь на яхте',
       tips: 'Советы путешественникам',

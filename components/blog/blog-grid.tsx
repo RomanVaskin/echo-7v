@@ -47,7 +47,7 @@ export function BlogGrid({ locale, posts, dict }: { locale: Locale; posts: BlogP
                 <Link href={href} className="relative block aspect-[4/3] overflow-hidden">
                   <Image
                     src={post.cover}
-                    alt={post.title[locale]}
+                    alt={post.coverAlt[locale]}
                     fill
                     sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                     className="object-cover transition-transform duration-700 hover:scale-[1.03]"
