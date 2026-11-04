@@ -215,6 +215,10 @@
   user-select: none;
 }
 
+/* A softer light band (All journeys): PANTONE 4087 C lifted two or three tones towards white */
+.theme-light.theme-light--soft {
+  --background: color-mix(in srgb, var(--brand-light) 70%, white);
+}
 /* Journal page (day cards): Vanilla Ice paper with the dark text of the light sections. The day number
    uses PANTONE 437 C's darker hover shade, which keeps 4.6:1 contrast on the paper */
 .journal-page {
