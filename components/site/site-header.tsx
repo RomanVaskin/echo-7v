@@ -49,7 +49,7 @@ export function SiteHeader({
           <LanguageSwitcher locale={locale} path={path} label={dict.languageLabel} />
           <Link
             href={enquireHref}
-            className="border border-foreground/40 px-5 py-2.5 text-xs uppercase tracking-[0.14em] text-foreground transition-colors hover:border-primary hover:text-primary"
+            className="rounded-full border border-foreground/40 px-5 py-2.5 text-xs uppercase tracking-[0.14em] text-foreground transition-colors hover:border-primary hover:text-primary"
           >
             {enquireLabel}
           </Link>

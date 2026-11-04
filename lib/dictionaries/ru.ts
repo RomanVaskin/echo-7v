@@ -53,10 +53,9 @@ export const ru: Dictionary = {
       area: 'Путешествие по островам',
       summary:
         'Десять ночей среди тихих якорных стоянок, бирюзовых лагун и островов с пальмовыми пляжами — наш главный маршрут.',
-      // Journey card copy: kept in English on purpose
-      cardTitle: 'Caribbean New Year Escape',
+      cardTitle: 'Новогодние Карибы',
       tagline:
-        'Sail into the New Year aboard a private yacht in the Caribbean, exploring tropical islands and turquoise waters. Enjoy an intimate escape for eight guests, with a private skipper and chef, and celebrate New Year’s Eve with a festive dinner under the stars.',
+        'Встретьте Новый год на борту частной яхты в Карибском море, открывая тропические острова и бирюзовые воды. Камерное путешествие для восьми гостей с личным шкипером и шеф-поваром, а в новогоднюю ночь — праздничный ужин под звёздами.',
       dates: '28.12.26 – 07.01.27',
     },
     bahamas: {
