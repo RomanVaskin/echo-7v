@@ -64,7 +64,7 @@ const journeysBase: JourneyBase[] = [
     slug: 'bahamas',
     region: 'Caribbean',
     // Temporary: the site's turquoise-lagoon shot until a photo of the Exumas is added
-    image: '/images/gallery-reef.png',
+    image: '/images/bahamas-card.jpg',
     nights: null,
     dates: null,
     vessel: null,
