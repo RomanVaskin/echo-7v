@@ -77,7 +77,7 @@ const journeysBase: JourneyBase[] = [
   {
     slug: 'dalmatia',
     region: 'Mediterranean',
-    image: '/images/adriatic.png',
+    image: '/images/dalmatia-card.jpg',
     nights: null,
     dates: null,
     vessel: null,
@@ -90,7 +90,7 @@ const journeysBase: JourneyBase[] = [
   {
     slug: 'seychelles',
     region: 'Indian Ocean',
-    image: '/images/indian-ocean.png',
+    image: '/images/seychelles-card.jpg',
     nights: null,
     dates: null,
     vessel: null,
