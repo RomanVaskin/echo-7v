@@ -26,7 +26,7 @@ export const teamMembers: TeamMember[] = []
 export const TEAM_PLACEHOLDERS = 3
 
 /** Photos and first names for the cards, in order, until roles and bios are added above. */
-export const teamPlaceholderPhotos: string[] = ['/images/team/artem.jpg', '/images/team/galya.jpg']
+export const teamPlaceholderPhotos: string[] = ['/images/team/artem.jpg', '/images/team/galya.jpg', '/images/team/elena.jpg']
 export const teamPlaceholderNames: Record<Locale, string>[] = [
   { ru: 'Артём', en: 'Arthur' },
   { ru: 'Галина', en: 'Gail' },
