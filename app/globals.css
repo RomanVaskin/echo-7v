@@ -37,9 +37,10 @@
 
 /* seasmates palette: PANTONE 4087 C (light sections) and PANTONE 4131 C (dark sections) */
 :root {
-  --brand-light: #b79f97;
-  /* Light section background: 4087 C lifted two or three tones towards white */
-  --brand-light-soft: color-mix(in srgb, var(--brand-light) 70%, white);
+  /* PANTONE 4087 C lifted two or three tones towards white (was #b79f97): light section backgrounds and the
+     sand accent on dark surfaces (prices, badges, highlighted words, active filters) */
+  --brand-light: #cdbcb6;
+  --brand-light-soft: var(--brand-light);
   --brand-dark: #484b5d;
   --brand-text-dark: #252733;
   --brand-text-light: #f8f6f3;
