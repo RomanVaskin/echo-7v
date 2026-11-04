@@ -362,6 +362,7 @@ export const en = {
     filterLabel: 'Filter stories by category',
     all: 'All',
     categories: {
+      travel: 'Travel',
       destinations: 'Destinations',
       'yacht-life': 'Life on a yacht',
       tips: 'Tips for travellers',
