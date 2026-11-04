@@ -76,9 +76,10 @@ export function TravelCard({
       </div>
 
       <div className="flex flex-1 flex-col px-6 pb-6 pt-5 max-[359px]:px-4 md:px-7 md:pb-7">
-        {journey.cardLead && <p className="font-display text-xl leading-snug tracking-[-0.01em]">{journey.cardLead}</p>}
+        {/* Lead line at the description size, set apart only by full-strength colour */}
+        {journey.cardLead && <p className="text-[0.9375rem] leading-relaxed text-foreground">{journey.cardLead}</p>}
         {journey.tagline && (
-          <p className={cn('text-[0.9375rem] leading-relaxed text-foreground/85', journey.cardLead && 'mt-3')}>{journey.tagline}</p>
+          <p className={cn('text-[0.9375rem] leading-relaxed text-foreground/85', journey.cardLead && 'mt-2')}>{journey.tagline}</p>
         )}
 
         {journey.bookingHref ? (
@@ -119,9 +120,8 @@ export function TravelCard({
             </p>
             <Link
               href={href}
-              /* From sm up: same width on every card, growing into the free space up to 13.5rem. On phones it
-                 shrinks to its label (tighter padding and tracking) so it stays on one line beside the price. */
-              className="ml-auto flex shrink-0 items-center justify-between gap-1.5 whitespace-nowrap rounded-[8px] border border-foreground/60 px-2.5 py-2.5 text-[10px] uppercase tracking-[0.1em] max-[359px]:gap-1 max-[359px]:px-2 max-[359px]:tracking-[0.06em] text-foreground transition-colors hover:bg-foreground hover:text-background sm:min-w-[8rem] sm:max-w-[13.5rem] sm:flex-1 sm:shrink sm:gap-2 sm:px-4 sm:text-[11px] sm:tracking-[0.14em]"
+              /* The same oval as the first card's buttons (height, type, border); half the card wide like each of them from sm up, as wide as its label on phones */
+              className="ml-auto flex shrink-0 items-center justify-center gap-1.5 whitespace-nowrap rounded-full border border-foreground/60 px-5 py-3 sm:w-[calc(50%-0.3125rem)] sm:px-3 text-[10px] uppercase tracking-[0.12em] max-[359px]:gap-1 max-[359px]:px-4 max-[359px]:tracking-[0.04em] text-foreground transition-colors hover:bg-foreground hover:text-background sm:text-[11px]"
             >
               {journey.href ? dict.common.more : dict.common.registerInterest}
               <ArrowUpRight className="size-3 sm:size-3.5" aria-hidden="true" />

@@ -35,7 +35,8 @@ export function Hero({ locale, dict }: { locale: Locale; dict: Dictionary['hero'
         <div className="hero-fade flex flex-col gap-1" style={{ animationDelay: '1.7s' }}>
           {dict.motto && <p className="text-[0.625rem] uppercase tracking-[0.3em] text-foreground/80">{dict.motto}</p>}
           {dict.mottoTranslation && (
-            <p className="text-[0.625rem] tracking-[0.16em] text-foreground/60">{dict.mottoTranslation}</p>
+            // Russian slogan: large capitals, same place under the logo
+            <p className="text-sm font-light uppercase tracking-[0.24em] text-foreground/90 sm:text-base md:text-lg lg:text-xl">{dict.mottoTranslation}</p>
           )}
         </div>
       </div>
