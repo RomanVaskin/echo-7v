@@ -25,5 +25,10 @@ export const teamMembers: TeamMember[] = []
 /** Number of placeholder cards shown until real members are added. */
 export const TEAM_PLACEHOLDERS = 3
 
-/** Photos for the placeholder cards, in order, until names and roles are added above. */
+/** Photos and first names for the cards, in order, until roles and bios are added above. */
 export const teamPlaceholderPhotos: string[] = ['/images/team/artem.jpg', '/images/team/galya.jpg']
+export const teamPlaceholderNames: Record<Locale, string>[] = [
+  { ru: 'Артём', en: 'Arthur' },
+  { ru: 'Галина', en: 'Gail' },
+  { ru: 'Елена', en: 'Elaine' },
+]

@@ -784,6 +784,14 @@
   outline: 2px solid var(--foreground);
   outline-offset: 3px;
 }
+/* Filled 437 C button with a thin outline about half a millimetre (2px) away from it */
+.enquiry-submit--ringed {
+  outline: 1px solid color-mix(in srgb, var(--foreground) 60%, transparent);
+  outline-offset: 2px;
+}
+.enquiry-submit--ringed:focus-visible {
+  outline-width: 2px;
+}
 
 /* Booking pages: light Vanilla Ice paper (PANTONE 11-0104 TPG, as on the day cards) with the dark text
    of the light sections. PANTONE 437 C's darker shade marks prices and the selected option (4.9:1 on

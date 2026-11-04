@@ -87,7 +87,7 @@ export function EnquiryForm({ journey = 'general', locale, dict }: EnquiryFormPr
       <button
         type="submit"
         disabled={pending}
-        className="enquiry-submit group mt-2 flex w-full items-center justify-center gap-3 px-8 py-4 text-xs uppercase tracking-[0.14em] disabled:opacity-60"
+        className="enquiry-submit enquiry-submit--ringed group mt-2 flex w-full rounded-full items-center justify-center gap-3 px-8 py-4 text-xs uppercase tracking-[0.14em] disabled:opacity-60"
       >
         {pending ? dict.sending : dict.send}
         <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />

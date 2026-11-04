@@ -56,7 +56,8 @@ export function TravelCard({
           {journey.status !== 'enquiries-open' && (
             <span
               className={cn(
-                'flex items-center gap-2 bg-background/80 px-3 py-1.5 text-[10px] uppercase tracking-[0.14em] backdrop-blur',
+                // On the right, like the "Upcoming journey" badge
+                'ml-auto flex items-center gap-2 rounded-md bg-background/80 px-3 py-1.5 text-[10px] uppercase tracking-[0.14em] backdrop-blur',
                 isAvailable ? 'text-foreground' : 'text-foreground/70',
               )}
             >
@@ -68,7 +69,7 @@ export function TravelCard({
             </span>
           )}
           {journey.featured && (
-            <span className="ml-auto whitespace-nowrap bg-primary px-3 py-1.5 text-[10px] uppercase tracking-[0.14em] text-primary-foreground">
+            <span className="ml-auto whitespace-nowrap rounded-md bg-primary px-3 py-1.5 text-[10px] uppercase tracking-[0.14em] text-primary-foreground">
               {dict.common.featured}
             </span>
           )}
@@ -76,10 +77,11 @@ export function TravelCard({
       </div>
 
       <div className="flex flex-1 flex-col px-6 pb-6 pt-5 max-[359px]:px-4 md:px-7 md:pb-7">
-        {/* Lead line at the description size, set apart only by full-strength colour */}
-        {journey.cardLead && <p className="text-[0.9375rem] leading-relaxed text-foreground">{journey.cardLead}</p>}
-        {journey.tagline && (
-          <p className={cn('text-[0.9375rem] leading-relaxed text-foreground/85', journey.cardLead && 'mt-2')}>{journey.tagline}</p>
+        {/* Lead line and description as one paragraph, same size and colour */}
+        {(journey.cardLead || journey.tagline) && (
+          <p className="text-[0.9375rem] leading-relaxed text-foreground/85">
+            {[journey.cardLead, journey.tagline].filter(Boolean).join(' ')}
+          </p>
         )}
 
         {journey.bookingHref ? (
@@ -100,7 +102,7 @@ export function TravelCard({
               </Link>
               <Link
                 href={journey.bookingHref}
-                className="enquiry-submit flex items-center justify-center rounded-full px-3 py-3 text-[10px] uppercase tracking-[0.12em] max-[359px]:px-1.5 max-[359px]:tracking-[0.04em] sm:text-[11px]"
+                className="enquiry-submit enquiry-submit--ringed flex items-center justify-center rounded-full px-3 py-3 text-[10px] uppercase tracking-[0.12em] max-[359px]:px-1.5 max-[359px]:tracking-[0.04em] sm:text-[11px]"
               >
                 {dict.common.book}
                 <span className="sr-only">{` — ${journey.destination}`}</span>

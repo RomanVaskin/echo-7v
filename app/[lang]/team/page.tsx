@@ -8,7 +8,7 @@ import { SiteFooter } from '@/components/site/site-footer'
 import { SectionHeading } from '@/components/site/section-heading'
 import { getDictionary } from '@/lib/dictionaries'
 import { alternates, isLocale, localePath } from '@/lib/i18n'
-import { TEAM_PLACEHOLDERS, teamMembers, teamPlaceholderPhotos } from '@/lib/team'
+import { TEAM_PLACEHOLDERS, teamMembers, teamPlaceholderNames, teamPlaceholderPhotos } from '@/lib/team'
 
 const PATH = '/team'
 
@@ -63,7 +63,7 @@ export default async function TeamPage({ params }: PageProps<'/[lang]/team'>) {
               index="01"
               eyebrow={t.membersEyebrow}
               title={t.membersTitle}
-              description={teamMembers.length === 0 ? t.membersPending : undefined}
+              
             />
             <ul className="mt-14 grid gap-10 md:grid-cols-2 lg:grid-cols-3">
               {teamMembers.length > 0
@@ -88,13 +88,13 @@ export default async function TeamPage({ params }: PageProps<'/[lang]/team'>) {
                     </li>
                   ))
                 : Array.from({ length: TEAM_PLACEHOLDERS }, (_, i) => (
-                    // empty frames keep the layout until real members are added in lib/team.ts
-                    <li key={i} aria-hidden="true" className="reveal flex flex-col gap-5">
+                    // photo (or an empty frame) and first name until full profiles are added in lib/team.ts
+                    <li key={i} className="reveal flex flex-col gap-5">
                       {teamPlaceholderPhotos[i] ? (
                         <div className="relative aspect-[4/5] overflow-hidden bg-foreground/10">
                           <Image
                             src={teamPlaceholderPhotos[i]}
-                            alt=""
+                            alt={teamPlaceholderNames[i]?.[locale] ?? ''}
                             fill
                             sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                             className="object-cover"
@@ -105,7 +105,11 @@ export default async function TeamPage({ params }: PageProps<'/[lang]/team'>) {
                           <span className="eyebrow">{t.photoPending}</span>
                         </div>
                       )}
-                      <div className="border-t border-border" />
+                      {teamPlaceholderNames[i] ? (
+                        <h3 className="border-t border-border pt-5 font-display text-3xl">{teamPlaceholderNames[i][locale]}</h3>
+                      ) : (
+                        <div className="border-t border-border" />
+                      )}
                     </li>
                   ))}
             </ul>
@@ -114,17 +118,20 @@ export default async function TeamPage({ params }: PageProps<'/[lang]/team'>) {
 
         <section aria-labelledby="approach-title" className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
           <SectionHeading id="approach-title" index="02" eyebrow={t.approachEyebrow} title={t.approachTitle} />
-          <ol className="mt-14 grid gap-12 md:grid-cols-3 md:gap-10">
-            {t.approach.map((item, i) => (
-              <li key={item.title} className="reveal flex flex-col gap-4 border-t border-border pt-6">
-                <span className="eyebrow text-primary">{String(i + 1).padStart(2, '0')}</span>
-                <h3 className="font-display text-4xl">{item.title}</h3>
+          {/* A short list of what matters to us: no numbers or rules, smaller titles, tighter spacing */}
+          <ul className="mt-10 grid gap-8 md:grid-cols-3 md:gap-10">
+            {t.approach.map((item) => (
+              <li key={item.title} className="reveal flex flex-col gap-2">
+                <h3 className="font-display text-2xl md:text-3xl">{item.title}</h3>
                 <p className="max-w-sm leading-relaxed text-muted-foreground">{item.text}</p>
               </li>
             ))}
-          </ol>
+          </ul>
           <div className="mt-20 flex justify-center">
-            <Link href={localePath(locale, '/journeys')} className="btn-primary group">
+            <Link
+              href={localePath(locale, '/journeys')}
+              className="group flex items-center gap-3 rounded-full border border-foreground/60 px-9 py-4 text-xs uppercase tracking-[0.14em] text-foreground transition-colors hover:bg-foreground hover:text-background"
+            >
               {t.cta}
               <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
             </Link>
