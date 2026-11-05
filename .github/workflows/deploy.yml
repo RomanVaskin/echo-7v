@@ -1,8 +1,8 @@
-name: Deploy SeaSmates to Beget
+name: Deploy SeaSmates to KZ VDSka
 
 on:
-  # Beget auto-deploy paused; GitHub updates should deploy via Vercel.
-  # Restore push trigger when Beget is available again.
+  push:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -25,12 +25,12 @@ jobs:
         run: |
           set -euo pipefail
           test -n "$VPS_HOST" && test -n "$VPS_USER" && test -n "$VPS_SSH_KEY"
-          test "$VPS_HOST" = "31.207.74.26"
+          test "$VPS_HOST" = "213.155.29.140"
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
           printf '%s\n' "$VPS_SSH_KEY" > ~/.ssh/seasmates_deploy
           chmod 600 ~/.ssh/seasmates_deploy
-          printf '%s\n' '31.207.74.26 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMSts96kiUo+K7fCJlE9XXSR29D24ss7uOdD4UyG0dAp' > ~/.ssh/known_hosts
+          printf '%s\n' '213.155.29.140 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINiNJmFv2cmjUlGKLDrj4fYhTbRs0yqse4Dy/0ICY5bO' > ~/.ssh/known_hosts
           chmod 600 ~/.ssh/known_hosts
           printf 'Host seasmates-vps\n  HostName %s\n  User %s\n  Port 22\n  IdentityFile ~/.ssh/seasmates_deploy\n  IdentitiesOnly yes\n  StrictHostKeyChecking yes\n  UserKnownHostsFile ~/.ssh/known_hosts\n' "$VPS_HOST" "$VPS_USER" > ~/.ssh/config
           chmod 600 ~/.ssh/config
