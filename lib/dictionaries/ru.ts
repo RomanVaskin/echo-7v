@@ -458,7 +458,7 @@ export const ru: Dictionary = {
     },
     yacht: {
       eyebrow: 'Яхта',
-      description: 'Катамаран, на котором пройдёт путешествие. Подробное описание и фотографии появятся позже.',
+      description: 'Катамаран, на котором пройдёт путешествие.',
       exteriorTitle: 'Катамаран',
       cabinsTitle: 'Каюты',
       photoPlaceholder: 'Фото появится позже',
