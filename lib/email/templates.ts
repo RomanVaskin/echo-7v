@@ -8,7 +8,12 @@ import { formatUsd } from '@/lib/booking/voyage'
  */
 export type EmailTemplate = 'booking_received' | 'deposit_received' | 'balance_reminder' | 'paid_in_full' | 'payment_failed'
 
-const optionNames = { shared: 'Shared Cabin', 'private-solo': 'Private Cabin · Solo', 'private-two': 'Private Cabin · Two Guests' }
+const optionNames = {
+  en: { shared: 'Shared Cabin', 'private-solo': 'Private Cabin · Solo', 'private-two': 'Private Cabin · Two Guests' },
+  ru: { shared: 'Место в двухместной каюте', 'private-solo': 'Отдельная каюта · для одного', 'private-two': 'Отдельная каюта · для двоих' },
+} as const
+/** The voyage's name in the guest's language (the trip row keeps the English name). */
+const voyageNames = { en: 'Caribbean New Year Escape', ru: 'Новогодние Карибы' } as const
 
 /** Absolute link to the guest's booking page (payments are made from there). */
 export function bookingUrl(details: BookingDetails) {
@@ -80,7 +85,7 @@ const copy = {
       booking_received: (amount: string) =>
         `Спасибо за бронирование в seasmates. Места удерживаются недолго: чтобы подтвердить бронь, оплатите предоплату ${amount} на странице брони.`,
       deposit_received: (amount: string) => `Мы получили вашу предоплату ${amount}. Ваше место на борту подтверждено.`,
-      balance_reminder: (amount: string, date: string) => `Напоминаем, что остаток ${amount} нужно оплатить до ${date}.`,
+      balance_reminder: (amount: string, date: string) => `Напоминаем, что остаток ${amount} нужно оплатить до ${date}`,
       paid_in_full: () => 'Спасибо! Бронирование оплачено полностью. Ждём вас на борту.',
       payment_failed: (amount: string) =>
         `Платёж на сумму ${amount} не завершён, деньги не списаны. Вы можете повторить оплату на странице брони или выбрать другой способ оплаты в PayPal.`,
@@ -109,8 +114,8 @@ export function renderEmail(template: EmailTemplate, details: BookingDetails, am
     '',
     `${t.summary}`,
     `${t.reference}: ${booking.id}`,
-    `${t.journey}: ${trip.title}, ${formatDate(trip.startDate, booking.locale)} – ${formatDate(trip.endDate, booking.locale)}`,
-    `${t.accommodation}: ${optionNames[booking.option]}`,
+    `${t.journey}: ${voyageNames[booking.locale]}, ${formatDate(trip.startDate, booking.locale)} – ${formatDate(trip.endDate, booking.locale)}`,
+    `${t.accommodation}: ${optionNames[booking.locale][booking.option]}`,
     `${t.guests}: ${guests.map((g) => `${g.firstName} ${g.lastName}`).join(', ')}`,
     `${t.total}: ${formatUsd(booking.totalCents)}`,
     `${t.paid}: ${formatUsd(booking.paidCents)}`,
@@ -120,5 +125,5 @@ export function renderEmail(template: EmailTemplate, details: BookingDetails, am
   if (template === 'deposit_received' || template === 'balance_reminder') lines.push('', t.noCharge)
   lines.push('', t.sign)
 
-  return { subject: `${t.subjects[template]} · ${trip.title} (${booking.id})`, text: lines.join('\n') }
+  return { subject: `${t.subjects[template]} · ${voyageNames[booking.locale]} (${booking.id})`, text: lines.join('\n') }
 }
