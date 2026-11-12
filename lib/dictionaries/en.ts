@@ -459,7 +459,7 @@ export const en = {
     },
     yacht: {
       eyebrow: 'The yacht',
-      description: 'The catamaran for this journey. A full description and photos will be added later.',
+      description: 'The catamaran for this journey.',
       exteriorTitle: 'The catamaran',
       cabinsTitle: 'Cabins',
       photoPlaceholder: 'Photo coming soon',
