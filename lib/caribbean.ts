@@ -47,7 +47,7 @@ export type RouteDay = {
  */
 export const routeDays: RouteDay[] = [
   { dayId: 1, mapPoint: 'le-marin', photo: { src: '/images/day-01-martinique-le-marin.jpg', position: '55% 50%' } },
-  { dayId: 2, mapPoint: 'pitons', photo: { src: '/images/day-02-saint-lucia-pitons.png', position: '50% 40%' } },
+  { dayId: 2, mapPoint: 'pitons', photo: { src: '/images/day-02-saint-lucia-pitons.jpg', position: '50% 45%' } },
   { dayId: 3, mapPoint: 'wallilabou', photo: { src: '/images/day-03-saint-vincent-wallilabou.jpg', position: '50% 55%' } },
   { dayId: 4, mapPoint: 'mustique', photo: { src: '/images/day-04-mustique-new-year.png', position: '50% 45%' } },
   { dayId: 5, mapPoint: 'tobago-cays', photo: { src: '/images/day-05-tobago-cays.png', position: '50% 35%' } },
