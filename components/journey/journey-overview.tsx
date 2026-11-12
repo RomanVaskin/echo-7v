@@ -14,7 +14,11 @@ export function JourneyOverview({ dict }: { dict: Dictionary['caribbean']['overv
           </>
         }
       />
-      <p className="reveal mt-8 max-w-2xl text-lg leading-relaxed text-foreground/85">{dict.primary}</p>
+      <div className="reveal mt-8 flex max-w-2xl flex-col gap-5 text-lg leading-relaxed text-foreground/85">
+        {dict.primary.map((paragraph) => (
+          <p key={paragraph}>{paragraph}</p>
+        ))}
+      </div>
     </section>
   )
 }
