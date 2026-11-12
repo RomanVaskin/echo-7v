@@ -394,8 +394,12 @@ export const en = {
       eyebrow: 'Journey overview',
       titleLead: 'Ten nights,',
       titleAccent: 'one unhurried horizon.',
-      primary:
-        'Our signature voyage moves slowly through the islands — a short sail each day, long swims, sheltered anchorages at dusk. It is designed for travellers who want the sea itself to be the destination.',
+      primary: [
+        'Picture it: we’re sailing along the shores of tropical islands, leaving everyday life in our wake. Every day brings a new place, new impressions and new horizons. In the evening, sunsets wash the sea in gold and pink, and there is an endless sense of freedom.',
+        'We’ll slip into small bays and drop anchor by islands lost in the ocean. We’ll get to know local life, stop by to buy fresh seafood, fruit and local treats, and taste real Caribbean cooking — simple, vibrant and made with heart.',
+        'Here, adventure grows out of small things: an unplanned stop in a beautiful bay, a swim in crystal-clear water, an unhurried lunch on board and conversations under a starry sky.',
+        'It’s a chance to slow down, let go of the everyday rush and taste the moment again. Not just to see the Caribbean, but to live it — through the sea, the people, the nature and the small discoveries of every day.',
+      ],
     },
     highlights: {
       eyebrow: 'On this journey',
