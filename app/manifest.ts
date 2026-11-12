@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next'
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'seasmates — United by the Sea',
+    name: 'seasmates – United by the Sea',
     short_name: 'seasmates',
     start_url: '/',
     display: 'standalone',

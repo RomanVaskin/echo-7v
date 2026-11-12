@@ -13,7 +13,7 @@ function PhotoStrip({
   photos: (string | null)[]
   dict: Dictionary['caribbean']['yacht']
 }) {
-  const name = `${caribbeanYacht.name} — ${title}`
+  const name = `${caribbeanYacht.name} – ${title}`
   return (
     <Carousel
       label={`${dict.carouselLabel}: ${title}`}

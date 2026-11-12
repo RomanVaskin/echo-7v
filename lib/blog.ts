@@ -19,7 +19,7 @@ export type BlogBlock =
 
 /**
  * Journal articles for /blog and /blog/[slug]. Add an entry to publish it in both
- * languages — the list, the article page, its metadata and static generation all
+ * languages – the list, the article page, its metadata and static generation all
  * read from here, so nothing else needs editing. Covers go in public/images/blog/.
  *
  * {
@@ -60,11 +60,11 @@ export const blogPosts: BlogPost[] = [
       en: 'New Year in the Caribbean: We’re Bringing Back Our Special Journey',
     },
     excerpt: {
-      ru: 'Встречаем Новый год среди бирюзовых вод Карибского моря. Частная яхта, всего 8 гостей, профессиональный шкипер и шеф-повар — путешествие, которое мы решили повторить.',
-      en: 'Ring in the New Year among the turquoise waters of the Caribbean. A private yacht, just eight guests, a professional skipper and a chef on board — a journey we loved so much that we’re setting sail again.',
+      ru: 'Встречаем Новый год среди бирюзовых вод Карибского моря. Частная яхта, всего 8 гостей, профессиональный шкипер и шеф-повар – путешествие, которое мы решили повторить.',
+      en: 'Ring in the New Year among the turquoise waters of the Caribbean. A private yacht, just eight guests, a professional skipper and a chef on board – a journey we loved so much that we’re setting sail again.',
     },
     seo: {
-      title: { ru: 'Новый год на Карибах на яхте — Seasmates', en: 'New Year in the Caribbean on a Private Yacht — Seasmates' },
+      title: { ru: 'Новый год на Карибах на яхте – Seasmates', en: 'New Year in the Caribbean on a Private Yacht – Seasmates' },
       description: {
         ru: 'Встретьте Новый год на Карибах на борту частной яхты. Путешествие небольшой компанией, 8 гостей, профессиональный шкипер и шеф-повар.',
         en: 'Celebrate New Year in the Caribbean aboard a private yacht. A small-group journey for eight guests, with a professional skipper and a private chef.',
@@ -74,8 +74,8 @@ export const blogPosts: BlogPost[] = [
       {
         type: 'lead',
         text: {
-          ru: 'В прошлом году мы встретили Новый год на Карибах — среди бирюзовой воды, тропических островов, живописных бухт и удивительного ощущения свободы.',
-          en: 'Last year we welcomed the New Year in the Caribbean — surrounded by turquoise water, tropical islands, picture-perfect bays and a rare, wonderful sense of freedom.',
+          ru: 'В прошлом году мы встретили Новый год на Карибах, среди бирюзовой воды, тропических островов, живописных бухт и удивительного ощущения свободы.',
+          en: 'Last year we welcomed the New Year in the Caribbean – surrounded by turquoise water, tropical islands, picture-perfect bays and a rare, wonderful sense of freedom.',
         },
       },
       {
@@ -88,8 +88,8 @@ export const blogPosts: BlogPost[] = [
       {
         type: 'paragraph',
         text: {
-          ru: 'Тёплое море, красивые стоянки, новые знакомства, праздничная атмосфера и возможность встретить Новый год вдали от зимы — всё это снова ждёт нас на борту.',
-          en: 'Warm seas, beautiful anchorages, new friendships, a festive mood and the chance to see in the New Year far from winter — it’s all waiting for us on board once more.',
+          ru: 'Тёплое море, красивые стоянки, новые знакомства, праздничная атмосфера и возможность встретить Новый год вдали от зимы – всё это снова ждёт нас на борту.',
+          en: 'Warm seas, beautiful anchorages, new friendships, a festive mood and the chance to see in the New Year far from winter – it’s all waiting for us on board once more.',
         },
       },
       {
@@ -147,8 +147,8 @@ export const blogPosts: BlogPost[] = [
         type: 'cta',
         title: { ru: 'Присоединяйтесь к нам на борту', en: 'Join us on board' },
         text: [
-          { ru: 'Даты путешествия: 28 декабря 2026 — 7 января 2027.', en: 'Dates: 28 December 2026 – 7 January 2027.' },
-          { ru: 'Количество мест ограничено — всего 8 гостей.', en: 'Places are limited — just eight guests.' },
+          { ru: 'Даты путешествия: 28 декабря 2026 – 7 января 2027.', en: 'Dates: 28 December 2026 – 7 January 2027.' },
+          { ru: 'Количество мест ограничено – всего 8 гостей.', en: 'Places are limited – just eight guests.' },
           {
             ru: 'Бронирование уже открыто. Если вам близок такой формат отдыха, будем рады видеть вас на борту.',
             en: 'Booking is now open. If this kind of journey speaks to you, we’d love to welcome you on board.',

@@ -82,7 +82,7 @@ export async function startPayment(bookingId: string, kind: PaymentKind, origin:
       bookingId: booking.id,
       amountCents: payment.amountCents,
       currency: payment.currency,
-      description: `${caribbeanVoyage.title} — ${kind === 'deposit' ? 'deposit' : 'balance'} (${booking.id})`,
+      description: `${caribbeanVoyage.title} – ${kind === 'deposit' ? 'deposit' : 'balance'} (${booking.id})`,
       returnUrl: `${origin}/api/payments/paypal/return?payment=${payment.id}`,
       cancelUrl: `${origin}/api/payments/paypal/cancel?payment=${payment.id}`,
       locale: booking.locale,

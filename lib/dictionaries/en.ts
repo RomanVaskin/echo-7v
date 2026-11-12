@@ -1,15 +1,15 @@
 export const en = {
   meta: {
-    siteTitle: 'seasmates — United by the Sea',
-    siteDescription: 'Seasmates — sea journeys, sailing yachts, new routes and people united by the sea.',
+    siteTitle: 'seasmates – United by the Sea',
+    siteDescription: 'Seasmates – sea journeys, sailing yachts, new routes and people united by the sea.',
     journeysTitle: 'All journeys',
     journeysDescription: 'Every seasmates sailing journey in one place: the Caribbean voyage and the routes in preparation.',
-    caribbeanTitle: 'The Caribbean — 10 Nights',
+    caribbeanTitle: 'The Caribbean – 10 Nights',
     caribbeanDescription:
       'Our signature 10-night Caribbean sailing journey: quiet anchorages, turquoise lagoons and island life with a small crew.',
     teamTitle: 'Our Team',
     teamDescription:
-      'The people behind every seasmates journey — sailors for whom the sea is more than a route.',
+      'The people behind every seasmates journey – sailors for whom the sea is more than a route.',
     blogTitle: 'Journal',
     blogDescription: 'Stories under sail: routes, discoveries, practical advice and inspiration for new sea journeys.',
     contactsTitle: 'Contacts',
@@ -51,7 +51,7 @@ export const en = {
       destination: 'The Caribbean',
       area: 'Island-hopping voyage',
       summary:
-        'Ten nights between quiet anchorages, turquoise lagoons and palm-fringed islands — our signature journey.',
+        'Ten nights between quiet anchorages, turquoise lagoons and palm-fringed islands – our signature journey.',
       // Journey card copy (English in both locales)
       cardTitle: 'Caribbean New Year Escape',
       tagline:
@@ -106,7 +106,7 @@ export const en = {
     } as Record<string, { name: string; region: string; description: string }>,
   },
   booking: {
-    metaTitle: 'Book — Caribbean New Year Escape',
+    metaTitle: 'Book – Caribbean New Year Escape',
     eyebrow: 'Booking',
     journeyLink: 'About the journey',
     facts: { dates: 'Dec 28, 2026 – Jan 7, 2027', nights: '10 nights', cabins: '4 guest cabins · up to 8 guests' },
@@ -145,7 +145,7 @@ export const en = {
       country: 'Country of residence',
       requests: 'Additional requests (optional)',
       consent: 'I agree to the booking terms and the privacy policy.',
-      pay: 'Pay deposit — {amount}',
+      pay: 'Pay deposit – {amount}',
       paying: 'Opening secure payment…',
       secure: 'You will continue to PayPal’s secure page to pay.',
       notAvailable: 'Online payment is being set up. Please send us an enquiry and we will hold a place for you.',
@@ -189,8 +189,8 @@ export const en = {
       paid: 'Paid',
       balance: 'Remaining balance',
       dueBy: 'Due by {date}',
-      payDeposit: 'Pay deposit — {amount}',
-      payBalance: 'Pay balance — {amount}',
+      payDeposit: 'Pay deposit – {amount}',
+      payBalance: 'Pay balance – {amount}',
       paypalNote: 'Payments are made through PayPal. Nothing is charged automatically.',
       payments: 'Payments',
       kinds: { deposit: 'Deposit', balance: 'Balance' } as Record<string, string>,
@@ -231,7 +231,7 @@ export const en = {
     tagline:
       'An international sailing club. Carefully selected journeys for small crews who prefer to travel by sea.',
     journeys: 'Journeys',
-    caribbeanLink: 'The Caribbean — 10 nights',
+    caribbeanLink: 'The Caribbean – 10 nights',
     schedule: 'Sailing schedule',
     club: 'Club',
     howItWorks: 'How it works',
@@ -260,7 +260,7 @@ export const en = {
     items: [
       { title: 'Small crews', text: 'Intimate groups, so every anchorage still feels like a discovery.' },
       { title: 'Curated routes', text: 'Each voyage is planned around calm water, light and local life.' },
-      { title: 'Skippered', text: 'Professional crews sail — you decide how involved you want to be.' },
+      { title: 'Skippered', text: 'Professional crews sail – you decide how involved you want to be.' },
     ],
   },
   featuredJourney: {
@@ -292,7 +292,7 @@ export const en = {
     eyebrow: 'How it works',
     titleLead: 'From first glance',
     titleAccent: 'to open water.',
-    description: 'Every seasmates journey is arranged personally. There is no checkout — only a conversation with our team.',
+    description: 'Every seasmates journey is arranged personally. There is no checkout – only a conversation with our team.',
     steps: [
       { title: 'Explore Your Journey', description: 'Discover our carefully curated sailing experiences.' },
       { title: 'Plan Your Escape', description: 'Connect with our team to discuss availability, accommodation and travel details.' },
@@ -396,9 +396,9 @@ export const en = {
       titleAccent: 'one unhurried horizon.',
       primary: [
         'Picture it: we’re sailing along the shores of tropical islands, leaving everyday life in our wake. Every day brings a new place, new impressions and new horizons. In the evening, sunsets wash the sea in gold and pink, and there is an endless sense of freedom.',
-        'We’ll slip into small bays and drop anchor by islands lost in the ocean. We’ll get to know local life, stop by to buy fresh seafood, fruit and local treats, and taste real Caribbean cooking — simple, vibrant and made with heart.',
+        'We’ll slip into small bays and drop anchor by islands lost in the ocean. We’ll get to know local life, stop by to buy fresh seafood, fruit and local treats, and taste real Caribbean cooking – simple, vibrant and made with heart.',
         'Here, adventure grows out of small things: an unplanned stop in a beautiful bay, a swim in crystal-clear water, an unhurried lunch on board and conversations under a starry sky.',
-        'It’s a chance to slow down, let go of the everyday rush and taste the moment again. Not just to see the Caribbean, but to live it — through the sea, the people, the nature and the small discoveries of every day.',
+        'It’s a chance to slow down, let go of the everyday rush and taste the moment again. Not just to see the Caribbean, but to live it – through the sea, the people, the nature and the small discoveries of every day.',
       ],
     },
     highlights: {
@@ -409,9 +409,9 @@ export const en = {
       next: 'Next',
       // Themed cards; their photos are set in lib/caribbean.ts
       items: [
-        { title: 'Nature', text: 'New islands, turquoise lagoons and stunning views. The Caribbean at its most beautiful — from the sea.' },
+        { title: 'Nature', text: 'New islands, turquoise lagoons and stunning views. The Caribbean at its most beautiful – from the sea.' },
         { title: 'Your own crew', text: 'Eight guests, shared adventures and evenings under the stars. The feel of a group of friends.' },
-        { title: 'Private chef', text: 'Fresh produce, signature dishes and dinners with a sea view — all right on board.' },
+        { title: 'Private chef', text: 'Fresh produce, signature dishes and dinners with a sea view – all right on board.' },
         { title: 'Feel the wind', text: 'Take the sails and feel the freedom of the sea.' },
         { title: 'New Year together', text: 'A festive dinner, sparkling wine and music. Welcome the New Year in the middle of the Caribbean Sea.' },
       ],
@@ -434,7 +434,7 @@ export const en = {
         'The activity programme is provisional and may be adjusted for the weather and the specifics of the route. Local guides, taxis and excursions are paid separately.',
       previous: 'Previous',
       next: 'Next',
-      // Programme «Новогодние Карибы — маршрут 10 дней»: nine sailing days; disembarkation on the morning of 7 January
+      // Programme «Новогодние Карибы – маршрут 10 дней»: nine sailing days; disembarkation on the morning of 7 January
       // has no card of its own, and 4–5 January share DAY 08
       items: [
         { place: 'Martinique · Le Marin', date: 'December 28, 2026', text: 'The Caribbean adventure begins! We get to know the yacht and the crew, settle in on board and welcome our first tropical evening over dinner by the chef. Ten nights under sail lie ahead.' },
@@ -451,7 +451,7 @@ export const en = {
     inclusions: {
       eyebrow: 'Terms',
       title: 'What the journey includes',
-      note: 'A preliminary list for illustration only — the final terms will be confirmed separately.',
+      note: 'A preliminary list for illustration only – the final terms will be confirmed separately.',
       includedTitle: 'What’s included',
       notIncludedTitle: 'Paid separately',
       included: ['Accommodation on the yacht', 'Route planning', 'Journey hosting', 'Shared programme activities'],
