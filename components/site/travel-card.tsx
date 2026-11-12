@@ -98,14 +98,14 @@ export function TravelCard({
               >
                 {dict.common.more}
                 <ArrowUpRight className="size-3 sm:size-3.5" aria-hidden="true" />
-                <span className="sr-only">{` — ${journey.destination}`}</span>
+                <span className="sr-only">{` – ${journey.destination}`}</span>
               </Link>
               <Link
                 href={journey.bookingHref}
                 className="enquiry-submit enquiry-submit--ringed flex items-center justify-center rounded-full px-3 py-3 text-[10px] uppercase tracking-[0.12em] max-[359px]:px-1.5 max-[359px]:tracking-[0.04em] sm:text-[11px]"
               >
                 {dict.common.book}
-                <span className="sr-only">{` — ${journey.destination}`}</span>
+                <span className="sr-only">{` – ${journey.destination}`}</span>
               </Link>
             </div>
           </div>
@@ -127,7 +127,7 @@ export function TravelCard({
             >
               {journey.href ? dict.common.more : dict.common.registerInterest}
               <ArrowUpRight className="size-3 sm:size-3.5" aria-hidden="true" />
-              <span className="sr-only">{` — ${journey.destination}`}</span>
+              <span className="sr-only">{` – ${journey.destination}`}</span>
             </Link>
           </div>
         )}

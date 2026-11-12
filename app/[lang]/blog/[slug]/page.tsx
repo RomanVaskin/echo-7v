@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: PageProps<'/[lang]/blog/[slug
   const title = post.seo?.title[lang] ?? post.title[lang]
   const description = post.seo?.description[lang] ?? post.excerpt[lang]
   return {
-    // The SEO title already names the site, so it skips the "— seasmates" template
+    // The SEO title already names the site, so it skips the "– seasmates" template
     title: post.seo ? { absolute: title } : title,
     description,
     alternates: alternates(lang, `/blog/${post.slug}`),

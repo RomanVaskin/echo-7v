@@ -4,7 +4,7 @@ import { formatUsd } from '@/lib/booking/voyage'
 
 /**
  * Booking emails in the guest's language. Plain text for now; the mail service (and any HTML
- * layout) is chosen separately — see send.ts.
+ * layout) is chosen separately – see send.ts.
  */
 export type EmailTemplate = 'booking_received' | 'deposit_received' | 'balance_reminder' | 'paid_in_full' | 'payment_failed'
 
@@ -44,10 +44,10 @@ const copy = {
     sign: 'With warm regards,\nseasmates',
     noCharge: 'We never charge your card automatically: the balance is paid by you, from your booking page.',
     subjects: {
-      booking_received: 'Booking received — complete your deposit',
-      deposit_received: 'Deposit received — your booking is confirmed',
+      booking_received: 'Booking received – complete your deposit',
+      deposit_received: 'Deposit received – your booking is confirmed',
       balance_reminder: 'Reminder: remaining balance due',
-      paid_in_full: 'Paid in full — see you on board',
+      paid_in_full: 'Paid in full – see you on board',
       payment_failed: 'Your payment did not go through',
     },
     intro: {
@@ -75,8 +75,8 @@ const copy = {
     sign: 'С наилучшими пожеланиями,\nseasmates',
     noCharge: 'Мы никогда не списываем деньги автоматически: остаток вы оплачиваете сами на странице брони.',
     subjects: {
-      booking_received: 'Бронирование получено — оплатите предоплату',
-      deposit_received: 'Предоплата получена — бронирование подтверждено',
+      booking_received: 'Бронирование получено – оплатите предоплату',
+      deposit_received: 'Предоплата получена – бронирование подтверждено',
       balance_reminder: 'Напоминание об оплате остатка',
       paid_in_full: 'Бронирование оплачено полностью',
       payment_failed: 'Платёж не прошёл',
